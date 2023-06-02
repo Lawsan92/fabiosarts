@@ -1,0 +1,94 @@
+@import './home.scss';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+
+.app{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #FFFAFA;
+  margin: 0;
+}
+
+.app_header{
+  height: fit-content;
+  width: 100vw;
+  font-family: 'Inter', sans-serif;
+  padding: 1em;
+  & h1{
+    font-size: 10vh;
+    margin: 1em 0 .25em 1em;
+  }
+}
+
+.app_header_sub{
+  height: fit-content;
+  display: flex;
+  width: 100vw;
+  align-items: center;
+}
+
+.app_header_sub_line{
+  background-color: gray;
+  height: 1px;
+  width: 50vw;
+  margin-left: 5em;
+}
+
+.app_header_sub_ellipse{
+  display: flex;
+  align-items: center;
+}
+
+.ellipse_1{
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: .5em;
+}
+
+.ellipse_2{
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: .3em;
+}
+
+.ellipse_3{
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: .3em;
+}
+
+.app_body{
+  height: 72vh;
+  width: 100vw;
+  display: flex;
+
+  & ul {
+    list-style: none;
+    font-family: 'Inter', sans-serif;
+    color: #808080;
+    font-size: 30px;
+    margin-left: 1em;
+    margin-top: 0;
+  }
+
+  & img {
+    height: 50vh;
+    width: auto;
+    justify-self: center;
+  }
+}
+
+.app_footer{
+  height: 18vh;
+  width: 100vw;
+  background-color: #001133;
+}

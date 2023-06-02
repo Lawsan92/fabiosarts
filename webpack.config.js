@@ -22,6 +22,9 @@ const config = (env) => {
           use: ['style-loader', 'css-loader', 'sass-loader']
         }
       ]
+    },
+    devServer: {
+      static: path.join(__dirname, 'client/dist')
     }
   }
 }
