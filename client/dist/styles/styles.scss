@@ -78,6 +78,12 @@
     font-size: 30px;
     margin-left: 1em;
     margin-top: 0;
+    cursor: pointer;
+    // & :hover{
+    //   color: red;
+    //   cursor: pointer;
+    //   transition: ease-in 1s;
+    // }
   }
 
   & img {

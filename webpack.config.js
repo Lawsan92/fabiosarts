@@ -24,7 +24,10 @@ const config = (env) => {
       ]
     },
     devServer: {
-      static: path.join(__dirname, 'client/dist')
+      static: path.join(__dirname, 'client/dist'),
+      proxy: {
+        '/cloudinary': 'http://localhost:3000'
+      }
     }
   }
 }

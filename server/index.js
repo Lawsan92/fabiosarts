@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cloudinary = require('./routes/cloudinary.js');
 
 
 //--------------------SERVER--------------------*/
@@ -14,3 +15,5 @@ app.use(express.static(path.join(__dirname, '../client/dist/')));
 app.listen(3000, () => {
   console.log('listening to http://localhost:3000');
 })
+
+app.use('/cloudinary', cloudinary);
