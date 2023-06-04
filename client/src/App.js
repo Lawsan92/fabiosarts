@@ -94,10 +94,9 @@ const App = () => {
       <animated.div style={{...spring}} className='app'>
         <Header/>
         <div className='app_body'>
-          <ul>
+          <ul className='app_list'>
             {/* {mapGalleries()} */}
             <animated.li
-            className='app_list'
             onMouseEnter={hoverOn}
             onMouseLeave={hoverOff}
             onClick={(e) => {toggleSelect(e.target.innerText)}}
@@ -108,7 +107,10 @@ const App = () => {
             <li>aluminum</li>
             <li>series</li>
           </ul>
-          <img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
+          <div className='app_img_container'>
+            <img className='app_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
+          </div>
+          <div className='app_select'></div>
         </div>
         <Footer/>
       </animated.div>

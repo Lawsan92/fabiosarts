@@ -45,7 +45,7 @@ const Gallery = ({exhibits}) => {
 
   return (
     <div className='gallery'>
-      <animated.h1 style={{...headerSpring()}}>{exhibits.exhibit}</animated.h1>
+      <animated.h1 className='gallery_header' style={{...headerSpring()}}>{exhibits.exhibit}</animated.h1>
       <animated.div className='gallery_container' style={{...spring}}>
         {mapGallery()}
       </animated.div>

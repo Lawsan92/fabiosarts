@@ -6,7 +6,7 @@ const getGalleryFromCloudinary = require('../controllers/getGalleryFromCloudinar
 
 //--------------------MIDDLEWARE--------------------*/
 router.use((req, res, next) => {
-  console.log('/grepFiles', '@', new Date);
+  console.log('/cloudinary', 'w/', req.query, '@', new Date);
   next();
 })
 

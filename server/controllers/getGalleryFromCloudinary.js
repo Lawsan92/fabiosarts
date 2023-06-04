@@ -12,7 +12,7 @@ const getGalleryFromCloudinary = async (exhibit) => {
       api_key: process.env.CLOUD_API,
       api_secret: process.env.CLOUD_SECRET_API,
       type: 'upload',
-      prefix: exhibit.exhibit === 'early works' ? prefix: `FABIO/${(exhibit.exhibit || '')}`,
+      prefix: exhibit.exhibit === 'early works' ? prefix : `FABIO/${(exhibit.exhibit || '')}`,
       max_results: 25
     });
       let gallery = [];

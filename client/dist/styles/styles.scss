@@ -71,26 +71,35 @@
   height: 72vh;
   width: 100vw;
   display: flex;
+  justify-content: space-evenly;
+}
 
-  & ul {
-    list-style: none;
-    font-family: 'Inter', sans-serif;
-    color: #808080;
-    font-size: 30px;
-    margin-left: 1em;
-    margin-top: 0;
-    cursor: pointer;
-    // & :hover{
-    //   color: red;
-    //   cursor: pointer;
-    //   transition: ease-in 1s;
-    // }
-  }
+.app_img_container {
+  width: 66vw;
+  display: flex;
+  justify-content: flex-start;
+}
 
-  & img {
-    height: 50vh;
-    width: auto;
-    justify-self: center;
+.app_img {
+  height: 50vh;
+  width: auto;
+}
+
+.app_list {
+  list-style: none;
+  font-family: 'Inter', sans-serif;
+  color: #808080;
+  font-size: 30px;
+  margin-left: 1em;
+  margin-top: 0;
+  width: 33vw;
+  & li {
+    margin-bottom: 30px;
+    & :hover{
+      color: red;
+      cursor: crosshair;
+      transition: ease-in 1s;
+    }
   }
 }
 
