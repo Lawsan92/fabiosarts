@@ -20,70 +20,17 @@ const App = () => {
     to: {opacity: 1, x: 0}
   })
 
-  const [liSpring, api] = useSpring(() => ({
-      from: {color: '#808080'},
-  }))
-
-  const hoverOn = (key) => {
-    console.log('key:', key)
-    api.start({
-      to: {color: 'blue', transition: '0.5s ease-in'}
-    })
-  }
-
-  const hoverOff = (key) => {
-    api.start({
-      to: {color: '#808080', transition: '0.5s ease-in'}
-    })
-  }
-
   const toggleSelect = (exhibit) => {
     selectExhibit({...exhibits, ['exhibit']: exhibit});
   }
 
   const mapGalleries = () => {
-    // const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
-    // let key = 0;
-    // return galleries.map((gallery) => {
-    //   key ++;
-    //   return <animated.li onMouseEnter={(e) => {hoverOn(e.target.dataset.key); handleHover(e.target.dataset.key)}} onMouseLeave={(e) => {hoverOff; handleHover(e.target.dataset.key) }} style={{...liSpring}} key={key} data-key={key}>{gallery}</animated.li>
-    // })
-    const [liSpring, api] = useSprings(2, () => ({
-      from: {color: '#808080'},
-      to: {color: 'blue', transition: '0.5s ease-in'}
-    }))
-
-    const hoverOn = (key) => {
-      console.log('key:', key)
-      api.start({
-        to: {color: 'blue', transition: '0.5s ease-in'}
-      })
-    }
-
-    const hoverOff = (key) => {
-      api.start({
-        to: {color: '#808080', transition: '0.5s ease-in'}
-      })
-    }
-
+    const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
     let key = 0;
-//  return galleries.map((gallery) => {
-//       key ++;
-//     return (
-//       {liSpring.map((props) => {
-//         (<animated.div></animated.div>)
-//       })}
-//     );
-//   })
-
-    return (
-      <div>
-        {liSpring.map((props) => {
-          return <animated.div onMouseOver={hoverOn} onMouseLeave={hoverOff}style={props} onClick={toggleSelect}>oils</animated.div>
-        })}
-      </div>
-    )
-
+    return galleries.map((gallery) => {
+      key ++;
+      return <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText)}}>{gallery}</li>
+    })
   };
 
 
@@ -95,17 +42,7 @@ const App = () => {
         <Header/>
         <div className='app_body'>
           <ul className='app_list'>
-            {/* {mapGalleries()} */}
-            <animated.li
-            onMouseEnter={hoverOn}
-            onMouseLeave={hoverOff}
-            onClick={(e) => {toggleSelect(e.target.innerText)}}
-            style={{...liSpring}}>oils</animated.li>
-            <li onClick={(e) => {toggleSelect(e.target.innerText)}}>copper plates</li>
-            <li>printings</li>
-            <li onClick={(e) => {toggleSelect(e.target.innerText)}}>early works</li>
-            <li>aluminum</li>
-            <li>series</li>
+            {mapGalleries()}
           </ul>
           <div className='app_img_container'>
             <img className='app_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>

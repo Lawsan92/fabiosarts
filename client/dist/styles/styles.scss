@@ -95,10 +95,11 @@
   width: 33vw;
   & li {
     margin-bottom: 30px;
-    & :hover{
-      color: red;
-      cursor: crosshair;
-      transition: ease-in 1s;
+    transition: ease-in 0.5s;
+    &:hover{
+      color: lightblue;
+      cursor: pointer;
+      transition: ease-in 0.5s;
     }
   }
 }
