@@ -1,31 +1,15 @@
 import React, { useState , useEffect} from 'react';
 import { animated, useSpring, useSprings } from '@react-spring/web';
 import '../dist/styles/styles.scss';
-const axios = require('axios');
 
 import Footer from './Footer.js';
 import Header from './Header.js';
+import Gallery from './Gallery.js';
 
 const App = () => {
 
   const [isHover, setHover] = useState(false);
-
-  const getGallery = () => {
-    axios({
-      url: '/cloudinary',
-      method: 'get'
-    })
-      .then((response) => {
-        console.log('response:', response);
-      })
-      .catch((err) => {
-        console.log('error:', err.stack)
-      })
-  }
-
-  useEffect(() => {
-    getGallery();
-  }, [])
+  const [exhibits, selectExhibit] = useState(false);
 
   const handleHover = (key) => {
     setHover( prevState => ({...isHover, [key]: !prevState}))
@@ -51,6 +35,10 @@ const App = () => {
     api.start({
       to: {color: '#808080', transition: '0.5s ease-in'}
     })
+  }
+
+  const toggleSelect = (exhibit) => {
+    selectExhibit({...exhibits, ['exhibit']: exhibit});
   }
 
   const mapGalleries = () => {
@@ -91,31 +79,36 @@ const App = () => {
     return (
       <div>
         {liSpring.map((props) => {
-          return <animated.div onMouseOver={hoverOn} onMouseLeave={hoverOff}style={props}>oils</animated.div>
+          return <animated.div onMouseOver={hoverOn} onMouseLeave={hoverOff}style={props} onClick={toggleSelect}>oils</animated.div>
         })}
       </div>
     )
 
   };
 
-  return (
-    <animated.div style={{...spring}} className='app'>
-      <Header/>
-      <div className='app_body'>
-        <ul>
-          {mapGalleries()}
-          {/* <animated.li onMouseEnter={hoverOn} onMouseLeave={hoverOff} style={{...liSpring}}>oils</animated.li>
-          <li>copper plates</li>
-          <li>printings</li>
-          <li>early works</li>
-          <li>aluminum</li>
-          <li>series</li> */}
-        </ul>
-        <img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
-      </div>
-      <Footer/>
-    </animated.div>
-  )
+
+  if (exhibits) {
+    return <Gallery exhibits={exhibits}/>;
+  } else {
+    return (
+      <animated.div style={{...spring}} className='app'>
+        <Header/>
+        <div className='app_body'>
+          <ul>
+            {/* {mapGalleries()} */}
+            <animated.li onMouseEnter={hoverOn} onMouseLeave={hoverOff} onClick={(e) => {toggleSelect(e.target.innerText)}} style={{...liSpring}}>oils</animated.li>
+            <li>copper plates</li>
+            <li>printings</li>
+            <li>early works</li>
+            <li>aluminum</li>
+            <li>series</li>
+          </ul>
+          <img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
+        </div>
+        <Footer/>
+      </animated.div>
+    )
+  }
 };
 
 export default App;
