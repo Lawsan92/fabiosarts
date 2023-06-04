@@ -97,13 +97,14 @@ const App = () => {
           <ul>
             {/* {mapGalleries()} */}
             <animated.li
+            className='app_list'
             onMouseEnter={hoverOn}
             onMouseLeave={hoverOff}
             onClick={(e) => {toggleSelect(e.target.innerText)}}
             style={{...liSpring}}>oils</animated.li>
-            <li>copper plates</li>
+            <li onClick={(e) => {toggleSelect(e.target.innerText)}}>copper plates</li>
             <li>printings</li>
-            <li>early works</li>
+            <li onClick={(e) => {toggleSelect(e.target.innerText)}}>early works</li>
             <li>aluminum</li>
             <li>series</li>
           </ul>

@@ -1,10 +1,23 @@
 import React, { useState , useEffect} from 'react';
+import { animated, useSpring, useSprings } from '@react-spring/web';
 const axios = require('axios');
+
+import { headerSpring } from './hooks/Springs.js';
 
 
 const Gallery = ({exhibits}) => {
 
   const [gallery, getGallery] = useState([]);
+
+  const spring = useSpring({
+    from: {
+      opacity: 0,
+      transition: '2s ease-in'
+     },
+    to: {
+      opacity: 1,
+    }
+  });
 
   const fetchGallery = () => {
     axios({
@@ -20,16 +33,22 @@ const Gallery = ({exhibits}) => {
       })
   }
 
+  const mapGallery = () => {
+    return gallery.map((url) => {
+      return <img src={url}/>
+    });
+  }
+
   useEffect(() => {
     fetchGallery();
   }, [])
 
   return (
     <div className='gallery'>
-      <h1>{exhibits.exhibit}</h1>
-      {gallery.map((url) => {
-        return <img src={url}/>
-      })}
+      <animated.h1 style={{...headerSpring()}}>{exhibits.exhibit}</animated.h1>
+      <animated.div className='gallery_container' style={{...spring}}>
+        {mapGallery()}
+      </animated.div>
     </div>
   )
 }
