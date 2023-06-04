@@ -35,7 +35,7 @@ const App = () => {
 
 
   if (exhibits) {
-    return <Gallery exhibits={exhibits}/>;
+    return <Gallery exhibits={exhibits} selectExhibit={selectExhibit}/>;
   } else {
     return (
       <animated.div style={{...spring}} className='app'>

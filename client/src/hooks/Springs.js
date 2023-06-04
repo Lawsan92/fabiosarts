@@ -1,4 +1,16 @@
-import { animated, useSpring, useSprings } from '@react-spring/web';
+import { useSpring, useSprings } from '@react-spring/web';
+
+export const gallerySpring = () => {
+  return useSpring({
+    from: {
+      opacity: 0,
+      transition: '2s ease-in'
+     },
+    to: {
+      opacity: 1,
+    }
+  });
+}
 
 export const headerSpring = () => {
   return useSpring({
