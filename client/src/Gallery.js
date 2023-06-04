@@ -8,8 +8,8 @@ const Gallery = ({exhibits}) => {
 
   const fetchGallery = () => {
     axios({
-      url: '/cloudinary',
-      method: 'get'
+      url: `/cloudinary/?exhibit=${exhibits.exhibit}`,
+      method: 'get',
     })
       .then((response) => {
         console.log('response:', response);

@@ -10,14 +10,16 @@ router.use((req, res, next) => {
   next();
 })
 
+router.use(express.json())
+
 //--------------------ROUTES--------------------*/
 router
   .route('/')
   .get( async (req, res) => {
     try {
-      await getGalleryFromCloudinary()
+      await getGalleryFromCloudinary(req.query)
         .then((gallery) => {
-          console.log('gallery:', gallery);
+          // console.log('gallery:', gallery);
           res.send({data: gallery});
         })
 
