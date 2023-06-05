@@ -28,7 +28,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
   const mapGallery = () => {
     return gallery.map((url) => {
-      return <img src={url}/>
+      return <img className='gallery_img' src={url}/>
     });
   }
 

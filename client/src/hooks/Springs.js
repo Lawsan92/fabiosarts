@@ -18,17 +18,15 @@ export const headerSpring = () => {
       backgroundColor: 'rgba(255, 255, 255, 0)',
       color: '#808080',
       transition: '1s ease-in',
-      top: '310px',
-      left: '78px',
-      position: 'absolute'
+      y: 280,
+      x: 65
     },
     to: {
       backgroundColor: '#001133',
       color: '#fff',
       transition: '1s ease-in',
-      top: '0px',
-      left: '0px',
-      position: 'absolute'
+      y: 0,
+      x: 0
     }
   });
 }

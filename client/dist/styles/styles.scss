@@ -2,6 +2,10 @@
 @import './gallery.scss';
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
+body {
+  margin: 0;
+}
+
 .home{
   display: flex;
   flex-direction: column;

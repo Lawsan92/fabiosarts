@@ -66,47 +66,14 @@ const App = () => {
 
   return (
     <div className="app">
-      <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button>
+      {/* <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button> */}
       {exhibits ?
         <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/>
       :
-    //   <animated.div style={{...spring}} className='home'>
-    //   <Header/>
-    //   <div className='home_body'>
-    //     <ul className='home_list'>
-    //       {mapGalleries()}
-    //     </ul>
-    //     <div className='home_img_container'>
-    //       <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
-    //     </div>
-    //     <div className='home_select'></div>
-    //   </div>
-    //   <Footer/>
-    // </animated.div>
     mountSpring()
       }
     </div>
   )
-
-  // if (exhibits) {
-  //   return <Gallery exhibits={exhibits} selectExhibit={selectExhibit}/>;
-  // } else {
-  //   return (
-  //     <animated.div style={{...spring}} className='app'>
-  //       <Header/>
-  //       <div className='app_body'>
-  //         <ul className='app_list'>
-  //           {mapGalleries()}
-  //         </ul>
-  //         <div className='app_img_container'>
-  //           <img className='app_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
-  //         </div>
-  //         <div className='app_select'></div>
-  //       </div>
-  //       <Footer/>
-  //     </animated.div>
-  //   )
-  // }
 };
 
 export default App;
