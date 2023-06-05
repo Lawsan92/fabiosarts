@@ -27,7 +27,7 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
       items ?
       <animated.div style={style} className='home'>
         <div className='home_header'>
-          <h1>FABIO SANZOGNI</h1>
+          <h1 className='home_header_text'>FABIO SANZOGNI</h1>
           <div className='home_header_sub'>
             <div className='home_header_sub_line' />
             <div className='home_header_sub_ellipse'>
@@ -45,9 +45,25 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
           <div className='home_img_container'>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
           </div>
-          <div className='home_select'></div>
+          <div className='home_select'>
+            <ul className='home_select_menu'>
+              <li className='home_select_item'></li>
+              <li className='home_select_item'></li>
+              <li className='home_select_item'></li>
+              <li className='home_select_item'></li>
+              <li className='home_select_item'></li>
+              <li className='home_select_item'></li>
+              <li className='home_select_item'></li>
+            </ul>
+          </div>
         </div>
-        <div className='home_footer'></div>
+        <div className='home_footer'>
+          <p className='footer_text'>Arist Statment</p>
+          <p className='footer_text'>Contact</p>
+          <p className='footer_text'>All rights reserved</p>
+          <p className='footer_text'>studiodarteonline.com</p>
+          <p className='footer_text'>designed by Lawrence Sanzogni</p>
+        </div>
       </animated.div>
       :
       ''

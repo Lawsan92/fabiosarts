@@ -1,0 +1,143 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
+
+.home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #FFFAFA;
+  margin: 0;
+}
+
+.home_header{
+  height: fit-content;
+  width: 100vw;
+  font-family: 'Inter', sans-serif;
+  padding: 1em;
+}
+
+.home_header_text{
+  font-size: 10vh;
+  margin: .25em 0 0 4vw;
+  font-weight: 100;
+}
+
+.home_header_sub{
+  height: fit-content;
+  display: flex;
+  align-items: center;
+  margin-left: 4vw;
+  justify-content: flex-start;
+}
+
+.home_header_sub_line{
+  background-color: gray;
+  height: 1px;
+  width: 50vw;
+}
+
+.home_header_sub_ellipse{
+  display: flex;
+  align-items: center;
+}
+
+.ellipse_1{
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: .5em;
+}
+
+.ellipse_2{
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: .3em;
+}
+
+.ellipse_3{
+  height: 3px;
+  width: 3px;
+  border-radius: 50%;
+  background-color: grey;
+  margin: .3em;
+}
+
+.home_body{
+  height: 70vh;
+  width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.home_select {
+  width: 33vw;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.home_select_menu {
+  list-style: none;
+  margin-right: 25px;
+}
+
+.home_select_item{
+  height: 25px;
+  width: 25px;
+  border-radius: 50%;
+  background-color: #d3d3d3;
+  margin-bottom: 25px;
+}
+
+.home_list {
+  list-style: none;
+  font-family: 'Inter', sans-serif;
+  color: #808080;
+  font-size: 30px;
+  margin-top: 0;
+  width: 33vw;
+  padding: 0;
+  & li {
+    margin-bottom: 30px;
+    margin-left: 4vw;
+    transition: ease-in 0.5s;
+    &:hover{
+      color: lightblue;
+      cursor: pointer;
+      transition: ease-in 0.5s;
+    }
+  }
+}
+
+.home_img_container {
+  width: 33vw;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.home_img {
+  height: 50vh;
+  width: auto;
+  margin-left: 1em;
+}
+
+
+.home_footer{
+  height: 20vh;
+  width: 100vw;
+  background-color: #001133;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.footer_text{
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  margin-left: 2.5em;
+  font-size: 25px;
+}
