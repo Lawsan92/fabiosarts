@@ -6,6 +6,7 @@ const axios = require('axios');
 
 const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
+  /*---------------STATE && HOOKES---------------*/
   const [gallery, getGallery] = useState([]);
 
   const fetchGallery = () => {
