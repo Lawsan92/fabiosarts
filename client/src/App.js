@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import { animated, useSpring, useSprings } from '@react-spring/web';
+import { animated, useSpring, useTransition } from '@react-spring/web';
 import '../dist/styles/styles.scss';
 
 import Footer from './Footer.js';
@@ -20,6 +20,36 @@ const App = () => {
     to: {opacity: 1, x: 0}
   })
 
+  const [isMounted, setMount] = useState(true);
+  const transitions = useTransition(isMounted, {
+    from: { opacity: 0, transition: '0.5s ease-in', x: -200 },
+    enter: { x: 0, y: 0, opacity: 1 },
+    leave: { x: 200, y: 800, opacity: 0, transition: '0.5s ease-in' }
+  });
+
+
+  const mountSpring = () => {
+    return transitions((style, items) =>
+      items ?
+      <animated.div style={style} className='home'>
+        <Header/>
+        <div className='home_body'>
+          <ul className='home_list'>
+            {mapGalleries()}
+          </ul>
+          <div className='home_img_container'>
+            <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
+          </div>
+          <div className='home_select'></div>
+        </div>
+        <Footer/>
+      </animated.div>
+      :
+      ''
+    )
+  }
+
+
   const toggleSelect = (exhibit) => {
     selectExhibit({...exhibits, ['exhibit']: exhibit});
   }
@@ -29,30 +59,54 @@ const App = () => {
     let key = 0;
     return galleries.map((gallery) => {
       key ++;
-      return <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText)}}>{gallery}</li>
+      return <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
     })
   };
 
 
-  if (exhibits) {
-    return <Gallery exhibits={exhibits} selectExhibit={selectExhibit}/>;
-  } else {
-    return (
-      <animated.div style={{...spring}} className='app'>
-        <Header/>
-        <div className='app_body'>
-          <ul className='app_list'>
-            {mapGalleries()}
-          </ul>
-          <div className='app_img_container'>
-            <img className='app_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
-          </div>
-          <div className='app_select'></div>
-        </div>
-        <Footer/>
-      </animated.div>
-    )
-  }
+  return (
+    <div className="app">
+      <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button>
+      {exhibits ?
+        <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/>
+      :
+    //   <animated.div style={{...spring}} className='home'>
+    //   <Header/>
+    //   <div className='home_body'>
+    //     <ul className='home_list'>
+    //       {mapGalleries()}
+    //     </ul>
+    //     <div className='home_img_container'>
+    //       <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
+    //     </div>
+    //     <div className='home_select'></div>
+    //   </div>
+    //   <Footer/>
+    // </animated.div>
+    mountSpring()
+      }
+    </div>
+  )
+
+  // if (exhibits) {
+  //   return <Gallery exhibits={exhibits} selectExhibit={selectExhibit}/>;
+  // } else {
+  //   return (
+  //     <animated.div style={{...spring}} className='app'>
+  //       <Header/>
+  //       <div className='app_body'>
+  //         <ul className='app_list'>
+  //           {mapGalleries()}
+  //         </ul>
+  //         <div className='app_img_container'>
+  //           <img className='app_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
+  //         </div>
+  //         <div className='app_select'></div>
+  //       </div>
+  //       <Footer/>
+  //     </animated.div>
+  //   )
+  // }
 };
 
 export default App;

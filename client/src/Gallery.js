@@ -4,7 +4,7 @@ import { headerSpring, gallerySpring } from './hooks/Springs.js';
 const axios = require('axios');
 
 
-const Gallery = ({ exhibits, selectExhibit }) => {
+const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
   const [gallery, getGallery] = useState([]);
 
@@ -37,7 +37,7 @@ const Gallery = ({ exhibits, selectExhibit }) => {
       <animated.h1
       className='gallery_header'
       style={{...headerSpring()}}
-      onClick={() => {selectExhibit(false)}}>
+      onClick={() => {selectExhibit(false); setMount(true)}}>
         {exhibits.exhibit}
       </animated.h1>
       <animated.div className='gallery_container' style={{...gallerySpring()}}>
