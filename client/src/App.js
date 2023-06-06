@@ -7,7 +7,7 @@ import Home from './Home.js';
 
 const App = () => {
 
-  /*---------------STATE && HOOKES---------------*/
+  /*---------------STATE && HOOKS---------------*/
   const [exhibits, selectExhibit] = useState(false);
 
   const spring = useSpring({
@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <div className="app">
-      {/* <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button> */}
+      <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button>
       {exhibits ?
         <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/>
       :

@@ -1,44 +1,31 @@
 import React, { useState , useEffect} from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 
-export const SeriesMenu= ({ seriesList, setList }) => {
+export const SeriesMenu= ({ seriesList, setList, toggleSelect }) => {
 
   const mountTransition = useTransition(seriesList, {
-    from: {opacity: 0, transition: '0.5s ease-in'},
-    enter: {opacity: 1, transition: '0.5s ease-in'},
-    leave: {opacity: 0, transition: '0.5s ease-in'}
+    from: {opacity: 0, y: 400 },
+    enter: {opacity: 1, y: 0 },
+    leave: {opacity: 0 },
+    trail: 500
   });
 
   const mapSeries = () => {
+    let key = -1;
     return series.map((gallery) => {
-      return <li>{gallery}</li>
+      key ++;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
     })
   };
 
-  const mountSeries = () => {
-    let key = 0;
-    return mountTransition((style, item) => {
-      return item ?
-        <animated.ul style={style} className='series_list'>
-        {mapSeries()}
-      </animated.ul>
-      :
-      '';
-    })
-  }
-
   const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
 
-
-  // return seriesList ?
-  //   (
-  //     <ul className='series_list'>
-  //       {mapSeries()}
-  //     </ul>
-  //   )
-  // :
-  //   '';
-  return mountSeries();
+  return mountTransition((style, item) =>
+  item &&
+    <animated.ul style={style} className='series_list'>
+    {mapSeries()}
+  </animated.ul>
+);
 
 };
 
@@ -48,26 +35,26 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
 
   const mapGalleries = () => {
     const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
-    let key = 0;
+    let key = -1;
     return galleries.map((gallery) => {
       key ++;
       return gallery !== 'series' ?
       <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
       :
-      <li onClick={() => {setList(prevState => !prevState)}}>series</li>
+      <li key={galleries.length - 1}onClick={() => {setList(prevState => !prevState)}}>series</li>
     })
   };
 
   const transitions = useTransition(isMounted, {
     from: { opacity: 0, transition: '0.5s ease-in', x: -200 },
-    enter: { x: 0, y: 0, opacity: 1 },
+    enter: { x: 0, y: 0, opacity: 1, transition: '0.5s ease-in' },
     leave: { x: 200, y: 800, opacity: 0, transition: '0.5s ease-in' }
   });
 
   const mountSpring = () => {
 
     return transitions((style, items) =>
-      items ?
+      items &&
       <animated.div style={style} className='home'>
         <div className='home_header'>
           <h1 className='home_header_text'>FABIO SANZOGNI</h1>
@@ -85,7 +72,7 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
           <ul className='home_list'>
             {mapGalleries()}
           </ul>
-          {seriesList && <SeriesMenu seriesList={seriesList} setList={setList}/>}
+          <SeriesMenu seriesList={seriesList} setList={setList} toggleSelect={toggleSelect}/>
           <div className='home_img_container'>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
           </div>
@@ -109,8 +96,6 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
           <p className='footer_text'>designed by Lawrence Sanzogni</p>
         </div>
       </animated.div>
-      :
-      ''
     );
   }
 
@@ -119,6 +104,28 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
       {mountSpring()}
     </div>
   )
+
+
+  // const [isMounted, setMount] = useState(false);
+  // const transition = useTransition(isMounted, {
+  //   from: { opacity: 0, transition: '2s', x: 50 },
+  //   enter: { opacity: 1, transition: '2s', x: 0 },
+  //   leave: { opacity: 0, transition: '2s', x: 50 }
+  // })
+
+  // const mountTransition = () => {
+  //   return transition((style, item) => {
+  //     item && <animated.div style={{height: '250px', width: '250px', backgroundColor: 'red', borderRadius: '1em', ...style}}></animated.div>;
+  //   })
+  // }
+
+  // return (
+  //   <div>
+  //     <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button>
+  //     {transition((style, item) =>
+  //     item && <animated.div style={{height: '250px', width: '250px', backgroundColor: 'red', borderRadius: '1em', ...style}}></animated.div>)}
+  //   </div>
+  // )
 
 };
 
