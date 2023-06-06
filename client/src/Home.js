@@ -1,25 +1,46 @@
 import React, { useState , useEffect} from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 
+export const SeriesMenu= ({ seriesList, setList }) => {
+
+  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
+
+  const mapSeries = () => {
+    return series.map((gallery) => {
+      return <li>{gallery}</li>
+    })
+  };
+  return seriesList ?
+    (
+      <ul className='series_list'>
+        {mapSeries()}
+      </ul>
+    )
+  :
+    '';
+};
+
 const Home = ({ isMounted, setMount, toggleSelect }) => {
 
+  const [seriesList, setList] = useState(false);
 
   const mapGalleries = () => {
     const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
     let key = 0;
     return galleries.map((gallery) => {
       key ++;
-      return <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
+      return gallery !== 'series' ?
+      <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
+      :
+      <li onClick={() => {setList(prevState => !prevState)}}>series</li>
     })
   };
-
 
   const transitions = useTransition(isMounted, {
     from: { opacity: 0, transition: '0.5s ease-in', x: -200 },
     enter: { x: 0, y: 0, opacity: 1 },
     leave: { x: 200, y: 800, opacity: 0, transition: '0.5s ease-in' }
   });
-
 
   const mountSpring = () => {
 
@@ -42,6 +63,7 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
           <ul className='home_list'>
             {mapGalleries()}
           </ul>
+          <SeriesMenu seriesList={seriesList} setList={setList}/>
           <div className='home_img_container'>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
           </div>

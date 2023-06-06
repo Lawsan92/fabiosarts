@@ -113,6 +113,24 @@
   }
 }
 
+.series_list {
+  list-style: none;
+  font-family: 'Inter', sans-serif;
+  color: #808080;
+  font-size: 30px;
+}
+
+.series_item {
+  margin-bottom: 5px;
+    margin-left: 2vw;
+    transition: ease-in 0.5s;
+    &:hover{
+      color: lightblue;
+      cursor: pointer;
+      transition: ease-in 0.5s;
+    }
+}
+
 .home_img_container {
   width: 33vw;
   display: flex;
