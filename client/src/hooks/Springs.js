@@ -1,4 +1,4 @@
-import { useSpring, useSprings } from '@react-spring/web';
+import { useSpring, useSprings, useTransition } from '@react-spring/web';
 
 export const gallerySpring = () => {
   return useSpring({

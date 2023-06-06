@@ -3,21 +3,43 @@ import { animated, useSpring, useTransition } from '@react-spring/web';
 
 export const SeriesMenu= ({ seriesList, setList }) => {
 
-  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
+  const mountTransition = useTransition(seriesList, {
+    from: {opacity: 0, transition: '0.5s ease-in'},
+    enter: {opacity: 1, transition: '0.5s ease-in'},
+    leave: {opacity: 0, transition: '0.5s ease-in'}
+  });
 
   const mapSeries = () => {
     return series.map((gallery) => {
       return <li>{gallery}</li>
     })
   };
-  return seriesList ?
-    (
-      <ul className='series_list'>
+
+  const mountSeries = () => {
+    let key = 0;
+    return mountTransition((style, item) => {
+      return item ?
+        <animated.ul style={style} className='series_list'>
         {mapSeries()}
-      </ul>
-    )
-  :
-    '';
+      </animated.ul>
+      :
+      '';
+    })
+  }
+
+  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
+
+
+  // return seriesList ?
+  //   (
+  //     <ul className='series_list'>
+  //       {mapSeries()}
+  //     </ul>
+  //   )
+  // :
+  //   '';
+  return mountSeries();
+
 };
 
 const Home = ({ isMounted, setMount, toggleSelect }) => {
@@ -63,7 +85,7 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
           <ul className='home_list'>
             {mapGalleries()}
           </ul>
-          <SeriesMenu seriesList={seriesList} setList={setList}/>
+          {seriesList && <SeriesMenu seriesList={seriesList} setList={setList}/>}
           <div className='home_img_container'>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
           </div>
