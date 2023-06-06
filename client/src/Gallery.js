@@ -37,18 +37,30 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
   const scrollToImg = (imgIndex) => {
     const imgNode = document.querySelector(`.gallery_img.index${imgIndex}`);
-    imgNode.scrollIntoView({ behavior: 'smooth'});
+    imgNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
   };
 
   const mapGallery = () => {
     return gallery.map((url, index) => {
-      return <img className={`gallery_img index${index}`} key={index} src={url} />
+      return (
+      <div className='gallery_img_container'>
+        <img className={`gallery_img index${index}`} key={index} src={url} />
+      </div>
+      )
     });
   }
 
   const mapSelect = () => {
-    return gallery.map((gallery, index) => {
-      return <li className={`gallery_select_item index${index}`} key={index} onClick={(e) => {scrollToImg(index)}}/>
+    return gallery.map((item, index) => {
+      return <li
+      className={`gallery_select_item index${index}`}
+      key={index}
+      onClick={(e) => {scrollToImg(index)}}
+      style={{
+        height: gallery.length > 12 && '10px',
+        width: gallery.length > 12 && '10px',
+      }}
+      />
     })
   }
 
@@ -63,7 +75,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       <animated.div className='gallery_container' style={{...gallerySpring()}} >
         {mapGallery()}
       </animated.div>
-      <ul className='gallery_select_menu' style={{top: scrollPosition}}>
+      <ul className='gallery_select_menu' style={{top: scrollPosition}} >
         {mapSelect()}
       </ul>
     </div>
