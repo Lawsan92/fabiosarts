@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button>
+      {/* <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button> */}
       {exhibits ?
         <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/>
       :

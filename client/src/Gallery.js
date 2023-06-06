@@ -9,6 +9,14 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   /*---------------STATE && HOOKES---------------*/
   const [gallery, getGallery] = useState([]);
 
+  const [scrollPosition, getScrollPosition] = useState('10vh');
+
+  const handleSelectPosition = () => {
+    window.addEventListener('scroll', () => {
+      getScrollPosition(document.documentElement.scrollTop + (window.innerHeight / 10))
+    })
+  };
+
   const fetchGallery = () => {
     axios({
       url: `/cloudinary/?exhibit=${exhibits.exhibit}`,
@@ -25,12 +33,19 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
   useEffect(() => {
     fetchGallery();
+    handleSelectPosition();
   }, [])
 
   const mapGallery = () => {
     return gallery.map((url) => {
       return <img className='gallery_img' src={url}/>
     });
+  }
+
+  const mapSelect = () => {
+    return gallery.map(() => {
+      return <li className='gallery_select_item'/>
+    })
   }
 
   return (
@@ -44,6 +59,9 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       <animated.div className='gallery_container' style={{...gallerySpring()}}>
         {mapGallery()}
       </animated.div>
+      <ul className='gallery_select_menu' style={{top: scrollPosition}}>
+        {mapSelect()}
+      </ul>
     </div>
   )
 }
