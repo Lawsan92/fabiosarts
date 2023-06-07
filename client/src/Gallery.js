@@ -41,10 +41,11 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   };
 
   const mapGallery = () => {
-    return gallery.map((url, index) => {
+    return gallery.map((img, index) => {
       return (
       <div className='gallery_img_container'>
-        <img className={`gallery_img index${index}`} key={index} src={url} />
+        <img className={`gallery_img index${index}`} key={index} src={img.url} />
+        <p className={`gallery_text index${index}`} key={index}>{img.description}</p>
       </div>
       )
     });

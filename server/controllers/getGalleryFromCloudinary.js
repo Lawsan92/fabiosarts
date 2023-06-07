@@ -16,8 +16,10 @@ const getGalleryFromCloudinary = async (exhibit) => {
       max_results: 25
     });
       let gallery = [];
-      result.resources.forEach((img) => {
-        gallery.push(img.url);
+      result.resources.forEach((item) => {
+        let img = {url: item.url, description: item.public_id};
+        console.log('img:', img);
+        gallery.push(img);
       });
       return gallery;
       } catch (error) {
