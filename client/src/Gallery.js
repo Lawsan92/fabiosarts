@@ -61,6 +61,13 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     setModal(prevState => !prevState);
   }
 
+  (() => {
+    document.addEventListener('keydown', (e) => {
+      e.key === 'Escape' && handleModal(false);
+    })
+  })()
+
+
   /*----- Maps-----*/
 
   const mapGallery = () => {
