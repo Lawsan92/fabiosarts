@@ -3,13 +3,13 @@ import { animated } from '@react-spring/web';
 import { headerSpring, gallerySpring } from './hooks/Springs.js';
 const axios = require('axios');
 
-export const Modal = ({ handleModal }) => {
+export const Modal = ({ handleModal, modalImgSource, scrollPosition }) => {
 
   return (
-    <div className='gallery_modal'>
+    <div className='gallery_modal' style={{top: scrollPosition}}>
       <div className='gallery_modal_background'>
         <div className='gallery_modal_body' onClick={handleModal}>
-          Modal
+          <img src={modalImgSource} style={{height: 'inherit'}}/>
         </div>
       </div>
     </div>
@@ -23,6 +23,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   useEffect(() => {
     fetchGallery();
     handleSelectPosition();
+    upKeyEvent();
+    downKeyEvent();
   }, [])
 
   /*----- Gallery-----*/
@@ -50,23 +52,41 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   };
 
   const scrollToImg = (imgIndex) => {
+    console.log('SCROLL', imgIndex)
     const imgNode = document.querySelector(`.gallery_img.index${imgIndex}`);
     imgNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
   };
 
   /*----- Modal-----*/
   const [openModal, setModal] = useState(false);
+  const [modalImgSource, getModalImgSource] = useState('');
 
   const handleModal = () => {
     setModal(prevState => !prevState);
   }
 
-  (() => {
-    document.addEventListener('keydown', (e) => {
-      e.key === 'Escape' && handleModal(false);
-    })
-  })()
 
+  /*-----Key events-----*/
+
+  const escKeyEvent = document.addEventListener('keydown', (e) => {
+    e.key === 'Escape' && handleModal(false);
+  });
+
+
+  const [scrollIndex, getScrollIndex] = useState(0);
+
+  const downKeyEvent = () => {
+    document.addEventListener('keydown', (e) => {
+      e.keyCode=== 40 && scrollToImg(scrollIndex + 1);
+    });
+  }
+
+  const upKeyEvent = () => {
+    document.addEventListener('keydown', (e) => {
+      console.log('scrollIndex:', scrollIndex);
+      e.keyCode === 38 && scrollToImg(scrollIndex - 1);
+    });
+  }
 
   /*----- Maps-----*/
 
@@ -75,8 +95,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       return (
       <div className='gallery_img_container'>
         <p className={`gallery_text index${index}`} key={index} style={{color: 'red'}}>{img.sold && 'SOLD'}</p>
-        <img className={`gallery_img index${index}`} key={index} src={img.url}  onClick={handleModal}/>
-        <p className={`gallery_text index${index}`} key={index}>{img.title + ' ' + img.size + ' ' + img.type}</p>
+        <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url}  onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value)}}/>
+        <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ' ' + img.size + ' ' + img.type}</p>
       </div>
       )
     });
@@ -87,7 +107,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       return <li
       className={`gallery_select_item index${index}`}
       key={index}
-      onClick={(e) => {scrollToImg(index)}}
+      onClick={(e) => {scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex)}}
       style={{
         height: gallery.length > 12 && '10px',
         width: gallery.length > 12 && '10px',
@@ -99,7 +119,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   return (
     <div className='gallery'>
       {openModal ?
-        <Modal handleModal={handleModal}/> :
+        <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
         ''
       }
       <animated.h1

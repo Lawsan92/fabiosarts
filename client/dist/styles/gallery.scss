@@ -87,13 +87,12 @@
 }
 
 .gallery_modal_body {
-  height: 500px;
-  width: 500px;
+  height: 95vh;
+  width: 95vw;
   border-radius: 1em;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
   &:hover{
     cursor: pointer;
   }
