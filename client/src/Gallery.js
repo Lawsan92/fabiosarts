@@ -3,16 +3,29 @@ import { animated } from '@react-spring/web';
 import { headerSpring, gallerySpring } from './hooks/Springs.js';
 const axios = require('axios');
 
+export const Modal = ({ handleModal }) => {
+
+  return (
+    <div className='gallery_modal'>
+      <div className='gallery_modal_background'>
+        <div className='gallery_modal_body' onClick={handleModal}>
+          Modal
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
-  /*---------------STATE && HOOKES---------------*/
+  /*---------------STATE && HOOKS---------------*/
 
   useEffect(() => {
     fetchGallery();
     handleSelectPosition();
   }, [])
 
+  /*----- Gallery-----*/
   const [gallery, getGallery] = useState([]);
   const fetchGallery = () => {
     axios({
@@ -28,6 +41,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       })
   };
 
+  /*----- Scroll-----*/
   const [scrollPosition, getScrollPosition] = useState('10vh');
   const handleSelectPosition = () => {
     window.addEventListener('scroll', () => {
@@ -40,12 +54,21 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     imgNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
   };
 
+  /*----- Modal-----*/
+  const [openModal, setModal] = useState(false);
+
+  const handleModal = () => {
+    setModal(prevState => !prevState);
+  }
+
+  /*----- Maps-----*/
+
   const mapGallery = () => {
     return gallery.map((img, index) => {
       return (
       <div className='gallery_img_container'>
         <p className={`gallery_text index${index}`} key={index} style={{color: 'red'}}>{img.sold && 'SOLD'}</p>
-        <img className={`gallery_img index${index}`} key={index} src={img.url} />
+        <img className={`gallery_img index${index}`} key={index} src={img.url}  onClick={handleModal}/>
         <p className={`gallery_text index${index}`} key={index}>{img.title + ' ' + img.size + ' ' + img.type}</p>
       </div>
       )
@@ -68,6 +91,10 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
   return (
     <div className='gallery'>
+      {openModal ?
+        <Modal handleModal={handleModal}/> :
+        ''
+      }
       <animated.h1
       className='gallery_header'
       style={{...headerSpring()}}

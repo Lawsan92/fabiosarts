@@ -30,6 +30,9 @@
 .gallery_img {
   height: inherit;
   max-width: inherit;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .gallery_img_container {
@@ -66,4 +69,32 @@
 
 .gallery_text{
   font-family: 'Inter', sans-serif;
+}
+
+.gallery_modal {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.gallery_modal_background {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.gallery_modal_body {
+  height: 500px;
+  width: 500px;
+  border-radius: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  &:hover{
+    cursor: pointer;
+  }
 }

@@ -31,7 +31,6 @@ const getGalleryFromCloudinary = async (exhibit) => {
     });
 
       result.resources.forEach((item) => {
-        console.log(typeof item.context.custom.title, item.context.custom.title);
         let img = {
           url: item.url || '',
           title: (item.context && item.context.custom.title) ? item.context.custom.title : '',
