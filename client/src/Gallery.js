@@ -6,7 +6,7 @@ const axios = require('axios');
 export const Modal = ({ handleModal, modalImgSource, scrollPosition }) => {
 
   return (
-    <div className='gallery_modal' style={{top: scrollPosition}}>
+    <div className='gallery_modal' style={{top: document.documentElement.scrollTop}}>
       <div className='gallery_modal_background'>
         <div className='gallery_modal_body' onClick={handleModal}>
           <img src={modalImgSource} style={{height: 'inherit'}}/>
@@ -131,7 +131,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       <animated.div className='gallery_container' style={{...gallerySpring()}} >
         {mapGallery()}
       </animated.div>
-      <ul className='gallery_select_menu' style={{top: scrollPosition}} >
+      <ul className='gallery_select_menu' style={{top: scrollPosition - 10}} >
         {mapSelect()}
       </ul>
     </div>
