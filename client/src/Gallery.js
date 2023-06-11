@@ -88,6 +88,13 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     });
   }
 
+
+  /*----- Sphere List-----*/
+  const [sphereIsSelected, selectSphere] = useState(false);
+  const handleSphereSelect = (index) => {
+    selectSphere(prevState => ({...sphereIsSelected, [index]: !prevState[index]}));
+  };
+
   /*----- Maps-----*/
 
   const mapGallery = () => {
@@ -107,10 +114,12 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       return <li
       className={`gallery_select_item index${index}`}
       key={index}
-      onClick={(e) => {scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex)}}
+      onClick={(e) => {scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex); handleSphereSelect(index);}}
       style={{
         height: gallery.length > 12 && '10px',
         width: gallery.length > 12 && '10px',
+        backgroundColor: sphereIsSelected[index] && 'lightblue',
+        transform: sphereIsSelected[index] && 'scale(1.2)'
       }}
       />
     })
