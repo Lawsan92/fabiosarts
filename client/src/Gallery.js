@@ -93,7 +93,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   /*----- Sphere List-----*/
   const [sphereIsSelected, selectSphere] = useState(false);
   const handleSphereSelect = (index) => {
-    !sphereIsSelected ? selectSphere(prevState => ({...sphereIsSelected, [index]: !prevState[index]})) : selectSphere(false);
+    selectSphere((({props}) => ({...props, [index]: true})))
   };
 
   /*----- Maps-----*/
@@ -115,7 +115,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       return <li
       className={`gallery_select_item index${index}`}
       key={index}
-      onClick={(e) => { handleSphereSelect(index); !sphereIsSelected && scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex); }}
+      onClick={(e) => { handleSphereSelect(index); scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex); }}
       style={{
         height: gallery.length > 12 && '10px',
         width: gallery.length > 12 && '10px',
@@ -149,3 +149,5 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 }
 
 export default Gallery;
+
+// ref: https://dev.to/zeerorg/react-hooks-and-their-dependence-on-each-other-13pe
