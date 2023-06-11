@@ -21,11 +21,12 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   /*---------------STATE && HOOKS---------------*/
 
   useEffect(() => {
+    console.log('MOUNTED')
     fetchGallery();
     handleSelectPosition();
     upKeyEvent();
     downKeyEvent();
-  }, [])
+  }, [sphereIsSelected])
 
   /*----- Gallery-----*/
   const [gallery, getGallery] = useState([]);
@@ -92,7 +93,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   /*----- Sphere List-----*/
   const [sphereIsSelected, selectSphere] = useState(false);
   const handleSphereSelect = (index) => {
-    selectSphere(prevState => ({...sphereIsSelected, [index]: !prevState[index]}));
+    !sphereIsSelected ? selectSphere(prevState => ({...sphereIsSelected, [index]: !prevState[index]})) : selectSphere(false);
   };
 
   /*----- Maps-----*/
@@ -114,7 +115,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       return <li
       className={`gallery_select_item index${index}`}
       key={index}
-      onClick={(e) => {scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex); handleSphereSelect(index);}}
+      onClick={(e) => { handleSphereSelect(index); !sphereIsSelected && scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex); }}
       style={{
         height: gallery.length > 12 && '10px',
         width: gallery.length > 12 && '10px',
