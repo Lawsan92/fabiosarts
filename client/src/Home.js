@@ -89,7 +89,6 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
           </div>
         </div>
         <div className='home_footer'>
-          <p className='footer_text'>Arist Statment</p>
           <p className='footer_text'>Contact</p>
           <p className='footer_text'>All rights reserved</p>
           <p className='footer_text'>studiodarteonline.com</p>
