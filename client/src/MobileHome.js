@@ -27,6 +27,7 @@ export const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, s
       itemState &&
       <animated.ul className='mobile_home_list' style={{...style}}>
         {mapGalleries()}
+        <button className='mobile_home_list_btn' onClick={() => {mountMobileList(false)}}>X</button>
       </animated.ul>
     );
   }
