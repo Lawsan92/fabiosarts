@@ -2,9 +2,9 @@ import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 import MobileHome from './MobileHome.js';
 
-export const SeriesMenu= ({ seriesList, setList, toggleSelect }) => {
+export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
 
-  const mountTransition = useTransition(seriesList, {
+  const mountTransition = useTransition(seriesSubList, {
     from: {opacity: 0, y: 400 },
     enter: {opacity: 1, y: 0 },
     leave: {opacity: 0 },
@@ -33,7 +33,7 @@ export const SeriesMenu= ({ seriesList, setList, toggleSelect }) => {
 
 const Home = ({ isMounted, setMount, toggleSelect }) => {
 
-  const [seriesList, setList] = useState(false);
+  const [seriesSubList, setSubList] = useState(false);
 
   const [viewSize, getSize] = useState(window.innerWidth);
 
@@ -60,7 +60,7 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
       return gallery !== 'series' ?
       <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
       :
-      <li key={galleries.length - 1}onClick={() => {setList(prevState => !prevState)}}>series</li>
+      <li key={galleries.length - 1}onClick={() => {setSubList(prevState => !prevState)}}>series</li>
     })
   };
 
@@ -91,7 +91,7 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
           <ul className='home_list'>
             {mapGalleries()}
           </ul>
-          <SeriesMenu seriesList={seriesList} setList={setList} toggleSelect={toggleSelect}/>
+          <SeriesMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect}/>
           <div className='home_img_container'>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
           </div>
@@ -120,7 +120,7 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
   return (
     <div>
       {viewSize <= 450 ?
-        <MobileHome isMounted={isMounted} setMount={setMount}/> :
+        <MobileHome isMounted={isMounted} setMount={setMount} seriesSubList={seriesSubList} setSubList={setSubList}/> :
         mountSpring()
       }
     </div>

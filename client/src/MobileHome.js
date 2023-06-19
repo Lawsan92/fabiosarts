@@ -2,19 +2,58 @@ import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 
 
-export const MobileMenu = () => {
+export const MobileMenu = ({ mountMobileList }) => {
 
   return (
-    <div className='mobile_home_menu'>
+    <div className='mobile_home_menu' onClick={() => {mountMobileList(true)}}>
       <div className='mobile_home_menu_bar'></div>
       <div className='mobile_home_menu_bar'></div>
       <div className='mobile_home_menu_bar'></div>
     </div>
   );
-}
+};
 
-const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
+export const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, setSubList, seriesSubList }) => {
 
+  /*-----springs-----*/
+  const listTransitions = useTransition(mobileListMounted, {
+    from: { opacity: 0, transition: '0.5s ease-in', x: 200 },
+    enter: { x: 0, y: 0, opacity: 1, transition: '0.5s ease-in' },
+    leave: { x: -200, y: 800, opacity: 0, transition: '0.5s ease-in' }
+  });
+
+  const MountList = () => {
+    return listTransitions (( style, itemState ) =>
+      itemState &&
+      <animated.ul className='mobile_home_list' style={{...style}}>
+        {mapGalleries()}
+      </animated.ul>
+    );
+  }
+
+  /*-----maps-----*/
+  const mapGalleries = () => {
+    const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
+    let key = -1;
+    return galleries.map((gallery) => {
+      key ++;
+      return gallery !== 'series' ?
+      <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
+      :
+      <li key={galleries.length - 1}onClick={() => {setSubList(prevState => !prevState)}}>series</li>
+    })
+  };
+
+  /*-----jsx-----*/
+  return MountList();
+};
+
+const MobileHome = ({ isMounted, setMount, toggleSelect, seriesSubList, setSubList }) => {
+
+  /*-----STATE: mobile list-----*/
+  const [mobileListMounted, mountMobileList] = useState(false);
+
+  /*-----styles-----*/
   const mobileStyles = {
     home: {
       backgroundImage: `url(https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg)`,
@@ -54,6 +93,7 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
     },
   };
 
+  /*-----springs-----*/
   const transitions = useTransition(isMounted, {
     from: { opacity: 0, transition: '0.5s ease-in', x: -200 },
     enter: { x: 0, y: 0, opacity: 1, transition: '0.5s ease-in' },
@@ -65,7 +105,7 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
     return transitions((style, items) =>
       items &&
       <animated.div style={{...style, ...mobileStyles.home}} className='home'>
-        <MobileMenu/>
+        <MobileMenu mountMobileList={mountMobileList}/>
         <div className='home_header' style={mobileStyles.home.header}>
           <h1 className='home_header_text' style={mobileStyles.home.header.text}>FABIO SANZOGNI</h1>
           <div className='home_header_sub' style={mobileStyles.home.header.sub}>
@@ -86,11 +126,16 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
         </div>
       </animated.div>
     );
-  }
+  };
 
+  /*-----jsx-----*/
   return (
     <div>
-      {mountSpring()}
+      {
+      mobileListMounted?
+        <MobileList mobileListMounted={mobileListMounted} mountMobileList={mountMobileList} seriesSubList={seriesSubList} setSubList={setSubList}/> :
+      mountSpring()
+      }
     </div>
   );
 }
