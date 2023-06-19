@@ -1,5 +1,6 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
+import MobileHome from './MobileHome.js';
 
 export const SeriesMenu= ({ seriesList, setList, toggleSelect }) => {
 
@@ -21,17 +22,35 @@ export const SeriesMenu= ({ seriesList, setList, toggleSelect }) => {
   const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
 
   return mountTransition((style, item) =>
-  item &&
-    <animated.ul style={style} className='series_list'>
-    {mapSeries()}
-  </animated.ul>
-);
+    item &&
+      <animated.ul style={style} className='series_list'>
+      {mapSeries()}
+    </animated.ul>
+  );
 
 };
+
 
 const Home = ({ isMounted, setMount, toggleSelect }) => {
 
   const [seriesList, setList] = useState(false);
+
+  const [viewSize, getSize] = useState(window.innerWidth);
+
+  const body = document.querySelector('body');
+
+  viewSize < 400 ?  body.style.backgroundImage = `url(https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg)` : '';
+
+  const handleSize = (size) => {
+    window.addEventListener('resize', () => {
+      console.log('window.innerWidth:', window.innerWidth);
+      getSize(window.innerWidth);
+    })
+  };
+
+  useEffect(() => {
+    handleSize();
+  }, []);
 
   const mapGalleries = () => {
     const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
@@ -100,31 +119,12 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
 
   return (
     <div>
-      {mountSpring()}
+      {viewSize <= 450 ?
+        <MobileHome isMounted={isMounted} setMount={setMount}/> :
+        mountSpring()
+      }
     </div>
-  )
-
-
-  // const [isMounted, setMount] = useState(false);
-  // const transition = useTransition(isMounted, {
-  //   from: { opacity: 0, transition: '2s', x: 50 },
-  //   enter: { opacity: 1, transition: '2s', x: 0 },
-  //   leave: { opacity: 0, transition: '2s', x: 50 }
-  // })
-
-  // const mountTransition = () => {
-  //   return transition((style, item) => {
-  //     item && <animated.div style={{height: '250px', width: '250px', backgroundColor: 'red', borderRadius: '1em', ...style}}></animated.div>;
-  //   })
-  // }
-
-  // return (
-  //   <div>
-  //     <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button>
-  //     {transition((style, item) =>
-  //     item && <animated.div style={{height: '250px', width: '250px', backgroundColor: 'red', borderRadius: '1em', ...style}}></animated.div>)}
-  //   </div>
-  // )
+  );
 
 };
 

@@ -10,7 +10,8 @@
 
 .gallery_homeIcon{
   position: absolute;
-  right: 1vw;
+  right: 0;
+  margin-right: 25px;
   &:hover{
     cursor: pointer;
   }
