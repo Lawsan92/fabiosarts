@@ -5,6 +5,10 @@ const axios = require('axios');
 
 const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
+  useEffect(() => {
+    fetchGallery();
+  }, [])
+
   /*-----API-----*/
   const [gallery, getGallery] = useState([]);
   const fetchGallery = () => {
@@ -21,8 +25,23 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
       })
   };
 
-  /*----- Maps-----*/
+  /*----- Scroll-----*/
+  const [scrollPosition, getScrollPosition] = useState('10vh');
+  const handleSelectPosition = () => {
+    window.addEventListener('scroll', () => {
+      getScrollPosition(document.documentElement.scrollTop + (window.innerHeight / 10))
+    })
+  };
+  /*----- Modal-----*/
+  const [openModal, setModal] = useState(false);
+  const [modalImgSource, getModalImgSource] = useState('');
 
+  const handleModal = () => {
+    setModal(prevState => !prevState);
+  }
+
+
+  /*----- Maps-----*/
   const mapGallery = () => {
     return gallery.map((img, index) => {
       return (
@@ -38,10 +57,10 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
     return (
       <div className='gallery'>
-      {/* {openModal ?
+      {openModal ?
         <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
         ''
-      } */}
+      }
       <animated.h1
       className='gallery_header'
       style={{...headerSpring()}}
@@ -58,6 +77,20 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     </div>
     )
 };
+
+export const Modal = ({ handleModal, modalImgSource, scrollPosition }) => {
+
+  return (
+    <div className='gallery_modal' style={{top: document.documentElement.scrollTop}}>
+      <div className='gallery_modal_background'>
+        <div className='gallery_modal_body' onClick={handleModal}>
+          <img src={modalImgSource} style={{height: 'inherit'}}/>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 
 export const HomeIcon = ({ selectExhibit, setMount }) => {
 
