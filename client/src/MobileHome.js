@@ -1,14 +1,38 @@
 import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
-
+import MobileGallery from './MobileGallery.js';
 
 export const MobileMenu = ({ mountMobileList }) => {
 
+  const [isHover, setHover] = useState(false);
+
+  const styles = {
+    opacity: isHover ? 1 : 0.5,
+    backgroundColor: isHover && '#808080',
+    text: {
+      opacity: isHover ? 1 : 0.5,
+      color: isHover && '#fffafa'
+    },
+    arrow: {
+      opacity: isHover ? 1 : 0.5,
+      transform: isHover ? 'rotate(180deg) translate(7px, 0px)' : 'rotate(0) translate(7px, 0px)',
+      borderLeft: isHover && 'solid #fffafa 10px'
+    }
+  }
+
   return (
-    <div className='mobile_home_menu' onClick={() => {mountMobileList(true)}}>
+    <div
+    className='mobile_home_menu'
+    onClick={() => {mountMobileList(true)}}
+    style={styles}
+    onMouseEnter={() => {setHover(true)}}
+    onMouseLeave={() => {setHover(false)}}
+    >
+      {/* <div className='mobile_home_menu_bar'></div>
       <div className='mobile_home_menu_bar'></div>
-      <div className='mobile_home_menu_bar'></div>
-      <div className='mobile_home_menu_bar'></div>
+      <div className='mobile_home_menu_bar'></div> */}
+      <div className='mobile_home_menu_text' style={styles.text}>Galleries</div>
+      <div className='mobile_home_menu_arrow' style={styles.arrow}></div>
     </div>
   );
 };
@@ -39,7 +63,7 @@ export const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, s
     return galleries.map((gallery) => {
       key ++;
       return gallery !== 'series' ?
-      <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
+      <li key={key} data-key={key} onClick={(e) => {mountMobileGallery(true); setMount(false)}}>{gallery}</li>
       :
       <li key={galleries.length - 1}onClick={() => {setSubList(prevState => !prevState)}}>series</li>
     })
@@ -53,6 +77,9 @@ const MobileHome = ({ isMounted, setMount, toggleSelect, seriesSubList, setSubLi
 
   /*-----STATE: mobile list-----*/
   const [mobileListMounted, mountMobileList] = useState(false);
+
+  /*-----STATE: mobile gallery-----*/
+  const [mobileGalleryMounted, mountMobileGallery] = useState(false);
 
   /*-----styles-----*/
   const mobileStyles = {
@@ -130,13 +157,24 @@ const MobileHome = ({ isMounted, setMount, toggleSelect, seriesSubList, setSubLi
   };
 
   /*-----jsx-----*/
+
+  if (mobileListMounted && !mobileGalleryMounted) {
+    return (
+      <div>
+          <MobileList mobileListMounted={mobileListMounted} mountMobileList={mountMobileList} seriesSubList={seriesSubList} setSubList={setSubList} />
+      </div>
+    );
+  } else if (!mobileListMounted && mobileGalleryMounted) {
+    return (
+      <div>
+          <MobileGallery />
+      </div>
+    );
+  };
+
   return (
     <div>
-      {
-      mobileListMounted?
-        <MobileList mobileListMounted={mobileListMounted} mountMobileList={mountMobileList} seriesSubList={seriesSubList} setSubList={setSubList}/> :
-      mountSpring()
-      }
+      {mountSpring()}
     </div>
   );
 }

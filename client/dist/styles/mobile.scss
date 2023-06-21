@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
 .mobile_home_menu{
-  height: 50px;
+  height: fit-content;
   width: 50px;
-  border-radius: 15%;
+  border-radius: 2%;
   background-color: #fffafa;
   opacity: 0.5;
   position: absolute;
@@ -59,4 +59,20 @@
     cursor: pointer;
     transition: ease-in 0.5s;
   }
+}
+
+.mobile_home_menu_text{
+  font-family: 'Inter', sans-serif;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+}
+
+.mobile_home_menu_arrow{
+  height: 0;
+  width: 0;
+  border-top: solid #ffffff00 10px;;
+  border-right: solid #ffffff00 10px;;
+  border-bottom: solid #ffffff00 10px;
+  border-left:  solid #808080 10px;
+  margin-top: 5px;
 }
