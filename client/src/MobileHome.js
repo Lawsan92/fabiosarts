@@ -1,85 +1,12 @@
 import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
-import MobileGallery from './MobileGallery.js';
 
-export const MobileMenu = ({ mountMobileList }) => {
-
-  const [isHover, setHover] = useState(false);
-
-  const styles = {
-    opacity: isHover ? 1 : 0.5,
-    backgroundColor: isHover && '#808080',
-    text: {
-      opacity: isHover ? 1 : 0.5,
-      color: isHover && '#fffafa'
-    },
-    arrow: {
-      opacity: isHover ? 1 : 0.5,
-      transform: isHover ? 'rotate(180deg) translate(7px, 0px)' : 'rotate(0) translate(7px, 0px)',
-      borderLeft: isHover && 'solid #fffafa 10px'
-    }
-  }
-
-  return (
-    <div
-    className='mobile_home_menu'
-    onClick={() => {mountMobileList(true)}}
-    style={styles}
-    onMouseEnter={() => {setHover(true)}}
-    onMouseLeave={() => {setHover(false)}}
-    >
-      {/* <div className='mobile_home_menu_bar'></div>
-      <div className='mobile_home_menu_bar'></div>
-      <div className='mobile_home_menu_bar'></div> */}
-      <div className='mobile_home_menu_text' style={styles.text}>Galleries</div>
-      <div className='mobile_home_menu_arrow' style={styles.arrow}></div>
-    </div>
-  );
-};
-
-export const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, setSubList, seriesSubList }) => {
-
-  /*-----springs-----*/
-  const listTransitions = useTransition(mobileListMounted, {
-    from: { opacity: 0, transition: '0.5s ease-in', x: 200 },
-    enter: { x: 0, y: 0, opacity: 1, transition: '0.5s ease-in' },
-    leave: { x: -200, y: 800, opacity: 0, transition: '0.5s ease-in' }
-  });
-
-  const MountList = () => {
-    return listTransitions (( style, itemState ) =>
-      itemState &&
-      <animated.ul className='mobile_home_list' style={{...style}}>
-        {mapGalleries()}
-        <button className='mobile_home_list_btn' onClick={() => {mountMobileList(false)}}>X</button>
-      </animated.ul>
-    );
-  }
-
-  /*-----maps-----*/
-  const mapGalleries = () => {
-    const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
-    let key = -1;
-    return galleries.map((gallery) => {
-      key ++;
-      return gallery !== 'series' ?
-      <li key={key} data-key={key} onClick={(e) => {mountMobileGallery(true); setMount(false)}}>{gallery}</li>
-      :
-      <li key={galleries.length - 1}onClick={() => {setSubList(prevState => !prevState)}}>series</li>
-    })
-  };
-
-  /*-----jsx-----*/
-  return MountList();
-};
-
-const MobileHome = ({ isMounted, setMount, toggleSelect, seriesSubList, setSubList }) => {
+const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
 
   /*-----STATE: mobile list-----*/
   const [mobileListMounted, mountMobileList] = useState(false);
 
-  /*-----STATE: mobile gallery-----*/
-  const [mobileGalleryMounted, mountMobileGallery] = useState(false);
+  const [seriesSubList, setSubList] = useState(false);
 
   /*-----styles-----*/
   const mobileStyles = {
@@ -158,25 +85,90 @@ const MobileHome = ({ isMounted, setMount, toggleSelect, seriesSubList, setSubLi
 
   /*-----jsx-----*/
 
-  if (mobileListMounted && !mobileGalleryMounted) {
+  if (mobileListMounted) {
     return (
       <div>
-          <MobileList mobileListMounted={mobileListMounted} mountMobileList={mountMobileList} seriesSubList={seriesSubList} setSubList={setSubList} />
+          <MobileList mobileListMounted={mobileListMounted} mountMobileList={mountMobileList} seriesSubList={seriesSubList} setSubList={setSubList} setMount={setMount} toggleSelect={toggleSelect}/>
       </div>
     );
-  } else if (!mobileListMounted && mobileGalleryMounted) {
-    return (
-      <div>
-          <MobileGallery />
-      </div>
-    );
-  };
+  }
 
   return (
     <div>
       {mountSpring()}
     </div>
   );
-}
+};
+
+export const MobileMenu = ({ mountMobileList }) => {
+
+  const [isHover, setHover] = useState(false);
+
+  const styles = {
+    opacity: isHover ? 1 : 0.5,
+    backgroundColor: isHover && '#808080',
+    text: {
+      opacity: isHover ? 1 : 0.5,
+      color: isHover && '#fffafa'
+    },
+    arrow: {
+      opacity: isHover ? 1 : 0.5,
+      transform: isHover ? 'rotate(180deg) translate(7px, 0px)' : 'rotate(0) translate(7px, 0px)',
+      borderLeft: isHover && 'solid #fffafa 10px'
+    }
+  }
+
+  return (
+    <div
+    className='mobile_home_menu'
+    onClick={() => {mountMobileList(true)}}
+    style={styles}
+    onMouseEnter={() => {setHover(true)}}
+    onMouseLeave={() => {setHover(false)}}
+    >
+      {/* <div className='mobile_home_menu_bar'></div>
+      <div className='mobile_home_menu_bar'></div>
+      <div className='mobile_home_menu_bar'></div> */}
+      <div className='mobile_home_menu_text' style={styles.text}>Galleries</div>
+      <div className='mobile_home_menu_arrow' style={styles.arrow}></div>
+    </div>
+  );
+};
+
+export const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, setSubList, seriesSubList, setMount }) => {
+
+  /*-----springs-----*/
+  const listTransitions = useTransition(mobileListMounted, {
+    from: { opacity: 0, transition: '0.5s ease-in', x: 200 },
+    enter: { x: 0, y: 0, opacity: 1, transition: '0.5s ease-in' },
+    leave: { x: -200, y: 800, opacity: 0, transition: '0.5s ease-in' }
+  });
+
+  const MountList = () => {
+    return listTransitions (( style, itemState ) =>
+      itemState &&
+      <animated.ul className='mobile_home_list' style={{...style}}>
+        {mapGalleries()}
+        <button className='mobile_home_list_btn' onClick={() => {mountMobileList(false)}}>X</button>
+      </animated.ul>
+    );
+  }
+
+  /*-----maps-----*/
+  const mapGalleries = () => {
+    const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
+    let key = -1;
+    return galleries.map((gallery) => {
+      key ++;
+      return gallery !== 'series' ?
+      <li key={key} data-key={key} onClick={(e) =>  {toggleSelect(e.target.innerText)}}>{gallery}</li>
+      :
+      <li key={galleries.length - 1}onClick={() => {setSubList(prevState => !prevState)}}>series</li>
+    })
+  };
+
+  /*-----jsx-----*/
+  return MountList();
+};
 
 export default MobileHome;

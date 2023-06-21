@@ -13,6 +13,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
+  transition: ease-in 1s;
   &:hover { cursor: pointer; opacity: 1;}
 }
 
@@ -65,6 +66,7 @@
   font-family: 'Inter', sans-serif;
   writing-mode: vertical-rl;
   text-orientation: upright;
+  transition: ease-in 1s;
 }
 
 .mobile_home_menu_arrow{
@@ -75,4 +77,6 @@
   border-bottom: solid #ffffff00 10px;
   border-left:  solid #808080 10px;
   margin-top: 5px;
+  margin-bottom: 2px;
+  transition: ease-in 1s;
 }

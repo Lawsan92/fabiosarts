@@ -1,56 +1,13 @@
 import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
-import MobileHome from './MobileHome.js';
 
-export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
-
-  const mountTransition = useTransition(seriesSubList, {
-    from: {opacity: 0, y: 400 },
-    enter: {opacity: 1, y: 0 },
-    leave: {opacity: 0 },
-    trail: 500
-  });
-
-  const mapSeries = () => {
-    let key = -1;
-    return series.map((gallery) => {
-      key ++;
-      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
-    })
-  };
-
-  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
-
-  return mountTransition((style, item) =>
-    item &&
-      <animated.ul style={style} className='series_list'>
-      {mapSeries()}
-    </animated.ul>
-  );
-
-};
-
-
-const Home = ({ isMounted, setMount, toggleSelect }) => {
+const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
 
   const [seriesSubList, setSubList] = useState(false);
-
-  const [viewSize, getSize] = useState(window.innerWidth);
 
   const body = document.querySelector('body');
 
   viewSize < 400 ?  body.style.backgroundImage = `url(https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg)` : '';
-
-  const handleSize = (size) => {
-    window.addEventListener('resize', () => {
-      console.log('window.innerWidth:', window.innerWidth);
-      getSize(window.innerWidth);
-    })
-  };
-
-  useEffect(() => {
-    handleSize();
-  }, []);
 
   const mapGalleries = () => {
     const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
@@ -119,14 +76,38 @@ const Home = ({ isMounted, setMount, toggleSelect }) => {
 
   return (
     <div>
-      {viewSize <= 450 ?
-        <MobileHome isMounted={isMounted} setMount={setMount} seriesSubList={seriesSubList} setSubList={setSubList}/> :
-        mountSpring()
-      }
+      {mountSpring()}
     </div>
   );
 
 };
 
+export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
+
+  const mountTransition = useTransition(seriesSubList, {
+    from: {opacity: 0, y: 400 },
+    enter: {opacity: 1, y: 0 },
+    leave: {opacity: 0 },
+    trail: 500
+  });
+
+  const mapSeries = () => {
+    let key = -1;
+    return series.map((gallery) => {
+      key ++;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
+    })
+  };
+
+  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
+
+  return mountTransition((style, item) =>
+    item &&
+      <animated.ul style={style} className='series_list'>
+      {mapSeries()}
+    </animated.ul>
+  );
+
+};
 
 export default Home;
