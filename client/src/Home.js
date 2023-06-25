@@ -17,7 +17,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
       return gallery !== 'series' ?
       <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
       :
-      <li key={galleries.length - 1}onClick={() => {setSubList(prevState => !prevState)}}>series</li>
+      <li key={galleries.length - 1} onClick={() => {setSubList(prevState => !prevState)}}>series</li>
     })
   };
 

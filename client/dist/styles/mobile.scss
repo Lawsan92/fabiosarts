@@ -34,6 +34,7 @@
   list-style: none;
   font-family: 'Inter', sans-serif;
   font-size: 30px;
+  margin: 0;
   & li {
     margin-bottom: 30px;
     margin-left: 4vw;
@@ -79,4 +80,10 @@
   margin-top: 5px;
   margin-bottom: 2px;
   transition: ease-in 1s;
+}
+
+.mobile_series_list {
+  font-family: 'Inter', sans-serif;
+  color: #fffafa;
+  font-size: 30px;
 }

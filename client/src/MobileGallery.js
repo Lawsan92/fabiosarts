@@ -5,6 +5,23 @@ const axios = require('axios');
 
 const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
+  const styles = {
+    galleryContainer: {
+      width: '100vw'
+    },
+    imgContainer: {
+      width: '95vw'
+    },
+    img: {
+      height: 'auto',
+      maxWidth: 'inherit'
+    },
+    icon: {
+      marginRight: '10px',
+      marginTop: '10px'
+    }
+  }
+
   useEffect(() => {
     fetchGallery();
   }, [])
@@ -45,9 +62,9 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
   const mapGallery = () => {
     return gallery.map((img, index) => {
       return (
-      <div className='gallery_img_container'>
+      <div className='gallery_img_container' style={styles.imgContainer}>
         <p className={`gallery_text index${index}`} key={index} style={{color: 'red'}}>{img.sold && 'SOLD'}</p>
-        <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url}  onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value)}}/>
+        <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url}  onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value)}} style={styles.img}/>
         <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ' ' + img.size + ' ' + img.type}</p>
       </div>
       )
@@ -68,7 +85,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
         {exhibits.exhibit}
       </animated.h1>
       <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
-      <animated.div className='gallery_container' style={{...gallerySpring()}} >
+      <animated.div className='gallery_container' style={{...gallerySpring(), ...styles.galleryContainer}} >
         {mapGallery()}
       </animated.div>
       {/* <ul className='gallery_select_menu' >
@@ -80,11 +97,21 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
 export const Modal = ({ handleModal, modalImgSource, scrollPosition }) => {
 
+  const styles = {
+    btn: {
+      height: '10px',
+      width: '10px',
+      borderRaius: '50%',
+      backgroundColor: '#fff'
+    }
+  }
+
   return (
     <div className='gallery_modal' style={{top: document.documentElement.scrollTop}}>
       <div className='gallery_modal_background'>
         <div className='gallery_modal_body' onClick={handleModal}>
           <img src={modalImgSource} style={{height: 'inherit'}}/>
+          <div style={styles.btn}>Rotate</div>
         </div>
       </div>
     </div>
@@ -94,6 +121,11 @@ export const Modal = ({ handleModal, modalImgSource, scrollPosition }) => {
 
 export const HomeIcon = ({ selectExhibit, setMount }) => {
 
+  const styles =  {
+    marginRight: '10px',
+    marginTop: '10px'
+  };
+
   const [isHover, setHover] = useState(false);
 
   const handleHover = () => {
@@ -101,7 +133,7 @@ export const HomeIcon = ({ selectExhibit, setMount }) => {
   };
 
   return (
-    <div className='gallery_homeIcon' onClick={() => {selectExhibit(false); setMount(true)}}>
+    <div className='gallery_homeIcon' onClick={() => {selectExhibit(false); setMount(true)}} style={styles}>
       <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
         width="5vh" height="5vh" viewBox="0 0 495.398 495.398" style={{enableBackground:"new 0 0 495.398 495.398"}}
         space="preserve" onMouseEnter={handleHover} onMouseLeave={handleHover}>

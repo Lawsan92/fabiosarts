@@ -12,7 +12,6 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
   const mobileStyles = {
     home: {
       backgroundImage: `url(https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg)`,
-      height: '100%',
       header: {
         backgroundColor: '#fffafa',
         width: '20vw',
@@ -149,6 +148,7 @@ export const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, s
       itemState &&
       <animated.ul className='mobile_home_list' style={{...style}}>
         {mapGalleries()}
+        <SeriesMenu seriesSubList={seriesSubList} toggleSelect={toggleSelect}/>
         <button className='mobile_home_list_btn' onClick={() => {mountMobileList(false)}}>X</button>
       </animated.ul>
     );
@@ -169,6 +169,34 @@ export const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, s
 
   /*-----jsx-----*/
   return MountList();
+};
+
+export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
+
+  const mountTransition = useTransition(seriesSubList, {
+    from: {opacity: 0, y: 400 },
+    enter: {opacity: 1, y: 0 },
+    leave: {opacity: 0 },
+    trail: 500
+  });
+
+  const mapSeries = () => {
+    let key = -1;
+    return series.map((gallery) => {
+      key ++;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
+    })
+  };
+
+  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
+
+  return mountTransition((style, item) =>
+    item &&
+      <animated.ul style={style} className='mobile_series_list'>
+      {mapSeries()}
+    </animated.ul>
+  );
+
 };
 
 export default MobileHome;

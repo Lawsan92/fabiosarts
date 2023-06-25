@@ -13,7 +13,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     handleSelectPosition();
     upKeyEvent();
     downKeyEvent();
-    handleSize();
   }, [sphereIsSelected])
 
   /*----- Gallery-----*/
@@ -75,7 +74,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       e.keyCode === 38 && scrollToImg(scrollIndex - 1);
     });
   }
-
 
   /*----- Sphere List-----*/
   const [sphereIsSelected, selectSphere] = useState(false);
