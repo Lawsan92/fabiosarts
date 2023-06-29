@@ -9,7 +9,6 @@ const axios = require('axios');
 const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
   /*---------------STATE && HOOKS---------------*/
-
   useEffect(() => {
     console.log('MOUNTED')
     fetchGallery();
@@ -57,11 +56,9 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   }
 
   /*-----Key events-----*/
-
   const escKeyEvent = document.addEventListener('keydown', (e) => {
     e.key === 'Escape' && handleModal(false);
   });
-
 
   const [scrollIndex, getScrollIndex] = useState(0);
 
@@ -85,7 +82,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   };
 
   /*----- Maps-----*/
-
   const mapGallery = () => {
     return gallery.map((img, index) => {
       return (

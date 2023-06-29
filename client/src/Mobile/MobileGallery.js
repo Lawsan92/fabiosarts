@@ -2,6 +2,8 @@ import React, { useState , useEffect } from 'react';
 import { animated } from '@react-spring/web';
 import { headerSpring, gallerySpring } from '../hooks/Springs.js';
 import Modal from '../Modal.js';
+import SphereButton from './SphereButton.js';
+import SphereModal from './SphereModal.js';
 const axios = require('axios');
 
 const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
@@ -26,6 +28,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     }
   }
 
+  /*-----STATE----- */
   useEffect(() => {
     fetchGallery();
   }, [])
@@ -59,8 +62,10 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
   const handleModal = () => {
     setModal(prevState => !prevState);
-  }
+  };
 
+  /*----- Maps-----*/
+  const [openSphereModal, setSphereModal] = useState(false);
 
   /*----- Maps-----*/
   const mapGallery = () => {
@@ -75,26 +80,21 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     });
   };
 
-
     return (
       <div className='gallery'>
       {openModal ?
         <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
         ''
       }
-      <animated.h1
-      className='gallery_header'
-      style={{...headerSpring()}}
-      >
+      <animated.h1 className='gallery_header'style={{...headerSpring()}}>
         {exhibits.exhibit}
       </animated.h1>
+      <SphereButton setSphereModal={setSphereModal}/>
       <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
       <animated.div className='gallery_container' style={{...gallerySpring(), ...styles.galleryContainer}} >
         {mapGallery()}
       </animated.div>
-      {/* <ul className='gallery_select_menu' >
-        {mapSelect()}
-      </ul> */}
+      { openSphereModal ? <SphereModal setSphereModal={setSphereModal}/>  : ''}
     </div>
     )
 };
