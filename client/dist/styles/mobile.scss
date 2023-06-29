@@ -2,7 +2,7 @@
 
 .mobile_home_menu{
   height: fit-content;
-  width: 50px;
+  width: 35px;
   border-radius: 2%;
   background-color: #fffafa;
   opacity: 0.5;
@@ -85,5 +85,8 @@
 .mobile_series_list {
   font-family: 'Inter', sans-serif;
   color: #fffafa;
-  font-size: 30px;
+  max-height: 45vh;
+  flex-wrap: wrap;
+  flex-direction: column;
+  display: flex;
 }

@@ -3,8 +3,8 @@ import { animated, useSpring, useTransition } from '@react-spring/web';
 import '../dist/styles/styles.scss';
 import Gallery from './Gallery.js';
 import Home from './Home.js';
-import MobileGallery from './MobileGallery.js';
-import MobileHome from './MobileHome.js';
+import MobileGallery from './Mobile/MobileGallery.js';
+import MobileHome from './Mobile/MobileHome.js';
 
 const App = () => {
 

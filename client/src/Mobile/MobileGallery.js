@@ -1,20 +1,24 @@
 import React, { useState , useEffect } from 'react';
 import { animated } from '@react-spring/web';
-import { headerSpring, gallerySpring } from './hooks/Springs.js';
+import { headerSpring, gallerySpring } from '../hooks/Springs.js';
+import Modal from '../Modal.js';
 const axios = require('axios');
 
 const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
   const styles = {
     galleryContainer: {
-      width: '100vw'
+      width: '100vw',
+      maxWidth: '100vw',
     },
     imgContainer: {
-      width: '95vw'
+      width: '95vw',
+      // border: 'solid'
     },
     img: {
-      height: 'auto',
-      maxWidth: 'inherit'
+      maxHeight: '62vh',
+      maxWidth: '80vw',
+      objectFit: 'contain'
     },
     icon: {
       marginRight: '10px',
@@ -95,35 +99,12 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     )
 };
 
-export const Modal = ({ handleModal, modalImgSource, scrollPosition }) => {
-
-  const styles = {
-    btn: {
-      height: '10px',
-      width: '10px',
-      borderRaius: '50%',
-      backgroundColor: '#fff'
-    }
-  }
-
-  return (
-    <div className='gallery_modal' style={{top: document.documentElement.scrollTop}}>
-      <div className='gallery_modal_background'>
-        <div className='gallery_modal_body' onClick={handleModal}>
-          <img src={modalImgSource} style={{height: 'inherit'}}/>
-          <div style={styles.btn}>Rotate</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
 export const HomeIcon = ({ selectExhibit, setMount }) => {
 
   const styles =  {
-    marginRight: '10px',
-    marginTop: '10px'
+    right: '10px',
+    top: '10px',
+    position: 'fixed'
   };
 
   const [isHover, setHover] = useState(false);
