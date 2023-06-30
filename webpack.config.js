@@ -1,4 +1,6 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
 const config = (env) => {
   console.log('env:', env);
   return {
@@ -28,7 +30,10 @@ const config = (env) => {
       proxy: {
         '/cloudinary': 'http://localhost:3000'
       }
-    }
+    },
+    plugins: [
+      new Dotenv({systemvars: true})
+    ]
   }
 }
 

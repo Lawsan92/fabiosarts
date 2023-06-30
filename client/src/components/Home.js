@@ -1,13 +1,12 @@
 import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
+import Email from './Email.js';
 
 const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
 
   const [seriesSubList, setSubList] = useState(false);
 
   const body = document.querySelector('body');
-
-  viewSize < 400 ?  body.style.backgroundImage = `url(https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg)` : '';
 
   const mapGalleries = () => {
     const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
@@ -20,6 +19,9 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
       <li key={galleries.length - 1} onClick={() => {setSubList(prevState => !prevState)}}>series</li>
     })
   };
+
+  /*------STATE:email------*/
+  const [emailFormOpen, setEmailForm] = useState(false);
 
   const transitions = useTransition(isMounted, {
     from: { opacity: 0, transition: '0.5s ease-in', x: -200 },
@@ -65,11 +67,12 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
           </div>
         </div>
         <div className='home_footer'>
-          <p className='footer_text'>Contact</p>
+          <p className='footer_text_contact' onClick={() => {setEmailForm(true)}}>Contact</p>
           <p className='footer_text'>All rights reserved</p>
           <p className='footer_text'>studiodarteonline.com</p>
           <p className='footer_text'>designed by Lawrence Sanzogni</p>
         </div>
+        {emailFormOpen && <Email setEmailForm={setEmailForm}/>}
       </animated.div>
     );
   }
