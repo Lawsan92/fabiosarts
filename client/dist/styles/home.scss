@@ -159,3 +159,16 @@
   margin-left: 2.5em;
   font-size: 25px;
 }
+
+.footer_text_contact{
+  color: #fff;
+  font-family: 'Inter', sans-serif;
+  margin-left: 2.5em;
+  font-size: 25px;
+  transition: ease-in 0.5s;
+  &:hover{
+    color: lightblue;
+    cursor: pointer;
+    transition: ease-in 0.5s;
+  }
+}

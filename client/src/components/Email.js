@@ -20,12 +20,13 @@ const Email = ({ setEmailForm }) => {
 
   };
 
-  const handleClose = (e) => {
-    e.currentTarget === e.target && setEmailForm(false);
-  }
+  /*------Key event------*/
+  document.addEventListener('keydown', (e) => {
+    e.key === 'Escape' && setEmailForm(false);
+  });
 
   return (
-    <div className="contact" onClick={(e) => {handleClose(e)}}>
+    <div className="contact">
       <div className='contact_header'>
         <h1 className='contact_header_h1'>Contact Us</h1>
         <p className='contact_header_p'>Please fill out the following form to contact us via email</p>
@@ -55,6 +56,7 @@ const Email = ({ setEmailForm }) => {
       <div className='contact_phone'>
         <p className='contact_phone_p'>1-650-888-8706</p>
       </div>
+      <button className='contact_btn' onClick={() => {setEmailForm(false)}}>X</button>
     </div>
   );
 

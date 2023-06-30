@@ -96,7 +96,22 @@
   height: 80px;
 }
 
-
 .email_label{
   margin-bottom: 25px;
+}
+
+.contact_btn{
+  background: none;
+  border: none;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fffafa;
+  font-size: 20px;
+  font-family: 'Inter', sans-serif;
+  &:hover{
+    color: lightblue;
+    cursor: pointer;
+    transition: ease-in 0.5s;
+  }
 }

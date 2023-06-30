@@ -51,6 +51,7 @@ const MobileEmail = ({ setEmailForm }) => {
       <div className='contact_phone'>
         <p className='contact_phone_p'>1-650-888-8706</p>
       </div>
+      <button className='contact_btn' onClick={() => {setEmailForm(false)}}>X</button>
     </div>
   );
 

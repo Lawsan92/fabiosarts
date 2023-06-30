@@ -67,7 +67,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
           </div>
         </div>
         <div className='home_footer'>
-          <p className='footer_text' style={{cursor: 'pointer'}} onClick={() => {setEmailForm(true)}}>Contact</p>
+          <p className='footer_text_contact' onClick={() => {setEmailForm(true)}}>Contact</p>
           <p className='footer_text'>All rights reserved</p>
           <p className='footer_text'>studiodarteonline.com</p>
           <p className='footer_text'>designed by Lawrence Sanzogni</p>
