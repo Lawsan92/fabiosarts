@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-const SphereButton = ({ setSphereModal }) => {
+const SphereButton = ({ setSphereModal, scrollIndex }) => {
   return (
-    <div className="mobile_sphereBtn" onClick={() => {setSphereModal(true)}}></div>
+    <div className="mobile_sphereBtn" onClick={() => {setSphereModal(true)}}>{scrollIndex + 1}</div>
   );
 };
 
