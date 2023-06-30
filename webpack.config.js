@@ -30,7 +30,10 @@ const config = (env) => {
       proxy: {
         '/cloudinary': 'http://localhost:3000'
       }
-    }
+    },
+    plugins: [
+      new Dotenv({systemvars: true})
+    ]
   }
 }
 

@@ -12,18 +12,31 @@
 .contact_header{
   font-family: 'Inter', sans-serif;
   color: #fffafa;
-  display: grid;
   width: 100vw;
-  // flex-direction: column;
 }
 
 .contact_header_h1{
+  width: 100vw;
   justify-self: center;
   align-self: center;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
 }
 
 .contact_header_p{
-  margin-left: 10vw;
+  width: 40vw;
+  padding-left: 10vw;
+  display: inline-block;
+  width: fit-content;
+  font-size: 1vw;
+}
+
+.contact_header_h3{
+  display: inline-block;
+  width: fit-content;
+  padding-left: 35vw;
+  width: 15vw;
 }
 
 .contact_phone{
@@ -32,6 +45,9 @@
   display: grid;
   width: 50vw;
   height: fit-content;
+}
+.contact_phone_p{
+  margin-left: 10vw;
 }
 
 .email{
@@ -46,7 +62,7 @@
 }
 
 .email_inputs_grid{
-  height: 60vh;
+  height: fit-content;
   width: 30vw;
   display: flex;
   flex-direction: column;
@@ -73,6 +89,13 @@
   border: none;
   margin-bottom: 25px;
 }
+
+.email_input_textarea {
+  border: none;
+  margin-bottom: 25px;
+  height: 80px;
+}
+
 
 .email_label{
   margin-bottom: 25px;

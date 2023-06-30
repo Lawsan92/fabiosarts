@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { sendForm } from '@emailjs/browser';
 
-const Email = ({ setEmailForm }) => {
+const MobileEmail = ({ setEmailForm }) => {
 
   const emailRef = useRef();
 
@@ -20,12 +20,8 @@ const Email = ({ setEmailForm }) => {
 
   };
 
-  const handleClose = (e) => {
-    e.currentTarget === e.target && setEmailForm(false);
-  }
-
   return (
-    <div className="contact" onClick={(e) => {handleClose(e)}}>
+    <div className="contact" onClick={() => {setEmailForm(false)}}>
       <div className='contact_header'>
         <h1 className='contact_header_h1'>Contact Us</h1>
         <p className='contact_header_p'>Please fill out the following form to contact us via email</p>
@@ -60,4 +56,4 @@ const Email = ({ setEmailForm }) => {
 
 }
 
-export default Email;
+export default MobileEmail;

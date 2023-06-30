@@ -1,5 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
+import MobileEmail from './MobileEmail.js';
 
 const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
 
@@ -7,6 +8,9 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
   const [mobileListMounted, mountMobileList] = useState(false);
 
   const [seriesSubList, setSubList] = useState(false);
+
+   /*------STATE:email------*/
+   const [emailFormOpen, setEmailForm] = useState(false);
 
   /*-----styles-----*/
   const mobileStyles = {
@@ -77,11 +81,14 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
           </div>
         </div>
         <div className='home_footer'>
-          <p className='footer_text' style={mobileStyles.home.footer} >Contact</p>
+          <p className='footer_text' style={{...mobileStyles.home.footer, cursor: 'pointer'}}
+          onClick={() => {setEmailForm(true)}}
+          >Contact</p>
           <p className='footer_text' style={mobileStyles.home.footer}>All rights reserved</p>
           <p className='footer_text' style={mobileStyles.home.footer}>studiodarteonline.com</p>
           <p className='footer_text' style={mobileStyles.home.footer}>designed by Lawrence Sanzogni</p>
         </div>
+        {emailFormOpen && <MobileEmail setEmailForm={setEmailForm}/>}
       </animated.div>
     );
   };
