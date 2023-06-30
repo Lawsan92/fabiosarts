@@ -1,20 +1,26 @@
 import React, { useState , useEffect } from 'react';
 import { animated } from '@react-spring/web';
-import { headerSpring, gallerySpring } from './hooks/Springs.js';
+import { headerSpring, gallerySpring } from '../hooks/Springs.js';
+import MobileModal from './MobileModal.js';
+import SphereButton from './SphereButton.js';
+import SphereModal from './SphereModal.js';
 const axios = require('axios');
 
 const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
   const styles = {
     galleryContainer: {
-      width: '100vw'
+      width: '100vw',
+      maxWidth: '100vw',
     },
     imgContainer: {
-      width: '95vw'
+      width: '95vw',
+      // border: 'solid'
     },
     img: {
-      height: 'auto',
-      maxWidth: 'inherit'
+      maxHeight: '62vh',
+      maxWidth: '80vw',
+      objectFit: 'contain'
     },
     icon: {
       marginRight: '10px',
@@ -22,6 +28,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     }
   }
 
+  /*-----STATE----- */
   useEffect(() => {
     fetchGallery();
   }, [])
@@ -55,8 +62,24 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
   const handleModal = () => {
     setModal(prevState => !prevState);
-  }
+  };
 
+  /*-----Sphere-----*/
+  const [scrollIndex, getScrollIndex] = useState(0);
+  const [sphereIsSelected, selectSphere] = useState(false);
+  const handleSphereSelect = (index) => {
+    selectSphere((({props}) => ({...props, [index]: true})))
+  };
+
+  const scrollToImg = (imgIndex) => {
+    console.log('SCROLL', imgIndex)
+    const imgNode = document.querySelector(`.gallery_img.index${imgIndex}`);
+    imgNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
+  };
+
+
+  /*----- Maps-----*/
+  const [openSphereModal, setSphereModal] = useState(false);
 
   /*----- Maps-----*/
   const mapGallery = () => {
@@ -71,59 +94,41 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     });
   };
 
-
     return (
       <div className='gallery'>
       {openModal ?
-        <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
+        <MobileModal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
         ''
       }
-      <animated.h1
-      className='gallery_header'
-      style={{...headerSpring()}}
-      >
+      <animated.h1 className='gallery_header'style={{...headerSpring(), width: 'fit-content', fontSize: '25px'}}>
         {exhibits.exhibit}
       </animated.h1>
+      <SphereButton setSphereModal={setSphereModal} scrollIndex={scrollIndex}/>
       <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
       <animated.div className='gallery_container' style={{...gallerySpring(), ...styles.galleryContainer}} >
         {mapGallery()}
       </animated.div>
-      {/* <ul className='gallery_select_menu' >
-        {mapSelect()}
-      </ul> */}
+      { openSphereModal ?
+      <SphereModal
+      setSphereModal={setSphereModal}
+      scrollPosition={scrollPosition}
+      handleSphereSelect={handleSphereSelect}
+      scrollToImg={scrollToImg}
+      getScrollIndex={getScrollIndex}
+      gallery={gallery}
+      sphereIsSelected={sphereIsSelected}
+      scrollIndex={scrollIndex}
+      />  : ''}
     </div>
     )
 };
 
-export const Modal = ({ handleModal, modalImgSource, scrollPosition }) => {
-
-  const styles = {
-    btn: {
-      height: '10px',
-      width: '10px',
-      borderRaius: '50%',
-      backgroundColor: '#fff'
-    }
-  }
-
-  return (
-    <div className='gallery_modal' style={{top: document.documentElement.scrollTop}}>
-      <div className='gallery_modal_background'>
-        <div className='gallery_modal_body' onClick={handleModal}>
-          <img src={modalImgSource} style={{height: 'inherit'}}/>
-          <div style={styles.btn}>Rotate</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-
 export const HomeIcon = ({ selectExhibit, setMount }) => {
 
   const styles =  {
-    marginRight: '10px',
-    marginTop: '10px'
+    right: '10px',
+    top: '10px',
+    position: 'fixed'
   };
 
   const [isHover, setHover] = useState(false);

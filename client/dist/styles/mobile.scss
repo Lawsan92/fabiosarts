@@ -2,7 +2,7 @@
 
 .mobile_home_menu{
   height: fit-content;
-  width: 50px;
+  width: 35px;
   border-radius: 2%;
   background-color: #fffafa;
   opacity: 0.5;
@@ -85,5 +85,57 @@
 .mobile_series_list {
   font-family: 'Inter', sans-serif;
   color: #fffafa;
-  font-size: 30px;
+  max-height: 45vh;
+  flex-wrap: wrap;
+  flex-direction: column;
+  display: flex;
+}
+
+.mobile_sphereModal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.mobile_sphereBtn {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #808080;
+  position: fixed;
+  transform: translate(200px, 10px);
+  font-family: 'Inter', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fffafa;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.mobile_gallery_select_menu {
+  list-style: none;
+  margin-right: 25px;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  opacity: 1;
+}
+
+.mobile_gallery_select_item{
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  background-color: #d9d9d9;
+  margin-right: 30px;
+  margin-bottom: 30px;
+  opacity: 1;
+  &:hover{
+    cursor: pointer;
+    transform: scale(1.2);
+    transition: ease-in .5s;
+  }
 }

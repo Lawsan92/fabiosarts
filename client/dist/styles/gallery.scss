@@ -36,8 +36,9 @@
 }
 
 .gallery_img {
-  height: inherit;
-  max-width: inherit;
+  max-height: 68vh;
+  max-width: 66vw;
+  object-fit: contain;
   &:hover {
     cursor: pointer;
   }
@@ -45,8 +46,9 @@
 
 .gallery_img_container {
   // border: solid;
+  flex-direction: column;
   display: flex;
-  /* align-content: center; */
+  align-content: center;
   justify-content: center;
   width: 66vw;
   height: 80vh;

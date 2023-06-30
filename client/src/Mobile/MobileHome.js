@@ -14,13 +14,16 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
       backgroundImage: `url(https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg)`,
       header: {
         backgroundColor: '#fffafa',
-        width: '20vw',
+        width: '13vw',
         height: '80vh',
         marginRight: 'auto',
         display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
         sub: {
           flexDirection: 'column',
           marginLeft: 0,
+          transform: 'translate(0, -38px)',
           text: {
             writingMode: 'vertical-rl',
             textOrientation: 'upright',
@@ -38,7 +41,8 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
         text: {
           writingMode: 'vertical-rl',
           textOrientation: 'upright',
-          fontSize: '33px'
+          fontSize: '32px',
+          marrgin: 0
         },
       },
       footer: {
@@ -83,11 +87,16 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
   };
 
   /*-----jsx-----*/
-
   if (mobileListMounted) {
     return (
       <div>
-          <MobileList mobileListMounted={mobileListMounted} mountMobileList={mountMobileList} seriesSubList={seriesSubList} setSubList={setSubList} setMount={setMount} toggleSelect={toggleSelect}/>
+        <MobileList
+        mobileListMounted={mobileListMounted}
+        mountMobileList={mountMobileList}
+        seriesSubList={seriesSubList}
+        setSubList={setSubList}
+        setMount={setMount}
+        toggleSelect={toggleSelect}/>
       </div>
     );
   }
@@ -104,14 +113,17 @@ export const MobileMenu = ({ mountMobileList }) => {
   const [isHover, setHover] = useState(false);
 
   const styles = {
-    opacity: isHover ? 1 : 0.5,
+    // opacity: isHover ? 1 : 0.5,
+    opacity: 1,
     backgroundColor: isHover && '#808080',
     text: {
-      opacity: isHover ? 1 : 0.5,
+      // opacity: isHover ? 1 : 0.5,
+      opacity: 1,
       color: isHover && '#fffafa'
     },
     arrow: {
-      opacity: isHover ? 1 : 0.5,
+      // opacity: isHover ? 1 : 0.5,
+      opacity: 1,
       transform: isHover ? 'rotate(180deg) translate(7px, 0px)' : 'rotate(0) translate(7px, 0px)',
       borderLeft: isHover && 'solid #fffafa 10px'
     }
@@ -120,7 +132,7 @@ export const MobileMenu = ({ mountMobileList }) => {
   return (
     <div
     className='mobile_home_menu'
-    onClick={() => {mountMobileList(true)}}
+    onClick={() => {mountMobileList(true); setHover(true)}}
     style={styles}
     onMouseEnter={() => {setHover(true)}}
     onMouseLeave={() => {setHover(false)}}
