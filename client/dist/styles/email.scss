@@ -1,18 +1,79 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
-.email{
+.contact{
   position: absolute;
   height: 100vh;
   width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
+  flex-wrap: wrap;
+}
+
+.contact_header{
+  font-family: 'Inter', sans-serif;
+  color: #fffafa;
+  display: grid;
+  width: 100vw;
+  // flex-direction: column;
+}
+
+.contact_header_h1{
+  justify-self: center;
+  align-self: center;
+}
+
+.contact_header_p{
+  margin-left: 10vw;
+}
+
+.contact_phone{
+  font-family: 'Inter', sans-serif;
+  color: #fffafa;
+  display: grid;
+  width: 50vw;
+  height: fit-content;
+}
+
+.email{
+  width: 50vw;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.5)
+  font-family: 'Inter', sans-serif;
+  color: #fffafa;
 }
 
 .email_inputs_grid{
-  height: 100vh;
-  width: 100vw;
-  border-radius: 10%;
-  background-color: #fffafa;
+  height: 60vh;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.email_content{
+  display: flex;
+  height: fit-content;
+  flex-direction: column;
+  // border: solid;
+}
+
+.email_content_message{
+  display: flex;
+  flex-direction: column;
+}
+
+.email_content_button {
+  width: fit-content;
+}
+
+.email_input {
+  border: none;
+  margin-bottom: 25px;
+}
+
+.email_label{
+  margin-bottom: 25px;
 }
