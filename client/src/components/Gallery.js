@@ -1,6 +1,6 @@
 import React, { useState , useEffect } from 'react';
 import { animated } from '@react-spring/web';
-import { headerSpring, gallerySpring } from './hooks/Springs.js';
+import { headerSpring, gallerySpring } from '../hooks/Springs.js';
 import HomeIcon from './HomeIcon.js';
 import Modal from './Modal.js';
 import SphereSelect from './SphereSelect.js';

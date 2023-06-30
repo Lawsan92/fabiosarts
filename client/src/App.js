@@ -1,8 +1,8 @@
 import React, { useState , useEffect} from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 import '../dist/styles/styles.scss';
-import Gallery from './Gallery.js';
-import Home from './Home.js';
+import Gallery from './components/Gallery.js';
+import Home from './components/Home.js';
 import MobileGallery from './Mobile/MobileGallery.js';
 import MobileHome from './Mobile/MobileHome.js';
 

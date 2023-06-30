@@ -1,4 +1,6 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
+
 const config = (env) => {
   console.log('env:', env);
   return {
