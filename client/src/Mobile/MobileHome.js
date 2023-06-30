@@ -85,7 +85,9 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
           onClick={() => {setEmailForm(true)}}
           >Contact</p>
           <p className='footer_text' style={mobileStyles.home.footer}>All rights reserved</p>
-          <p className='footer_text' style={mobileStyles.home.footer}>studiodarteonline.com</p>
+          <a href='http://studiodarteonline.com/' style={{textDecoration: 'none'}}>
+            <p className='footer_text' style={mobileStyles.home.footer}>studiodarteonline.com</p>
+          </a>
           <p className='footer_text' style={mobileStyles.home.footer}>designed by Lawrence Sanzogni</p>
         </div>
         {emailFormOpen && <MobileEmail setEmailForm={setEmailForm}/>}
