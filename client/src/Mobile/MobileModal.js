@@ -6,7 +6,7 @@ export const MobileModal = ({ handleModal, modalImgSource, scrollPosition }) => 
     <div className='gallery_modal' style={{top: document.documentElement.scrollTop}}>
       <div className='gallery_modal_background'>
         <div className='gallery_modal_body' onClick={handleModal}>
-          <img src={modalImgSource} style={{maxHeight: '100vh', width: '100vw'}}/>
+          <img src={modalImgSource} style={{maxHeight: '100vh', width: '100vw', zIndex: 2}}/>
         </div>
       </div>
     </div>
