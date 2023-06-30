@@ -3,6 +3,15 @@ import { sendForm } from '@emailjs/browser';
 
 const MobileEmail = ({ setEmailForm }) => {
 
+  const styles = {
+    width: '50vw',
+    transform: 'translateY(16px)',
+    h3: {
+      paddingLeft: 0,
+      width: 'fit-content'
+    }
+  }
+
   const emailRef = useRef();
 
   const sendEmail = (e) => {
@@ -21,11 +30,11 @@ const MobileEmail = ({ setEmailForm }) => {
   };
 
   return (
-    <div className="contact" onClick={() => {setEmailForm(false)}}>
+    <div className="contact">
       <div className='contact_header'>
         <h1 className='contact_header_h1'>Contact Us</h1>
-        <p className='contact_header_p'>Please fill out the following form to contact us via email</p>
-        <h3 className='contact_header_h3'>Call Us</h3>
+        <p className='contact_header_p' style={styles}>Please fill out the following form to contact us via email</p>
+        <h3 className='contact_header_h3' style={styles.h3}>Call Us</h3>
       </div>
       <form className="email" ref={emailRef} onSubmit={sendEmail}>
         <div className='email_inputs_grid'>
