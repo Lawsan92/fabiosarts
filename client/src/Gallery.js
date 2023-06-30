@@ -110,7 +110,15 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       <animated.div className='gallery_container' style={{...gallerySpring()}} >
         {mapGallery()}
       </animated.div>
-      <SphereSelect scrollPosition={scrollPosition} handleSphereSelect={handleSphereSelect} scrollToImg={scrollToImg} getScrollIndex={getScrollIndex} gallery={gallery} sphereIsSelected={sphereIsSelected} scrollIndex={scrollIndex}/>
+      <SphereSelect
+      scrollPosition={scrollPosition}
+      handleSphereSelect={handleSphereSelect}
+      scrollToImg={scrollToImg}
+      getScrollIndex={getScrollIndex}
+      gallery={gallery}
+      sphereIsSelected={sphereIsSelected}
+      scrollIndex={scrollIndex}
+      />
     </div>
   )
 };

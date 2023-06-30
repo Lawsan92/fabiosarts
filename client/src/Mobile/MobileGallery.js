@@ -64,6 +64,20 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     setModal(prevState => !prevState);
   };
 
+  /*-----Sphere-----*/
+  const [scrollIndex, getScrollIndex] = useState(0);
+  const [sphereIsSelected, selectSphere] = useState(false);
+  const handleSphereSelect = (index) => {
+    selectSphere((({props}) => ({...props, [index]: true})))
+  };
+
+  const scrollToImg = (imgIndex) => {
+    console.log('SCROLL', imgIndex)
+    const imgNode = document.querySelector(`.gallery_img.index${imgIndex}`);
+    imgNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
+  };
+
+
   /*----- Maps-----*/
   const [openSphereModal, setSphereModal] = useState(false);
 
@@ -94,7 +108,17 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
       <animated.div className='gallery_container' style={{...gallerySpring(), ...styles.galleryContainer}} >
         {mapGallery()}
       </animated.div>
-      { openSphereModal ? <SphereModal setSphereModal={setSphereModal}/>  : ''}
+      { openSphereModal ?
+      <SphereModal
+      setSphereModal={setSphereModal}
+      scrollPosition={scrollPosition}
+      handleSphereSelect={handleSphereSelect}
+      scrollToImg={scrollToImg}
+      getScrollIndex={getScrollIndex}
+      gallery={gallery}
+      sphereIsSelected={sphereIsSelected}
+      scrollIndex={scrollIndex}
+      />  : ''}
     </div>
     )
 };

@@ -1,8 +1,6 @@
 import React, { useState , useEffect } from 'react';
 
-const SphereSelect = ({
-  scrollPosition, handleSphereSelect, scrollToImg, getScrollIndex, gallery, sphereIsSelected, scrollIndex
-}) => {
+const SphereSelect = ({ scrollPosition, handleSphereSelect, scrollToImg, getScrollIndex, gallery, sphereIsSelected, scrollIndex }) => {
 
   const mapSelect = () => {
     return gallery.map((item, index) => {
