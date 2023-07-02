@@ -9,9 +9,9 @@
 }
 
 .gallery_homeIcon{
-  position: absolute;
-  right: 0;
-  margin-right: 25px;
+  position: fixed;
+  right: 25px;
+  top: 10px;
   &:hover{
     cursor: pointer;
   }
@@ -36,7 +36,7 @@
 }
 
 .gallery_img {
-  max-height: 68vh;
+  max-height: 65vh;
   max-width: 66vw;
   object-fit: contain;
   &:hover {
@@ -58,10 +58,14 @@
 
 .gallery_select_menu {
   list-style: none;
-  margin-right: 25px;
   position: absolute;
-  right: 25px;
+  right: 30px;
+  top: 100px;
   height: fit-content;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .gallery_select_item{

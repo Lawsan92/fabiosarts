@@ -56,13 +56,13 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
           </div>
           <div className='home_select'>
             <ul className='home_select_menu'>
+              {/* <li className='home_select_item'></li>
               <li className='home_select_item'></li>
               <li className='home_select_item'></li>
               <li className='home_select_item'></li>
               <li className='home_select_item'></li>
               <li className='home_select_item'></li>
-              <li className='home_select_item'></li>
-              <li className='home_select_item'></li>
+              <li className='home_select_item'></li> */}
             </ul>
           </div>
         </div>
@@ -70,7 +70,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
           <p className='footer_text_contact' onClick={() => {setEmailForm(true)}}>Contact</p>
           <p className='footer_text'>All rights reserved</p>
           <a href='http://studiodarteonline.com/' style={{textDecoration: 'none'}}>
-            <p className='footer_text'>studiodarteonline.com</p>
+            <p className='footer_text_link'>studiodarteonline.com</p>
           </a>
           <p className='footer_text'>designed by Lawrence Sanzogni</p>
         </div>

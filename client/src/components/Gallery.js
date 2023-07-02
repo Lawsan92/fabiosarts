@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useRef } from 'react';
 import { animated } from '@react-spring/web';
 import { headerSpring, gallerySpring } from '../hooks/Springs.js';
 import HomeIcon from './HomeIcon.js';
@@ -13,9 +13,12 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     console.log('MOUNTED')
     fetchGallery();
     handleSelectPosition();
-    upKeyEvent();
-    downKeyEvent();
+    handleDownKey();
+    handleUpKey();
+    handleEscKey();
   }, [sphereIsSelected])
+
+  const scrollRef = useRef(0);
 
   /*----- Gallery-----*/
   const [gallery, getGallery] = useState([]);
@@ -42,9 +45,10 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   };
 
   const scrollToImg = (imgIndex) => {
-    console.log('SCROLL', imgIndex)
+    console.log('imgIndex', imgIndex)
     const imgNode = document.querySelector(`.gallery_img.index${imgIndex}`);
     imgNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
+    console.log('called')
   };
 
   /*----- Modal-----*/
@@ -56,22 +60,33 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
   }
 
   /*-----Key events-----*/
-  const escKeyEvent = document.addEventListener('keydown', (e) => {
-    e.key === 'Escape' && handleModal(false);
-  });
 
-  const [scrollIndex, getScrollIndex] = useState(0);
-
-  const downKeyEvent = () => {
+  const handleEscKey = () => {
     document.addEventListener('keydown', (e) => {
-      e.keyCode=== 40 && scrollToImg(scrollIndex + 1);
+      e.key === 'Escape' && handleModal(false);
     });
   }
 
-  const upKeyEvent = () => {
+  const [scrollIndex, getScrollIndex] = useState(0);
+
+  const handleDownKey = () => {
     document.addEventListener('keydown', (e) => {
-      console.log('scrollIndex:', scrollIndex);
-      e.keyCode === 38 && scrollToImg(scrollIndex - 1);
+      if (e.keyCode === 40) {
+        e.preventDefault();
+        scrollToImg(scrollRef.current + 1);
+        console.log('DOWN');
+      }
+    });
+  }
+
+  const handleUpKey = () => {
+    document.addEventListener('keydown', (e) => {
+      if (e.keyCode === 38) {
+        e.preventDefault();
+        console.log('scrollRef:', scrollRef.current);
+        scrollRef > 0 ? scrollToImg(scrollRef.current - 1) : scrollToImg(gallery.length - 1);
+        console.log('UP');
+      }
     });
   }
 
@@ -118,6 +133,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       gallery={gallery}
       sphereIsSelected={sphereIsSelected}
       scrollIndex={scrollIndex}
+      scrollRef={scrollRef}
       />
     </div>
   )

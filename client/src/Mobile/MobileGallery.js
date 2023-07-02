@@ -8,6 +8,10 @@ const axios = require('axios');
 
 const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
 
+  /*-----Set background color for gallery screen------*/
+  const body = document.querySelector('body');
+  body.style.backgroundColor = '#fffafa'
+
   const styles = {
     galleryContainer: {
       width: '100vw',

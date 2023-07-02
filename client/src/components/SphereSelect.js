@@ -1,13 +1,13 @@
 import React, { useState , useEffect } from 'react';
 
-const SphereSelect = ({ scrollPosition, handleSphereSelect, scrollToImg, getScrollIndex, gallery, sphereIsSelected, scrollIndex }) => {
+const SphereSelect = ({ scrollPosition, handleSphereSelect, scrollToImg, getScrollIndex, gallery, sphereIsSelected, scrollIndex, scrollRef }) => {
 
   const mapSelect = () => {
     return gallery.map((item, index) => {
       return <li
       className={`gallery_select_item index${index}`}
       key={index}
-      onClick={(e) => { handleSphereSelect(index); scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex); }}
+      onClick={(e) => { handleSphereSelect(index); scrollToImg(index); getScrollIndex(index); console.log('scrollIndex:', scrollIndex); scrollRef.current = index}}
       style={{
         height: gallery.length > 12 && '10px',
         width: gallery.length > 12 && '10px',

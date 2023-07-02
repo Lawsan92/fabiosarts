@@ -7,3 +7,13 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 450px) {
+  .home {
+    max-height: 100vh;
+  }
+
+}
+
+
+
