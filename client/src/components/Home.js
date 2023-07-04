@@ -115,8 +115,7 @@ export const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
       {mapSeries()}
     </animated.ul>
   );
-
-}
+};
 
 export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
 

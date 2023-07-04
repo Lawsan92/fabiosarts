@@ -8,7 +8,7 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
   /*-----STATE: mobile list-----*/
   const [mobileListMounted, mountMobileList] = useState(false);
 
-  const [seriesSubList, setSubList] = useState(false);
+  const [seriesSubList, setSubList] = useState({oils: false, series: false});
 
    /*------STATE:email------*/
    const [emailFormOpen, setEmailForm] = useState(false);
@@ -117,6 +117,7 @@ const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
     </div>
   );
 };
+
 
 export const MobileMenu = ({ mountMobileList }) => {
 
