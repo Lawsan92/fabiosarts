@@ -4,7 +4,8 @@ import Email from './Email.js';
 
 const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
 
-  const [seriesSubList, setSubList] = useState(false);
+  // const [seriesSubList, setSubList] = useState(false);
+  const [seriesSubList, setSubList] = useState({oils: false, series: false});
 
   const body = document.querySelector('body');
 
@@ -16,7 +17,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
       return gallery !== 'series' ?
       <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
       :
-      <li key={galleries.length - 1} onClick={() => {setSubList(prevState => !prevState)}}>series</li>
+      <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li>
     })
   };
 
@@ -50,6 +51,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
           <ul className='home_list'>
             {mapGalleries()}
           </ul>
+          <OilsMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect}/>
           <SeriesMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect}/>
           <div className='home_img_container'>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
@@ -87,14 +89,37 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
 
 };
 
-export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
+export const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
 
-  const mountTransition = useTransition(seriesSubList, {
+  const series = ['oils', 'mixed oils 2011', 'abstract'];
+
+  const mapSeries = () => {
+    let key = -1;
+    return series.map((gallery) => {
+      key ++;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item_oils' >{gallery}</li>;
+    })
+  };
+
+  const mountTransition = useTransition(seriesSubList['oils'], {
     from: {opacity: 0, y: 400 },
     enter: {opacity: 1, y: 0 },
     leave: {opacity: 0 },
     trail: 500
   });
+
+  return mountTransition((style, item) =>
+    item &&
+      <animated.ul style={style} className='series_list'>
+      {mapSeries()}
+    </animated.ul>
+  );
+
+}
+
+export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
+
+  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
 
   const mapSeries = () => {
     let key = -1;
@@ -104,7 +129,12 @@ export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
     })
   };
 
-  const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
+  const mountTransition = useTransition(seriesSubList['series'], {
+    from: {opacity: 0, y: 400 },
+    enter: {opacity: 1, y: 0 },
+    leave: {opacity: 0 },
+    trail: 500
+  });
 
   return mountTransition((style, item) =>
     item &&
