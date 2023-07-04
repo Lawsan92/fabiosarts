@@ -4,11 +4,34 @@ import { sendForm } from '@emailjs/browser';
 const MobileEmail = ({ setEmailForm }) => {
 
   const styles = {
-    width: '50vw',
-    transform: 'translateY(16px)',
+    contact: {
+      flexDirection: 'column',
+      height: 'fit-content',
+    },
+    email: {
+      container: {
+        width: '100vw',
+      },
+      grid: {
+        width: '75vw',
+      },
+      header: {
+        width: '75vw',
+        paddingLeft: '0'
+      }
+    },
+    phone: {
+      width: '100vw'
+    },
     h3: {
       paddingLeft: 0,
       width: 'fit-content'
+    },
+    button: {
+      position: 'relative',
+      border: 'solid',
+      top: 0,
+      right: 0
     }
   }
 
@@ -30,14 +53,13 @@ const MobileEmail = ({ setEmailForm }) => {
   };
 
   return (
-    <div className="contact">
-      <div className='contact_header'>
+    <div className="contact" style={styles.contact}>
+      <div className='contact_header' style={{paddingTop: '2em'}}>
         <h1 className='contact_header_h1'>Contact Us</h1>
-        <p className='contact_header_p' style={styles}>Please fill out the following form to contact us via email</p>
-        <h3 className='contact_header_h3' style={styles.h3}>Call Us</h3>
       </div>
-      <form className="email" ref={emailRef} onSubmit={sendEmail}>
-        <div className='email_inputs_grid'>
+      <form className="email" ref={emailRef} onSubmit={sendEmail} style={styles.email.container}>
+        <p className='contact_header_p' style={styles.email.header}>Please fill out the following form to contact us via email</p>
+        <div className='email_inputs_grid' style={styles.email.grid}>
           <div className='email_content'>
             <label for='' className='email_label'>Name</label>
               <input type='text' className='email_input' name='user_name'/>
@@ -57,10 +79,11 @@ const MobileEmail = ({ setEmailForm }) => {
           <input type='submit' value='Send Message' className='email_content_button' />
         </div>
       </form>
-      <div className='contact_phone'>
+      <div className='contact_phone' style={styles.phone}>
+        <h3 className='contact_header_h3' style={styles.h3}>Call Us</h3>
         <p className='contact_phone_p'>(415) 370-8756</p>
       </div>
-      <button className='contact_btn' onClick={() => {setEmailForm(false)}}>X</button>
+      <button className='contact_btn' onClick={() => {setEmailForm(false)}} style={styles.button}>X</button>
     </div>
   );
 
