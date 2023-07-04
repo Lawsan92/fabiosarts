@@ -19,6 +19,7 @@ const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, setSubLi
       itemState &&
       <animated.ul className='mobile_home_list' style={{...style}}>
         {mapGalleries()}
+        <OilsMenu seriesSubList={seriesSubList} toggleSelect={toggleSelect}/>
         <SeriesMenu seriesSubList={seriesSubList} toggleSelect={toggleSelect}/>
         <button className='mobile_home_list_btn' onClick={() => {mountMobileList(false)}}>X</button>
       </animated.ul>
@@ -31,10 +32,11 @@ const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, setSubLi
     let key = -1;
     return galleries.map((gallery) => {
       key ++;
-      return gallery !== 'series' ?
-      <li key={key} data-key={key} onClick={(e) =>  {toggleSelect(e.target.innerText)}}>{gallery}</li>
-      :
-      <li key={galleries.length - 1}onClick={() => {setSubList(prevState => !prevState)}}>series</li>
+      return gallery == 'series' ?
+        <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li> :
+          gallery === 'oils' ?
+          <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['oils']: !prevState['oils']}))}}>oils</li> :
+      <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
     })
   };
 
@@ -42,9 +44,36 @@ const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, setSubLi
   return MountList();
 };
 
+export const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
+
+  const series = ['oils', 'mixed oils 2011', 'abstract'];
+
+  const mapSeries = () => {
+    let key = -1;
+    return series.map((gallery) => {
+      key ++;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
+    })
+  };
+
+  const mountTransition = useTransition(seriesSubList['oils'], {
+    from: {opacity: 0, y: 400 },
+    enter: {opacity: 1, y: 0 },
+    leave: {opacity: 0 },
+    trail: 500
+  });
+
+  return mountTransition((style, item) =>
+    item &&
+      <animated.ul style={style} className='mobile_series_list'>
+      {mapSeries()}
+    </animated.ul>
+  );
+};
+
 export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
 
-  const mountTransition = useTransition(seriesSubList, {
+  const mountTransition = useTransition(seriesSubList['series'], {
     from: {opacity: 0, y: 400 },
     enter: {opacity: 1, y: 0 },
     leave: {opacity: 0 },
