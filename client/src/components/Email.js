@@ -29,10 +29,9 @@ const Email = ({ setEmailForm }) => {
     <div className="contact">
       <div className='contact_header'>
         <h1 className='contact_header_h1'>Contact Us</h1>
-        <p className='contact_header_p'>Please fill out the following form to contact us via email</p>
-        <h3 className='contact_header_h3'>Call Us</h3>
       </div>
       <form className="email" ref={emailRef} onSubmit={sendEmail}>
+        <p className='contact_header_p'>Please fill out the following form to contact us via email</p>
         <div className='email_inputs_grid'>
           <div className='email_content'>
             <label for='' className='email_label'>Name</label>
@@ -54,6 +53,7 @@ const Email = ({ setEmailForm }) => {
         </div>
       </form>
       <div className='contact_phone'>
+        <h3 className='contact_header_h3'>Call Us</h3>
         <p className='contact_phone_p'>(415) 370-8756</p>
       </div>
       <button className='contact_btn' onClick={() => {setEmailForm(false)}}>X</button>
