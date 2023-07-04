@@ -14,10 +14,11 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
     let key = -1;
     return galleries.map((gallery) => {
       key ++;
-      return gallery !== 'series' ?
+      return gallery == 'series' ?
+        <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li> :
+          gallery === 'oils' ?
+          <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['oils']: !prevState['oils']}))}}>oils</li> :
       <li key={key} data-key={key} onClick={(e) => {toggleSelect(e.target.innerText); setMount(false)}}>{gallery}</li>
-      :
-      <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li>
     })
   };
 
@@ -97,7 +98,7 @@ export const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
     let key = -1;
     return series.map((gallery) => {
       key ++;
-      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item_oils' >{gallery}</li>;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
     })
   };
 
