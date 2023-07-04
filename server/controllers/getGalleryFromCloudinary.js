@@ -24,7 +24,7 @@ const getGalleryFromCloudinary = async (exhibit) => {
 
     const result = await cloudinary.api.resources({
       type: 'upload',
-      prefix: exhibit.exhibit === 'early works' ? prefix : `FABIO/${(exhibit.exhibit || '')}`,
+      prefix: exhibit.exhibit === 'early works' ? prefix : exhibit.exhibit === 'abstract' ? `FABIO/oil on canvas abstract` : `FABIO/${(exhibit.exhibit || '')}`,
       max_results: 25,
       context: true,
       ...options
