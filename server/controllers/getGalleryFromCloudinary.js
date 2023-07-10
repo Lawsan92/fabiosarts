@@ -1,4 +1,5 @@
 const cloudinary = require('cloudinary').v2;
+const imageScaler = require('./imageScaler.js');
 require('dotenv').config();
 
 const getGalleryFromCloudinary = async (exhibit) => {
@@ -37,6 +38,7 @@ const getGalleryFromCloudinary = async (exhibit) => {
           size: (item.context && item.context.custom.size) ? item.context.custom.size : '',
           type: (item.context && item.context.custom.type) ? item.context.custom.type : '',
           sold: (item.context && item.context.custom.sold) ? item.context.custom.sold : '',
+          styles: imageScaler(item.context.custom.size)
         };
         gallery.push(img);
       });
