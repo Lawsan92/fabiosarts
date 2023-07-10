@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@babel/preset-env": "^7.22.4",
     "@emailjs/browser": "^3.11.0",
     "@react-spring/web": "^9.7.2",
     "axios": "^1.4.0",
