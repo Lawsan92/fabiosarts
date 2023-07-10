@@ -83,12 +83,14 @@
 .gallery_text{
   font-family: 'Inter', sans-serif;
   font-weight: bolder;
+  color: #000;
 }
 
 .gallery_text_sold{
   font-family: 'Inter', sans-serif;
   font-weight: bolder;
-  height: 65vh;
+  font-size: 4vh;
+  height: 64vh;
   color: red;
   width: 10vw;
   display: flex;
