@@ -18,7 +18,9 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     handleEscKey();
   }, [sphereIsSelected])
 
+  /*------Refs------ */
   const scrollRef = useRef(0);
+  const galleryRef = useRef([]);
 
   /*----- Gallery-----*/
   const [gallery, getGallery] = useState([]);
@@ -29,6 +31,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     })
       .then((response) => {
         console.log('response:', response);
+        galleryRef.current = response.data.data;
         getGallery(response.data.data)
       })
       .catch((err) => {
@@ -73,7 +76,10 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     document.addEventListener('keydown', (e) => {
       if (e.keyCode === 40) {
         e.preventDefault();
-        scrollToImg(scrollRef.current + 1);
+        scrollRef.current >= galleryRef.current.length - 1 ? scrollRef.current = 1 : scrollRef.current =  scrollRef.current + 1;
+        handleSphereSelect(scrollRef.current);
+        scrollToImg(scrollRef.current);
+        getScrollIndex(scrollRef.current);
         console.log('DOWN');
       }
     });
