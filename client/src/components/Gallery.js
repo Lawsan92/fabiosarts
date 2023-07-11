@@ -76,7 +76,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     document.addEventListener('keydown', (e) => {
       if (e.keyCode === 40) {
         e.preventDefault();
-        scrollRef.current >= galleryRef.current.length - 1 ? scrollRef.current = 1 : scrollRef.current =  scrollRef.current + 1;
+        scrollRef.current >= galleryRef.current.length - 1 ? scrollRef.current = 0 : scrollRef.current =  scrollRef.current + 1;
         handleSphereSelect(scrollRef.current);
         scrollToImg(scrollRef.current);
         getScrollIndex(scrollRef.current);
@@ -89,8 +89,10 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     document.addEventListener('keydown', (e) => {
       if (e.keyCode === 38) {
         e.preventDefault();
-        console.log('scrollRef:', scrollRef.current);
-        scrollRef > 0 ? scrollToImg(scrollRef.current - 1) : scrollToImg(gallery.length - 1);
+        scrollRef.current <= 0 ? scrollRef.current = galleryRef.current.length - 1 : scrollRef.current = scrollRef.current - 1;
+        handleSphereSelect(scrollRef.current);
+        scrollToImg(scrollRef.current);
+        getScrollIndex(scrollRef.current);
         console.log('UP');
       }
     });
