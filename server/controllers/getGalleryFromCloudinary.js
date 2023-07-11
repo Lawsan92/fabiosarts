@@ -38,8 +38,9 @@ const getGalleryFromCloudinary = async (exhibit) => {
           size: (item.context && item.context.custom.size) ? item.context.custom.size : '',
           type: (item.context && item.context.custom.type) ? item.context.custom.type : '',
           sold: (item.context && item.context.custom.sold) ? item.context.custom.sold : '',
-          styles: imageScaler(item.context.custom.size)
+          styles: item.context.custom.size ? imageScaler(item.context.custom.size) : {height: `${0}px`, width: `${0}px`}
         };
+        console.log('img:', img);
         gallery.push(img);
       });
       console.log('gallery:', gallery);
