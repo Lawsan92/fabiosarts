@@ -80,6 +80,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
         handleSphereSelect(scrollRef.current);
         scrollToImg(scrollRef.current);
         getScrollIndex(scrollRef.current);
+        let galleryArr = Array.from(galleryRef.current)
+        getModalImgSource(galleryArr[scrollRef.current].url);
         console.log('DOWN');
       }
     });
@@ -93,6 +95,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
         handleSphereSelect(scrollRef.current);
         scrollToImg(scrollRef.current);
         getScrollIndex(scrollRef.current);
+        let galleryArr = Array.from(galleryRef.current)
+        getModalImgSource(galleryArr[scrollRef.current].url);
         console.log('UP');
       }
     });
@@ -111,7 +115,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
         return (
         <div className='gallery_img_container'>
           <h2 className={`gallery_text_sold index${index}`} key={index}>{img.sold && 'SOLD'}</h2>
-          <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url} onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value)}} style={img.styles}/>
+          <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url} onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value); scrollRef.current = index; handleSphereSelect(scrollRef.current);}} style={img.styles}/>
           <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p>
         </div>
         )
