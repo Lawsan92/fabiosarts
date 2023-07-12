@@ -18,7 +18,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
       maxWidth: '100vw',
     },
     imgContainer: {
-      width: '95vw',
+      width: '100vw',
       // border: 'solid'
     },
     img: {
