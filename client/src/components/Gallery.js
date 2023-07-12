@@ -81,6 +81,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
         scrollToImg(scrollRef.current);
         getScrollIndex(scrollRef.current);
         let galleryArr = Array.from(galleryRef.current)
+        console.log('galleryArr[scrollRef.current].url:', galleryArr[scrollRef.current].url);
         getModalImgSource(galleryArr[scrollRef.current].url);
         console.log('DOWN');
       }
