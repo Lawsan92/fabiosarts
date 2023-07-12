@@ -1,4 +1,4 @@
-import React, { useState , useEffect } from 'react';
+import React, { useState , useEffect, useRef } from 'react';
 import { animated } from '@react-spring/web';
 import { headerSpring, gallerySpring } from '../hooks/Springs.js';
 import MobileModal from './MobileModal.js';
@@ -42,6 +42,10 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     fetchGallery();
   }, [])
 
+  /*------Refs------ */
+   const scrollRef = useRef(0);
+   const galleryRef = useRef([]);
+
   /*-----API-----*/
   const [gallery, getGallery] = useState([]);
   const fetchGallery = () => {
@@ -51,6 +55,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     })
       .then((response) => {
         console.log('response:', response);
+        galleryRef.current = response.data.data;
         getGallery(response.data.data)
       })
       .catch((err) => {
@@ -97,7 +102,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
         return (
         <div className='gallery_img_container' style={styles.imgContainer}>
           <p className={`gallery_text index${index}`} key={index} style={{color: 'red' }}>{img.sold && 'SOLD'}</p>
-          <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url}  onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value)}} style={styles.img}/>
+          <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url}  onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value); getScrollIndex(index); scrollRef.current = index}} style={styles.img}/>
           <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p>
         </div>
         )
@@ -110,7 +115,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
     return (
       <div className='gallery'>
       {openModal ?
-        <MobileModal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
+        <MobileModal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition} scrollRef={scrollRef} galleryRef={galleryRef} getModalImgSource={getModalImgSource} getScrollIndex ={getScrollIndex}/> :
         ''
       }
       <animated.h1 className='gallery_header'style={{...headerSpring(), width: 'fit-content', fontSize: '25px'}}>

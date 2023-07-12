@@ -139,3 +139,24 @@
     transition: ease-in .5s;
   }
 }
+
+.gallery_modal_scrollBtn {
+  background-color: #fffafa;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.gallery_modal_scrollArrow{
+  height: 10px;
+  width: 10px;
+  border-bottom: solid 1px;
+  border-right: solid 1px;
+  transform: rotate(45deg);
+}
