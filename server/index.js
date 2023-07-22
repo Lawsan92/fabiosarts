@@ -18,11 +18,6 @@ const cred = {
 const httpsServer = https.createServer(cred, app);
 httpsServer.listen(8443, () => {console.log(`https server live on port:8443`)});
 
-// https.createServer(cred, (req, res) => {
-//   res.writeHead(200);
-//   res.end('hello world\n');
-// }).listen(8080);
-
 //--------------------MIDDLEWARE--------------------*/
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../client/dist/')));

@@ -39,9 +39,11 @@
   flex-direction: column;
   display: flex;
   align-content: center;
+  align-items: center;
   justify-content: center;
   width: 90vw;
-  height: 80vh;
+  min-height: 80vh;
+  height: fit-content;
   margin-bottom: 10vh;
   flex-wrap: wrap;
 }
@@ -80,6 +82,13 @@
   }
 }
 
+.gallery_desc {
+  width: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .gallery_text{
   font-family: 'Inter', sans-serif;
   font-weight: bolder;
@@ -89,14 +98,9 @@
   font-family: 'Inter', sans-serif;
   font-weight: bolder;
   font-size: 4vh;
-  height: 64vh;
   color: red;
-  width: 10vw;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
   box-sizing: border-box;
-  padding: 10px;
 }
 
 .gallery_empty {

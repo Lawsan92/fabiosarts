@@ -115,9 +115,11 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       return gallery.map((img, index) => {
         return (
         <div className='gallery_img_container'>
-          <h2 className={`gallery_text_sold index${index}`} key={index}>{img.sold && 'SOLD'}</h2>
           <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url} onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value); scrollRef.current = index; handleSphereSelect(scrollRef.current);}} style={img.styles}/>
-          <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p>
+          <div className='gallery_desc'>
+            <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p>
+           <h2 className={`gallery_text_sold index${index}`} key={index}>{img.sold && 'SOLD'}</h2>
+          </div>
         </div>
         )
       });
