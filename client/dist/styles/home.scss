@@ -16,12 +16,17 @@
   width: 100vw;
   font-family: 'Inter', sans-serif;
   padding: 1em;
+  /*TEMP......*/
+  background: #d2cdcd;
+  padding: 0 !important;
 }
 
 .home_header_text{
   font-size: 10vh;
   margin: .25em 0 0 4vw;
   font-weight: 300;
+  /*TEMP......*/
+  font-size: 7vh !important;
 }
 
 .home_header_sub{
@@ -72,6 +77,8 @@
   width: 100vw;
   display: flex;
   justify-content: space-evenly;
+  /*TEMP......*/
+  height: 74vh !important;
 }
 
 .home_select {
@@ -101,6 +108,11 @@
   margin-top: 0;
   width: 33vw;
   padding: 0;
+  /*TEMP......*/
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /*.........*/
   & li {
     margin-bottom: 30px;
     margin-left: 4vw;
@@ -142,6 +154,10 @@
   width: 33vw;
   display: flex;
   justify-content: flex-start;
+  /*TEMP......*/
+  justify-content: center !important;
+  align-items: center;
+  /*.........*/
 }
 
 .home_img {
@@ -158,6 +174,8 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
+  /*TEMP......*/
+  height: 10vh !important;
 }
 
 .footer_text{

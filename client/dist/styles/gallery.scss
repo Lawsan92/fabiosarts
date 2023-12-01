@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   position: absolute;
+  // /*TEMP*/ background: gray;
 }
 
 .gallery_homeIcon{
@@ -46,6 +47,7 @@
   height: fit-content;
   margin-bottom: 10vh;
   flex-wrap: wrap;
+  // /*TEMP*/ background: gray;
 }
 
 .gallery_img {
@@ -92,6 +94,8 @@
 .gallery_text{
   font-family: 'Inter', sans-serif;
   font-weight: bolder;
+  /*TEMP*/ font-size: 2em;
+  // /*TEMP*/ color: #fff;
 }
 
 .gallery_text_sold{
@@ -101,6 +105,14 @@
   color: red;
   display: flex;
   box-sizing: border-box;
+  /*TEMP...*/
+  color:#990707 !important;
+  font-size: 4.5vh !important;
+  background-color: #fff;
+  position: absolute;
+  top: 551px;
+  right: 151px;
+  /*......*/
 }
 
 .gallery_empty {
