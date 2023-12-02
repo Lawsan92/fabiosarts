@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 const Gallery_Header = () => {
   return (
-    <div className='app'>
+    <div className='gallery_header'>
     </div>
   );
 }

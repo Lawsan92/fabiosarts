@@ -4,6 +4,7 @@ import { headerSpring, gallerySpring } from '../hooks/Springs.js';
 import HomeIcon from './HomeIcon.js';
 import Modal from './Modal.js';
 import SphereSelect from './SphereSelect.js';
+import Gallery_Footer from './gallery/galleryFooter.js';
 const axios = require('axios');
 
 const Gallery = ({ exhibits, selectExhibit, setMount }) => {
@@ -154,6 +155,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       scrollIndex={scrollIndex}
       scrollRef={scrollRef}
       />
+      {/* <Gallery_Footer/> */}
     </div>
   )
 };
