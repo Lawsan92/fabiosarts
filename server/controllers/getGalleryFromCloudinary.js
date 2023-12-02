@@ -4,8 +4,8 @@ require('dotenv').config();
 
 const getGalleryFromCloudinary = async (exhibit) => {
   let [prefix, gallery] = [null, []];
-
   let validExhibit;
+
   (validExhibit = () => {
     exhibit && console.log('exhibit:', exhibit.exhibit);
     exhibit ? prefix =  `FABIO/san francisco` : '';

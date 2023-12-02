@@ -25,7 +25,6 @@ const App = () => {
     })
   };
 
-
   const spring = useSpring({
     from: { opacity: 0, transition: '0.5s ease-in', x: -200 },
     to: {opacity: 1, x: 0}
@@ -41,9 +40,14 @@ const App = () => {
     <div className="app">
       {/* <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button> */}
       {exhibits ?
-        ( viewSize <= 450 ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/> : <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/> )
+        ( viewSize <= 450 ?
+        <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/> :
+        <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/>
+        )
         :
-        ( viewSize <= 450 ? <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect}/> : <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize}/> )
+        ( viewSize <= 450 ? <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect}/>
+          : <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize}/>
+        )
       }
     </div>
   )
