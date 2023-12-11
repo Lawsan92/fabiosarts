@@ -1,0 +1,47 @@
+.mobile_gallery_modal {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.mobile_gallery_modal_background {
+  height: inherit;
+  width: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.mobile_gallery_modal_body {
+  height: 95vh;
+  width: 95vw;
+  border-radius: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &:hover{
+    cursor: pointer;
+  }
+}
+
+.mobile_gallery_modal_scrollBtn {
+  background-color: #fffafa;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  z-index: 2;
+  position: absolute;
+  bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.mobile_gallery_modal_scrollArrow{
+  height: 10px;
+  width: 10px;
+  border-bottom: solid 1px;
+  border-right: solid 1px;
+  transform: rotate(45deg);
+}

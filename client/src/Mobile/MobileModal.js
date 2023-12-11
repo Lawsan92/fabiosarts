@@ -15,12 +15,12 @@ export const MobileModal = ({ handleModal, modalImgSource, scrollPosition, scrol
     }
 
   return (
-    <div className='gallery_modal' style={{top: document.documentElement.scrollTop, backgroundColor: '#fff'}}>
-      <div className='gallery_modal_background'>
-        <div className='gallery_modal_body' onClick={(e) => { console.log('e.target:', e.target, 'e.currentTarget:', e.currentTarget); e.currentTarget === e.target && handleModal()}}>
+    <div className='mobile_gallery_modal' style={{top: document.documentElement.scrollTop, backgroundColor: '#fff'}}>
+      <div className='mobile_gallery_modal_background'>
+        <div className='mobile_gallery_modal_body' onClick={(e) => { console.log('e.target:', e.target, 'e.currentTarget:', e.currentTarget); e.currentTarget === e.target && handleModal()}}>
           <img src={modalImgSource} style={{maxHeight: '100vh', width: '100vw', zIndex: 2}}/>
-          <div className='gallery_modal_scrollBtn' onClick={handleArrow}>
-            <div className='gallery_modal_scrollArrow'></div>
+          <div className='mobile_gallery_modal_scrollBtn' onClick={handleArrow}>
+            <div className='mobile_gallery_modal_scrollArrow'></div>
           </div>
         </div>
       </div>

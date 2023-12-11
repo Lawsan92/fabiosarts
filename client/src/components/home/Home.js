@@ -42,7 +42,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
     return transitions((style, items) =>
       items &&
       <animated.div style={style} className='home'>
-        <button onClick={() => {stopBug((prevState) => {return !prevState;})}} style={{position: 'absolute', zIndex: 10, top: 0, right: 0}}>STOP</button>
+        {/* <button onClick={() => {stopBug((prevState) => {return !prevState;})}} style={{position: 'absolute', zIndex: 10, top: 0, right: 0}}>STOP</button> */}
         <div className='home_header'>
           <h1 className='home_header_text'>FABIO SANZOGNI</h1>
           <div className='home_header_sub'>

@@ -13,49 +13,6 @@ const MobileHome = ({ isMounted, setMount, toggleSelect, XYRef, getXYRef }) => {
    /*------STATE:email------*/
    const [emailFormOpen, setEmailForm] = useState(false);
 
-  /*-----styles-----*/
-  const mobileStyles = {
-    home: {
-      backgroundImage: `url(https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg)`,
-      header: {
-        backgroundColor: '#fffafa',
-        width: '13vw',
-        height: '80vh',
-        marginRight: 'auto',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        sub: {
-          flexDirection: 'column',
-          marginLeft: 0,
-          transform: 'translate(0, -38px)',
-          text: {
-            writingMode: 'vertical-rl',
-            textOrientation: 'upright',
-            fontSize: '8px',
-            marrgin: 0
-          }
-        },
-        line: {
-          height: '30vh',
-          width: '1px'
-        },
-        ellipse: {
-          flexDirection: 'column'
-        },
-        text: {
-          writingMode: 'vertical-rl',
-          textOrientation: 'upright',
-          fontSize: '32px',
-          marrgin: 0
-        },
-      },
-      footer: {
-        fontSize: '12px'
-      }
-    },
-  };
-
   /*-----springs-----*/
   const transitions = useTransition(isMounted, {
     from: { opacity: 0, transition: '0.5s ease-in', x: -200 },
@@ -67,29 +24,29 @@ const MobileHome = ({ isMounted, setMount, toggleSelect, XYRef, getXYRef }) => {
 
     return transitions((style, items) =>
       items &&
-      <animated.div style={{...style, ...mobileStyles.home}} className='home'>
+      <animated.div className='mobile_home'>
         <MobileMenu mountMobileList={mountMobileList}/>
-        <div className='home_header' style={mobileStyles.home.header}>
-          <h1 className='home_header_text' style={mobileStyles.home.header.text}>FABIO SANZOGNI</h1>
-          <div className='home_header_sub' style={mobileStyles.home.header.sub}>
-            <div className='home_header_sub_line' style={mobileStyles.home.header.line}/>
-            <div className='home_header_sub_ellipse' style={mobileStyles.home.header.ellipse}>
+        <div className='mobile_home_header'>
+          <h1 className='mobile_home_header_text'>FABIO SANZOGNI</h1>
+          <div className='mobile_home_header_sub'>
+            <div className='mobile_home_header_sub_line'/>
+            <div className='mobile_home_header_sub_ellipse'>
               <div className='ellipse_1'></div>
               <div className='ellipse_2'/>
               <div className='ellipse_3'/>
             </div>
-            <p className='home_header_sub_text' style={mobileStyles.home.header.sub.text}>international artist</p>
+            <p className='mobile_home_header_sub_text'>international artist</p>
           </div>
         </div>
-        <div className='home_footer'>
-          <p className='footer_text' style={{...mobileStyles.home.footer, cursor: 'pointer'}}
+        <div className='mobile_home_footer'>
+          <p className='mobile_home_footer_text_contact' style={{cursor: 'pointer'}}
           onClick={() => {setEmailForm(true)}}
           >Contact</p>
-          <p className='footer_text' style={mobileStyles.home.footer}>All rights reserved</p>
+          <p className='mobile_home_footer_text' >All rights reserved</p>
           <a href='http://studiodarteonline.com/' style={{textDecoration: 'none'}}>
-            <p className='footer_text_link' style={mobileStyles.home.footer}>studiodarteonline.com</p>
+            <p className='mobile_home_footer_text_link' >studiodarteonline.com</p>
           </a>
-          <p className='footer_text' style={mobileStyles.home.footer}>designed by Lawrence Sanzogni</p>
+          <p className='mobile_home_footer_text' >designed by Lawrence Sanzogni</p>
         </div>
         {emailFormOpen && <MobileEmail setEmailForm={setEmailForm}/>}
       </animated.div>
