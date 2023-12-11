@@ -5,10 +5,12 @@ import SeriesMenu from './SeriesMenu.js';
 import OilsMenu from './OilsMenu.js';
 import Home_Gallery from './Home_Gallery.js'
 
-const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
+const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) => {
 
   // const [seriesSubList, setSubList] = useState(false);
   const [seriesSubList, setSubList] = useState({oils: false, series: false});
+
+  const [springBug, stopBug] = useState(false);
 
   /*------STATE:email------*/
   const [emailFormOpen, setEmailForm] = useState(false);
@@ -40,6 +42,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
     return transitions((style, items) =>
       items &&
       <animated.div style={style} className='home'>
+        <button onClick={() => {stopBug((prevState) => {return !prevState;})}} style={{position: 'absolute', zIndex: 10, top: 0, right: 0}}>STOP</button>
         <div className='home_header'>
           <h1 className='home_header_text'>FABIO SANZOGNI</h1>
           <div className='home_header_sub'>
@@ -53,13 +56,13 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize }) => {
           </div>
         </div>
         <div className='home_body'>
-          <Home_Gallery/>
+          {(!springBug && items) ? <Home_Gallery /> : ''}
           <ul className='home_list'>
             {mapGalleries()}
           </ul>
-          <OilsMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect}/>
-          <SeriesMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect}/>
-          <div className='home_img_container'>
+          <OilsMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/>
+          <SeriesMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/>
+          <div className='home_img_container' style={{opacity: '0'}}>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
           </div>
         </div>

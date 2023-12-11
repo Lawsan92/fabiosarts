@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 
-const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
+const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef }) => {
 
   const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
 
@@ -9,7 +9,9 @@ const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
     let key = -1;
     return series.map((gallery) => {
       key ++;
-      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText);
+      getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y});
+      }} className='series_item' >{gallery}</li>;
     })
   };
 

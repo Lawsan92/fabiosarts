@@ -18,6 +18,10 @@ const App = () => {
 
   const [viewSize, getSize] = useState(window.innerWidth);
 
+  const [XYRef, getXYRef] = useState({});
+
+  const MobileView = viewSize <= 450;
+
   const handleSize = (size) => {
     window.addEventListener('resize', () => {
       console.log('window.innerWidth:', window.innerWidth);
@@ -39,16 +43,25 @@ const App = () => {
   return (
     <div className="app">
       {/* <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button> */}
-      {exhibits ?
-        ( viewSize <= 450 ?
-        <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/> :
-        <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/>
-        )
+      { exhibits ?
+        ( MobileView  ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/> :
+        <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> )
         :
-        ( viewSize <= 450 ? <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect}/>
-          : <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize}/>
-        )
+        ( MobileView  ? <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect}/> :
+        <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef}/> )
       }
+        {/* { (() => {
+          switch (exhibits) {
+            case exhibits.length:
+              return ( MobileView  ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/> :
+              <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount}/> )
+            default:
+              return ( MobileView ? <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect}/> :
+              <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize}/> )
+            break;
+          }
+        })()
+      } */}
     </div>
   )
 };

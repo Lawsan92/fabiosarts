@@ -5,9 +5,12 @@ import HomeIcon from './HomeIcon.js';
 import Modal from './Modal.js';
 import SphereSelect from './SphereSelect.js';
 import Gallery_Footer from './gallery/galleryFooter.js';
+import Gallery_Header from './gallery/galleryHeader.js';
+import { handleSelectPosition } from './gallery/gallery_events.js';
+
 const axios = require('axios');
 
-const Gallery = ({ exhibits, selectExhibit, setMount }) => {
+const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 
   /*---------------STATE && HOOKS---------------*/
   useEffect(() => {
@@ -40,8 +43,11 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       })
   };
 
-  /*----- Scroll-----*/
+  /*************- EVENT Handlers-*************/
+
+  /*_________SCROLL__________*/
   const [scrollPosition, getScrollPosition] = useState('10vh');
+  const [scrollIndex, getScrollIndex] = useState(0);
   const handleSelectPosition = () => {
     window.addEventListener('scroll', () => {
       getScrollPosition(document.documentElement.scrollTop + (window.innerHeight / 10))
@@ -55,7 +61,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     console.log('called')
   };
 
-  /*----- Modal-----*/
+  /*_________MODAL__________*/
   const [openModal, setModal] = useState(false);
   const [modalImgSource, getModalImgSource] = useState('');
 
@@ -63,15 +69,13 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     setModal(prevState => !prevState);
   }
 
-  /*-----Key events-----*/
+  /*_________KEYS_________*/
 
   const handleEscKey = () => {
     document.addEventListener('keydown', (e) => {
       e.key === 'Escape' && handleModal(false);
     });
   }
-
-  const [scrollIndex, getScrollIndex] = useState(0);
 
   const handleDownKey = () => {
     document.addEventListener('keydown', (e) => {
@@ -104,6 +108,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
     });
   }
 
+  /***************************************/
+
   /*----- Sphere List-----*/
   const [sphereIsSelected, selectSphere] = useState(false);
   const handleSphereSelect = (index) => {
@@ -112,15 +118,22 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
 
   /*----- Maps-----*/
   const mapGallery = () => {
-    if (gallery.length) {
+    let galleryDataHasArrived = gallery.length;
+    if (galleryDataHasArrived) {
       return gallery.map((img, index) => {
         return (
         <div className='gallery_img_container'>
-          <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url} onClick={(e) => {handleModal(); getModalImgSource(e.target.attributes.src.value); scrollRef.current = index; handleSphereSelect(scrollRef.current);}} style={img.styles}/>
-          <div className='gallery_desc'>
-            <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p>
+          <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url} onClick={(e) => {
+            handleModal();
+            getModalImgSource(e.target.attributes.src.value);
+            scrollRef.current = index;
+            handleSphereSelect(scrollRef.current);
+          }}
+          style={img.styles}/>
+          {/* <div className='gallery_desc'>
+            <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p> */}
            <h2 className={`gallery_text_sold index${index}`} key={index}>{img.sold && 'SOLD'}</h2>
-          </div>
+          {/* </div> */}
         </div>
         )
       });
@@ -135,9 +148,10 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
         <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
         ''
       }
+      <Gallery_Header/>
       <animated.h1
       className='gallery_header'
-      style={{...headerSpring()}}
+      style={{...headerSpring(XYRef)}}
       >
         {exhibits.exhibit}
       </animated.h1>
@@ -155,11 +169,48 @@ const Gallery = ({ exhibits, selectExhibit, setMount }) => {
       scrollIndex={scrollIndex}
       scrollRef={scrollRef}
       />
-      {/* <Gallery_Footer/> */}
+      <Gallery_Footer gallery={gallery} scrollRef={scrollRef}/>
     </div>
   )
+  /*
+  return (
+    <div className='gallery'>
+      {openModal ?
+        <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
+        ''
+      }
+      <Gallery_Header/>
+      <div className='gallery_body'>
+        <animated.h1
+        className='gallery_header'
+        style={{...headerSpring()}}
+        >
+          {exhibits.exhibit}
+        </animated.h1>
+        <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
+        <animated.div className='gallery_container' style={{...gallerySpring()}} >
+          {mapGallery()}
+        </animated.div>
+        <SphereSelect
+        scrollPosition={scrollPosition}
+        handleSphereSelect={handleSphereSelect}
+        scrollToImg={scrollToImg}
+        getScrollIndex={getScrollIndex}
+        gallery={gallery}
+        sphereIsSelected={sphereIsSelected}
+        scrollIndex={scrollIndex}
+        scrollRef={scrollRef}
+        />
+      </div>
+      <Gallery_Footer gallery={gallery} scrollRef={scrollRef}/>
+    </div>
+  )
+*/
+
 };
 
 export default Gallery;
 
 // ref: https://dev.to/zeerorg/react-hooks-and-their-dependence-on-each-other-13pe
+
+

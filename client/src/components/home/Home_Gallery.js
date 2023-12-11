@@ -1,7 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { animated, useTransition } from '@react-spring/web';
 
 const Home_Gallery = () => {
+
+  const functionCalls = useRef(0);
+
+  useEffect(() => {
+
+  }, [])
 
   /*
         Width | Height
@@ -30,7 +36,7 @@ const Home_Gallery = () => {
       enterX: 500,
       inFrameX: -400,
       enterY: 0,
-      inFrameY: 100,
+      inFrameY: 125,
       width: '58.7%',
       height:'70.8%',
       zIndex: 4
@@ -50,7 +56,7 @@ const Home_Gallery = () => {
       enterX: 500,
       inFrameX: -200,
       enterY: 0,
-      inFrameY: 200,
+      inFrameY: 125,
       width: '37.5%',
       height:'81.3%',
       zIndex: 4
@@ -58,7 +64,7 @@ const Home_Gallery = () => {
     {
       url: 'https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200270/FABIO/oil%20on%20canvas%20abstract/Sanzogni_Upswing_68_x_53_oil_on_canvas_hjufwm.jpg',
       enterX: 500,
-      inFrameX: 500,
+      inFrameX: 620,
       enterY: 0,
       inFrameY: 200,
       width: '30.4%',
@@ -84,7 +90,8 @@ const Home_Gallery = () => {
       inFrameX: image.inFrameX,
       enterFrameY: image.enterY,
       inFrameY:
-      image.inFrameY
+      image.inFrameY,
+      i: i
     };
     // console.log(`image_styles:[${i}]`, image_styles);
     return image_styles;
@@ -96,18 +103,43 @@ const Home_Gallery = () => {
     leave: { opacity: 1, transition: '1s ease-in', x: 0, y: 0 },
   };
 
-  const imageList_springTransitions = useTransition( image_Styles, image_spring_Config);;
+  const imageList_springTransitions = useTransition(image_Styles, image_spring_Config);;
 
   const animateimageList = () => {
-    return imageList_springTransitions((springStyles, state) => {
-       return <animated.img src={state.url} style={{height: state.height, width: state.width, position: 'absolute', zIndex: state.zIndex, ...springStyles}}/>;
-  });
+    functionCalls.current = functionCalls.current + 1;
+    if (functionCalls.current <= 1) {
+      return imageList_springTransitions((springStyles, state) => {
+        return <animated.img src={state.url} style={{height: state.height, width: state.width, position: 'absolute', zIndex: state.zIndex, ...springStyles}} className={`image ${state.i}`} key={state.i}/>;
+      });
+    } else {
+      const divStyle = {
+        height: '74vh',
+        width: '100vw',
+        position: 'absolute',
+        background: 'url("https://res.cloudinary.com/darp0mj9i/image/upload/v1702090971/Screenshot_2023-12-08_at_20.59.14_nruow6.jpg")',
+        backgroundSize: 'cover'
+      }
+
+      return <div style={divStyle}></div>;
+    }
   }
 
-
   // return <div style={{position: 'absolute', width: '100vw', height: '73vh', top: '16vh', overflow: 'hidden'}}>{animateimageList()}</div>
-
   return animateimageList();
+
+  const divStyle = {
+    height: '50vh',
+    width: '100vw',
+    position: 'absolute'
+  }
+
+  // return (
+  //   <div style={divStyle}>
+  //     {imageList.map((img) => {return <img src={img.url}/>})}
+  //   </div>
+  // );
+
+  // return imageList.map((img) => { functionCalls.current = functionCalls.current + 1;return <img src={img.url}/>});
 }
 
 export default Home_Gallery;

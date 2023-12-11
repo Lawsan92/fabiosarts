@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 
-const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
+const OilsMenu = ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef }) => {
 
   const series = ['oils', 'mixed oils 2011', 'abstract'];
 
@@ -9,7 +9,7 @@ const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
     let key = -1;
     return series.map((gallery) => {
       key ++;
-      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
+      return <li key={key} onClick={(e) => {toggleSelect(e.target.innerText); getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y})}} className='series_item' >{gallery}</li>;
     })
   };
 
@@ -23,8 +23,8 @@ const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
   return mountTransition((style, item) =>
     item &&
       <animated.ul style={style} className='series_list'>
-      {mapSeries()}
-    </animated.ul>
+        {mapSeries()}
+      </animated.ul>
   );
 
 };
