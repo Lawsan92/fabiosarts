@@ -3,7 +3,7 @@ import { animated, useSpring, useTransition } from '@react-spring/web';
 import MobileEmail from './MobileEmail.js';
 import MobileList from './MobileList.js';
 
-const MobileHome = ({ isMounted, setMount, toggleSelect }) => {
+const MobileHome = ({ isMounted, setMount, toggleSelect, XYRef, getXYRef }) => {
 
   /*-----STATE: mobile list-----*/
   const [mobileListMounted, mountMobileList] = useState(false);

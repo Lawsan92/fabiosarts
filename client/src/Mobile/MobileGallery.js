@@ -1,12 +1,12 @@
 import React, { useState , useEffect, useRef } from 'react';
 import { animated } from '@react-spring/web';
-import { headerSpring, gallerySpring } from '../hooks/Springs.js';
+import { headerSpring, gallerySpring, mobileHeaderSpring } from '../hooks/Springs.js';
 import MobileModal from './MobileModal.js';
 import SphereButton from './SphereButton.js';
 import SphereModal from './SphereModal.js';
 const axios = require('axios');
 
-const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
+const MobileGallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 
   /*-----Set background color for gallery screen------*/
   const body = document.querySelector('body');
@@ -118,7 +118,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
         <MobileModal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition} scrollRef={scrollRef} galleryRef={galleryRef} getModalImgSource={getModalImgSource} getScrollIndex ={getScrollIndex}/> :
         ''
       }
-      <animated.h1 className='gallery_header'style={{...headerSpring(), width: 'fit-content', fontSize: '25px'}}>
+      <animated.h1 className='gallery_header'style={{...mobileHeaderSpring(), width: 'fit-content', fontSize: '25px'}}>
         {exhibits.exhibit}
       </animated.h1>
       <SphereButton setSphereModal={setSphereModal} scrollIndex={scrollIndex}/>

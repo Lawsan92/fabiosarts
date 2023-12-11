@@ -42,6 +42,26 @@ export const headerSpring = (XYRef) => {
       x: XYRef.x
     },
     to: {
+      color: '#338BA8',
+      transition: '1s ease-in',
+      y: 300,
+      x: 50,
+      position: 'absolute'
+    }
+  });
+}
+
+export const mobileHeaderSpring = (XYRef) => {
+  console.log('headerSpring{XYRef}:', XYRef);
+  return useSpring({
+    from: {
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      color: '#808080',
+      transition: '1s ease-in',
+      y: 280,
+      x: 65
+    },
+    to: {
       backgroundColor: '#001133',
       color: '#fff',
       transition: '1s ease-in',
