@@ -12,32 +12,13 @@ export const gallerySpring = () => {
   });
 }
 
-// export const headerSpring = () => {
-//   return useSpring({
-//     from: {
-//       opacity: 0,
-//       color: '#808080',
-//       transition: '1s ease-in',
-//       y: 280,
-//       x: 65
-//     },
-//     to: {
-//       opacity: 1,
-//       color:'#338BA8',
-//       transition: '1s ease-in',
-//       y: 280,
-//       x: 0
-//     }
-//   });
-// }
-
 export const headerSpring = (XYRef) => {
   console.log('headerSpring{XYRef}:', XYRef);
   return useSpring({
     from: {
       backgroundColor: 'rgba(255, 255, 255, 0)',
       color: '#808080',
-      transition: '1s ease-in',
+
       y: XYRef.y,
       x: XYRef.x
     },

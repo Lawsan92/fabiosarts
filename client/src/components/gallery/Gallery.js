@@ -1,12 +1,12 @@
 import React, { useState , useEffect, useRef } from 'react';
 import { animated } from '@react-spring/web';
-import { headerSpring, gallerySpring } from '../hooks/Springs.js';
-import HomeIcon from './HomeIcon.js';
-import Modal from './Modal.js';
-import SphereSelect from './SphereSelect.js';
-import Gallery_Footer from './gallery/galleryFooter.js';
-import Gallery_Header from './gallery/galleryHeader.js';
-import { handleSelectPosition } from './gallery/gallery_events.js';
+import { headerSpring, gallerySpring } from '../../hooks/Springs.js';
+import HomeIcon from '../HomeIcon.js';
+import Modal from '../Modal.js';
+import SphereSelect from '../SphereSelect.js';
+import Gallery_Footer from './galleryFooter.js';
+import Gallery_Header from './galleryHeader.js';
+import { handleSelectPosition } from './gallery_events.js';
 
 const axios = require('axios');
 

@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+import { useSpring, animated } from '@react-spring/web';
+import Gallery_Springs from '../../hooks/Gallery_Springs.js'
 
 const Gallery_Header = () => {
   return (
-    <div className='gallery_header_main'>
+    <animated.div className='gallery_header_main' style={{...Gallery_Springs.gallery_footer_spring()}}>
       <h1 className='gallery_header_main_text'>FABIO SANZOGNI</h1>
       <div className='gallery_header_main_sub'>
         <div className='gallery_header_main_sub_line' />
@@ -13,7 +15,7 @@ const Gallery_Header = () => {
         </div>
       <p className='gallery_header_main_sub_text'>international artist</p>
     </div>
-  </div>
+  </animated.div>
   );
 }
 

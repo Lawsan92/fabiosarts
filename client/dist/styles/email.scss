@@ -7,6 +7,7 @@
   background-color: rgba(0, 0, 0, 0.85);
   display: flex;
   flex-wrap: wrap;
+  z-index: 8;
 }
 
 .contact_header{
@@ -85,17 +86,31 @@
 
 .email_content_button {
   width: fit-content;
+  background: none;
+  color: white;
+  font-size: 2vh;
+  border-radius: 8px;
+  padding: 5px;
+  transition: ease-in 1s;
+  &:hover{
+    background: #fffa;
+    color: black;
+    transition: ease-in 1s;
+    cursor: pointer;
+  }
 }
 
 .email_input {
   border: none;
   margin-bottom: 25px;
+  border-radius: 3px;
 }
 
 .email_input_textarea {
   border: none;
   margin-bottom: 25px;
   height: 80px;
+  border-radius: 3px;
 }
 
 .email_label{
