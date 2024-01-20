@@ -5,7 +5,17 @@ import App from './App.js';
 
 const root = createRoot(document.querySelector('#root'));
 
-const router = createBrowserRouter([{ path: "/", element: <App/>}]);
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App/>
+  },
+  {
+    path: "gallery",
+    element: <div className='temp'>Gallery</div>,
+    errorElement: <div className='error'>404 Not found</div>
+  }
+]);
 
 
 root.render( <RouterProvider router={router} />);

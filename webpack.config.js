@@ -26,6 +26,7 @@ const config = (env) => {
       ]
     },
     devServer: {
+      historyApiFallback: true,
       static: path.join(__dirname, 'client/dist'),
       proxy: {
         '/cloudinary': 'http://localhost:3000'
