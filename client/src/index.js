@@ -1,14 +1,11 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.js';
 
 const root = createRoot(document.querySelector('#root'));
 
-const body = document.querySelector('body');
+const router = createBrowserRouter([{ path: "/", element: <App/>}]);
 
 
-root.render(<App/>);
-// root.render(
-//   <div id="app">
-//   </div>
-// )
+root.render( <RouterProvider router={router} />);
