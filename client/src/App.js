@@ -47,21 +47,25 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: MobileView ?
-      <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/> :
-      <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
+      element: <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
       errorElement: <Error/>
     },
     {
       path: "gallery/:id",
-      element: MobileView  ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> :<Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
+      element: <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
       errorElement: <Error/>,
     }
   ]);
 
   return (
     <div className="app">
+       { MobileView ?
+          exhibits ?
+           <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> :
+           <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/>
+        :
        <RouterProvider router={router} />
+       }
     </div>
   )
 };
