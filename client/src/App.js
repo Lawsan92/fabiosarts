@@ -6,6 +6,7 @@ import Home from './components/home/Home.js';
 import MobileGallery from './Mobile/MobileGallery.js';
 import MobileHome from './Mobile/MobileHome.js';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import Error from './components/Error.js';
 
 const App = () => {
 

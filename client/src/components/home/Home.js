@@ -3,7 +3,8 @@ import { animated, useTransition } from '@react-spring/web';
 import Email from '../Email.js';
 import SeriesMenu from './SeriesMenu.js';
 import OilsMenu from './OilsMenu.js';
-import Home_Gallery from './Home_Gallery.js'
+import Home_Gallery from './Home_Gallery.js';
+import { Link } from 'react-router-dom';
 
 const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) => {
 
@@ -23,18 +24,19 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
     return galleries.map((gallery) => {
       key ++;
       return gallery == 'series' ?
-        <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li> :
+        <li className='home_list_item'key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li> :
           gallery === 'oils' ?
-          <li key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['oils']: !prevState['oils']}))}}>oils</li> :
-      <li
+          <li className='home_list_item'key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['oils']: !prevState['oils']}))}}>oils</li> :
+      <Link
+      className='home_list_item'
         key={key}
         data-key={key}
+        to={'/gallery'}
         onClick={(e) => {
           toggleSelect(e.target.innerText);
-          setMount(false);
           getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y}); }}>
         {gallery}
-      </li>
+      </Link>
     })
   };
 
