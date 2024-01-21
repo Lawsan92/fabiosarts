@@ -7,10 +7,11 @@ import SphereSelect from '../SphereSelect.js';
 import Gallery_Footer from './galleryFooter.js';
 import Gallery_Header from './galleryHeader.js';
 import { handleSelectPosition } from './gallery_events.js';
+import useAPI from '../../hooks/useAPI.js';
 
 const axios = require('axios');
 
-const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
+const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, location, updateLocation }) => {
 
   /*---------------STATE && HOOKS---------------*/
   useEffect(() => {
@@ -20,11 +21,28 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     handleDownKey();
     handleUpKey();
     handleEscKey();
+    updateLocation(window.location.pathname);
+    getURLid()
+
   }, [sphereIsSelected])
 
   /*------Refs------ */
   const scrollRef = useRef(0);
   const galleryRef = useRef([]);
+
+  const getURLid = () => {
+    let [URLarr, URLparams]= [Array.from(window.location.pathname), ''];
+    URLarr.map((char) => {
+      if (char === '%') {
+        URLparams += ' ';
+      }
+      if (char.match(/[a-z]/i)) {
+        URLparams += char;
+      }
+      return URLparams;
+    });
+    console.log('URLparams:', URLparams);
+  }
 
   /*----- Gallery-----*/
   const [gallery, getGallery] = useState([]);

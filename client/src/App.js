@@ -22,7 +22,11 @@ const App = () => {
 
   const [isMounted, setMount] = useState(true);
 
+  const [location, updateLocation] = useState(window.location.pathname);
+
   const MobileView = viewSize <= 450;
+
+  console.log('location:', location);
 
   const handleSize = (size) => {
     window.addEventListener('resize', () => {
@@ -45,12 +49,12 @@ const App = () => {
       path: "/",
       element: MobileView ?
       <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/> :
-      <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef}/>,
+      <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
       errorElement: <Error/>
     },
     {
       path: "gallery/:id",
-      element: MobileView  ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> :<Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/>,
+      element: MobileView  ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> :<Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
       errorElement: <Error/>,
     }
   ]);

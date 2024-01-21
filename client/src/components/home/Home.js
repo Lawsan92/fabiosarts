@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { animated, useTransition } from '@react-spring/web';
 import Email from '../Email.js';
 import SeriesMenu from './SeriesMenu.js';
@@ -6,7 +6,7 @@ import OilsMenu from './OilsMenu.js';
 import Home_Gallery from './Home_Gallery.js';
 import { Link } from 'react-router-dom';
 
-const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) => {
+const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef, location, updateLocation }) => {
 
   // const [seriesSubList, setSubList] = useState(false);
   const [seriesSubList, setSubList] = useState({oils: false, series: false});
@@ -21,7 +21,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
   const mapGalleries = () => {
     const galleries = ['oils', 'copper plates', 'printings', 'early works', 'aluminum', 'series'];
     let key = -1;
-    return galleries.map((gallery) => {
+    return galleries.map((gallery, index) => {
       key ++;
       return gallery == 'series' ?
         <li className='home_list_item'key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li> :
@@ -31,7 +31,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
       className='home_list_item'
         key={key}
         data-key={key}
-        to={`/gallery/${key}`}
+        to={`/gallery/${gallery}`}
         onClick={(e) => {
           toggleSelect(e.target.innerText);
           getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y}); }}>
@@ -95,6 +95,10 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
       {mountSpring()}
     </div>
   );
+
+  useEffect(() => {
+    updateLocation('/')
+  }, [location])
 
 };
 
