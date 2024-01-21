@@ -5,6 +5,7 @@ import Gallery from './components/gallery/Gallery.js';
 import Home from './components/home/Home.js';
 import MobileGallery from './Mobile/MobileGallery.js';
 import MobileHome from './Mobile/MobileHome.js';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 const App = () => {
 
@@ -20,6 +21,8 @@ const App = () => {
 
   const [XYRef, getXYRef] = useState({});
 
+  const [isMounted, setMount] = useState(true);
+
   const MobileView = viewSize <= 450;
 
   const handleSize = (size) => {
@@ -34,22 +37,35 @@ const App = () => {
     to: {opacity: 1, x: 0}
   })
 
-  const [isMounted, setMount] = useState(true);
-
   const toggleSelect = (exhibit) => {
     selectExhibit({...exhibits, ['exhibit']: exhibit});
   }
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef}/>,
+      errorElement: <Error/>
+    },
+    {
+      path: "gallery",
+      element: <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/>,
+      errorElement: <Error/>,
+    }
+  ]);
+
+
+
   return (
     <div className="app">
       {/* <button onClick={() => {setMount(prevState => !prevState)}}>{isMounted ? 'unmount' : 'mount'}</button> */}
-      { exhibits ?
+      {/* { exhibits ?
         ( MobileView  ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> :
         <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> )
         :
         ( MobileView  ? <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/> :
         <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef}/> )
-      }
+      } */}
         {/* { (() => {
           switch (exhibits) {
             case exhibits.length:
@@ -62,6 +78,7 @@ const App = () => {
           }
         })()
       } */}
+       <RouterProvider router={router} />
     </div>
   )
 };

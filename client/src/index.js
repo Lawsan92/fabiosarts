@@ -2,20 +2,24 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App.js';
+import Error from './components/Error.js';
+import Gallery from './components/gallery/Gallery.js';
 
 const root = createRoot(document.querySelector('#root'));
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App/>
+    element: <App/>,
+    errorElement: <Error/>
   },
   {
     path: "gallery",
-    element: <div className='temp'>Gallery</div>,
-    errorElement: <div className='error'>404 Not found</div>
+    element: <Gallery/>,
+    errorElement: <Error/>,
   }
 ]);
 
 
-root.render( <RouterProvider router={router} />);
+// root.render( <RouterProvider router={router} />);
+root.render(<App/>)
