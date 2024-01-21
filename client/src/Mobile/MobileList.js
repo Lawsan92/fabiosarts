@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
+import { Link } from 'react-router-dom';
 
 const MobileList = ({ toggleSelect, mountMobileList, mobileListMounted, setSubList, seriesSubList, setMount }) => {
 
@@ -52,7 +53,7 @@ export const OilsMenu = ({ seriesSubList, setSubList, toggleSelect }) => {
     let key = -1;
     return series.map((gallery) => {
       key ++;
-      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='mobile_series_item' >{gallery}</li>;
     })
   };
 
@@ -84,7 +85,7 @@ export const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect }) => {
     let key = -1;
     return series.map((gallery) => {
       key ++;
-      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='series_item' >{gallery}</li>;
+      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText)}} className='mobile_series_item' >{gallery}</li>;
     })
   };
 

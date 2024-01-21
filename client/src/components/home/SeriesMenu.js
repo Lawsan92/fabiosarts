@@ -12,7 +12,7 @@ const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef })
       key ++;
       return (
       <Link
-      to={'gallery'}
+      to={`/gallery/${key}`}
       className='series_item'
       key={key}
       onClick={(e) => {toggleSelect(e.target.innerText);

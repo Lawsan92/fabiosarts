@@ -1,11 +1,11 @@
 import React, { useState , useEffect} from 'react';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 import '../dist/styles/styles.scss';
 import Gallery from './components/gallery/Gallery.js';
 import Home from './components/home/Home.js';
 import MobileGallery from './Mobile/MobileGallery.js';
 import MobileHome from './Mobile/MobileHome.js';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Error from './components/Error.js';
 
 const App = () => {
@@ -43,12 +43,14 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef}/>,
+      element: MobileView ?
+      <MobileHome isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/> :
+      <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef}/>,
       errorElement: <Error/>
     },
     {
-      path: "gallery",
-      element: <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/>,
+      path: "gallery/:id",
+      element: MobileView  ? <MobileGallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/> :<Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef}/>,
       errorElement: <Error/>,
     }
   ]);

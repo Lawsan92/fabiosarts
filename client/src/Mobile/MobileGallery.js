@@ -122,7 +122,7 @@
 //         {exhibits.exhibit}
 //       </animated.h1>
 //       <SphereButton setSphereModal={setSphereModal} scrollIndex={scrollIndex}/>
-//       <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
+//       <HomeIcon selectExhibit={selectExhibit}/>
 //       <animated.div className='mobile_gallery_container' style={{...gallerySpring(), ...styles.galleryContainer}} >
 //         {mapGallery()}
 //       </animated.div>
@@ -293,7 +293,7 @@ const MobileGallery = ({ exhibits, selectExhibit, setMount }) => {
         {exhibits.exhibit}
       </animated.h1>
       <SphereButton setSphereModal={setSphereModal} scrollIndex={scrollIndex}/>
-      <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
+      <HomeIcon selectExhibit={selectExhibit}/>
       <animated.div className='mobile_gallery_container' style={{...gallerySpring(), ...styles.galleryContainer}} >
         {mapGallery()}
       </animated.div>

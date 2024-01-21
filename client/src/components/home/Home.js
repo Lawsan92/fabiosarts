@@ -31,7 +31,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
       className='home_list_item'
         key={key}
         data-key={key}
-        to={'/gallery'}
+        to={`/gallery/${key}`}
         onClick={(e) => {
           toggleSelect(e.target.innerText);
           getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y}); }}>

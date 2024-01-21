@@ -13,7 +13,7 @@ const OilsMenu = ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef }) 
       return (
       <Link
         className='series_item'
-        to={'gallery'}
+        to={`/gallery/${key}`}
         key={key}
         onClick={(e) => {toggleSelect(e.target.innerText); getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y})}} >{gallery}</Link>);
     })
