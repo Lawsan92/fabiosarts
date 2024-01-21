@@ -70,8 +70,8 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef, lo
           <ul className='home_list'>
             {mapGalleries()}
           </ul>
-          <OilsMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/>
-          <SeriesMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef}/>
+          <OilsMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>
+          <SeriesMenu seriesSubList={seriesSubList} setSubList={setSubList} toggleSelect={toggleSelect} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>
           <div className='home_img_container' style={{opacity: '0'}}>
             <img className='home_img' src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200227/FABIO/2017/Sanzogni_Significance_14_36_x_48_silver_leaf_oil_on_canvas_mouygv.jpg'/>
           </div>
