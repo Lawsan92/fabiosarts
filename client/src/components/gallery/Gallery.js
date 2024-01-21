@@ -47,7 +47,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, location,
   const [gallery, getGallery] = useState([]);
   const fetchGallery = () => {
     axios({
-      url: `/cloudinary/?exhibit=${exhibits.exhibit}`,
+      url: `/cloudinary/?exhibit=${location}`,
       method: 'get',
     })
       .then((response) => {

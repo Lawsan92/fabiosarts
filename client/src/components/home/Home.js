@@ -33,7 +33,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef, lo
         data-key={key}
         to={`/gallery/${gallery}`}
         onClick={(e) => {
-          toggleSelect(e.target.innerText);
+          updateLocation(e.target.innerText);
           getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y}); }}>
         {gallery}
       </Link>
