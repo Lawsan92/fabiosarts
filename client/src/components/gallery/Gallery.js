@@ -31,7 +31,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, location,
   const galleryRef = useRef([]);
 
   const getURLid = () => {
-    let [URLarr, URLparams]= [Array.from(window.location.pathname), ''];
+    let [URLarr, URLparams]= [Array.from(window.location.pathname).slice(8), ''];
     URLarr.map((char) => {
       if (char === '%') {
         URLparams += ' ';
@@ -39,9 +39,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, location,
       if (char.match(/[a-z]/i)) {
         URLparams += char;
       }
-      return URLparams;
     });
-    console.log('URLparams:', URLparams);
+    updateLocation(URLparams);
   }
 
   /*----- Gallery-----*/
