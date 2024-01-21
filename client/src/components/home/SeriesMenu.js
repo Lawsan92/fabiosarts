@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
+import { Link } from 'react-router-dom';
 
 const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef }) => {
 
@@ -9,9 +10,14 @@ const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef })
     let key = -1;
     return series.map((gallery) => {
       key ++;
-      return <li key={key}  onClick={(e) => {toggleSelect(e.target.innerText);
+      return (
+      <Link
+      to={'gallery'}
+      className='series_item'
+      key={key}
+      onClick={(e) => {toggleSelect(e.target.innerText);
       getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y});
-      }} className='series_item' >{gallery}</li>;
+      }} >{gallery}</Link>);
     })
   };
 
