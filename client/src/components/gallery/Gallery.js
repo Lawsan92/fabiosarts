@@ -189,41 +189,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, location,
       <Gallery_Footer gallery={gallery} scrollRef={scrollRef}/>
     </div>
   )
-  /*
-  return (
-    <div className='gallery'>
-      {openModal ?
-        <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
-        ''
-      }
-      <Gallery_Header/>
-      <div className='gallery_body'>
-        <animated.h1
-        className='gallery_header'
-        style={{...headerSpring()}}
-        >
-          {exhibits.exhibit}
-        </animated.h1>
-        <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
-        <animated.div className='gallery_container' style={{...gallerySpring()}} >
-          {mapGallery()}
-        </animated.div>
-        <SphereSelect
-        scrollPosition={scrollPosition}
-        handleSphereSelect={handleSphereSelect}
-        scrollToImg={scrollToImg}
-        getScrollIndex={getScrollIndex}
-        gallery={gallery}
-        sphereIsSelected={sphereIsSelected}
-        scrollIndex={scrollIndex}
-        scrollRef={scrollRef}
-        />
-      </div>
-      <Gallery_Footer gallery={gallery} scrollRef={scrollRef}/>
-    </div>
-  )
-*/
-
 };
 
 export default Gallery;
