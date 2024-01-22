@@ -32,14 +32,27 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, location,
 
   const getURLid = () => {
     let [URLarr, URLparams]= [Array.from(window.location.pathname).slice(8), ''];
-    URLarr.map((char) => {
-      if (char === '%') {
+
+    for (let index = 0; index < URLarr.length; index++) {
+      console.log('index:', index, 'array[index]:', URLarr[index])
+      const ifParam = URLarr[index]  === '2' && URLarr[index + 1] === '0' && URLarr[index - 1] === '%';
+      console.log('ifParam:', ifParam)
+      if (ifParam) {
+        index +=1;
+        continue;
+      }
+      if (URLarr[index] === '%') {
+        console.log('HIT')
         URLparams += ' ';
+        continue;
       }
-      if (char.match(/[a-z]/i)) {
-        URLparams += char;
+      if (URLarr[index] === '/') {
+        continue;
       }
-    });
+
+      URLparams += URLarr[index];
+    }
+
     updateLocation(URLparams);
   }
 
