@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 import { Link } from 'react-router-dom';
 
-const OilsMenu = ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef, location, updateLocation }) => {
+const OilsMenu = ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef }) => {
 
   const series = ['oils', 'mixed oils 2011', 'abstract'];
 
@@ -15,7 +15,7 @@ const OilsMenu = ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef, lo
         className='series_item'
         to={`/gallery/${gallery}`}
         key={key}
-        onClick={(e) => {updateLocation(e.target.innerText); toggleSelect(e.target.innerText); getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y})}} >{gallery}</Link>);
+        onClick={(e) => { toggleSelect(e.target.innerText); getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y})}} >{gallery}</Link>);
     })
   };
 

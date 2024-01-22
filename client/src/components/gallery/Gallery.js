@@ -8,59 +8,35 @@ import Gallery_Footer from './galleryFooter.js';
 import Gallery_Header from './galleryHeader.js';
 import { handleSelectPosition } from './gallery_events.js';
 import useAPI from '../../hooks/useAPI.js';
+import { useParams } from 'react-router-dom';
 
 const axios = require('axios');
 
-const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, location, updateLocation }) => {
+const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 
   /*---------------STATE && HOOKS---------------*/
   useEffect(() => {
     console.log('MOUNTED')
+    console.log('params:', params);
     fetchGallery();
     handleSelectPosition();
     handleDownKey();
     handleUpKey();
     handleEscKey();
-    updateLocation(window.location.pathname);
-    getURLid()
 
   }, [sphereIsSelected])
+
+  const params= useParams()
 
   /*------Refs------ */
   const scrollRef = useRef(0);
   const galleryRef = useRef([]);
 
-  const getURLid = () => {
-    let [URLarr, URLparams]= [Array.from(window.location.pathname).slice(8), ''];
-
-    for (let index = 0; index < URLarr.length; index++) {
-      console.log('index:', index, 'array[index]:', URLarr[index])
-      const ifParam = URLarr[index]  === '2' && URLarr[index + 1] === '0' && URLarr[index - 1] === '%';
-      console.log('ifParam:', ifParam)
-      if (ifParam) {
-        index +=1;
-        continue;
-      }
-      if (URLarr[index] === '%') {
-        console.log('HIT')
-        URLparams += ' ';
-        continue;
-      }
-      if (URLarr[index] === '/') {
-        continue;
-      }
-
-      URLparams += URLarr[index];
-    }
-
-    updateLocation(URLparams);
-  }
-
   /*----- Gallery-----*/
   const [gallery, getGallery] = useState([]);
   const fetchGallery = () => {
     axios({
-      url: `/cloudinary/?exhibit=${location}`,
+      url: `/cloudinary/?exhibit=${params.id}`,
       method: 'get',
     })
       .then((response) => {

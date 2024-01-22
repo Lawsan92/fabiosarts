@@ -33,3 +33,21 @@ app.get('/.well-known/pki-validation/A7DC6BA9ED359DF264150C3009144078.txt', (req
 })
 
 app.use('/cloudinary', cloudinary);
+
+app.get('/gallery/*', (req, res) => {
+  console.log('req:', req.params);
+  console.log('********************');
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    err && alert('err:', err);
+  })
+});
+
+
+
+app.get('/*', (req, res) => {
+  console.log('req:', req.route);
+  console.log('********************');
+  res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
+    err && alert('err:', err);
+  })
+});

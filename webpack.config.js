@@ -10,7 +10,8 @@ const config = (env) => {
     },
     output: {
       path: path.join(__dirname, 'client/dist/'),
-      filename: 'bundle.js'
+      filename: 'bundle.js',
+      clean: true
     },
     module: {
       rules: [
@@ -29,7 +30,7 @@ const config = (env) => {
       historyApiFallback: true,
       static: path.join(__dirname, 'client/dist'),
       proxy: {
-        '/cloudinary': 'http://localhost:3000'
+        '/': 'http://localhost:3000'
       }
     },
     plugins: [

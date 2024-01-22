@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 import { Link } from 'react-router-dom';
 
-const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef, location, updateLocation }) => {
+const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef }) => {
 
   const series = ['2008', '2012', '2013', '2014', '2016', 'tarot cards', 'petrogliphs'];
 
@@ -15,7 +15,7 @@ const SeriesMenu= ({ seriesSubList, setSubList, toggleSelect, XYRef, getXYRef, l
       to={`/gallery/${gallery}`}
       className='series_item'
       key={key}
-      onClick={(e) => {updateLocation(e.target.innerText);
+      onClick={(e) => {
         toggleSelect(e.target.innerText);
       getXYRef({...XYRef, x: e.target.getBoundingClientRect().x, y: e.target.getBoundingClientRect().y});
       }} >{gallery}</Link>);

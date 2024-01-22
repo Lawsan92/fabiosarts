@@ -1,5 +1,5 @@
 import React, { useState , useEffect} from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 import '../dist/styles/styles.scss';
 import Gallery from './components/gallery/Gallery.js';
@@ -22,11 +22,8 @@ const App = () => {
 
   const [isMounted, setMount] = useState(true);
 
-  const [location, updateLocation] = useState(window.location.pathname);
-
   const MobileView = viewSize <= 450;
 
-  console.log('location:', location);
 
   const handleSize = (size) => {
     window.addEventListener('resize', () => {
@@ -47,13 +44,26 @@ const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
+      element: <Home isMounted={isMounted} setMount={setMount} toggleSelect={toggleSelect} viewSize={viewSize} XYRef={XYRef} getXYRef={getXYRef} />,
       errorElement: <Error/>
     },
     {
       path: "gallery/:id",
-      element: <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef} location={location} updateLocation={updateLocation}/>,
+      element: <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef} />,
       errorElement: <Error/>,
+    },
+    {
+      path: 'slide',
+      element: <div className='slide'>slide</div>,
+      errorElement: <Error/>,
+      children: [
+        {
+          path: "slide/:id",
+          element: <div id="detail">
+          <Outlet />
+      </div>,
+        },
+      ],
     }
   ]);
 
