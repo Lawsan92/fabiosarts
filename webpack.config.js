@@ -10,8 +10,7 @@ const config = (env) => {
     },
     output: {
       path: path.join(__dirname, 'client/dist/'),
-      filename: 'bundle.js',
-      clean: true
+      filename: 'bundle.js'
     },
     module: {
       rules: [

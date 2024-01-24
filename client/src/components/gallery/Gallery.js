@@ -1,4 +1,4 @@
-import React, { useState , useEffect, useRef } from 'react';
+import React, { useState , useEffect, useRef  } from 'react';
 import { animated } from '@react-spring/web';
 import { headerSpring, gallerySpring } from '../../hooks/Springs.js';
 import HomeIcon from '../HomeIcon.js';
@@ -8,7 +8,7 @@ import Gallery_Footer from './galleryFooter.js';
 import Gallery_Header from './galleryHeader.js';
 import { handleSelectPosition } from './gallery_events.js';
 import useAPI from '../../hooks/useAPI.js';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 
 const axios = require('axios');
 
@@ -18,6 +18,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
   useEffect(() => {
     console.log('MOUNTED')
     console.log('params:', params);
+    console.log('location["hash"]:', location);
+    URLhashScroll();
     fetchGallery();
     handleSelectPosition();
     handleDownKey();
@@ -26,7 +28,27 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 
   }, [sphereIsSelected])
 
-  const params= useParams()
+  const params= useParams();
+  const location = useLocation();
+
+  const URLhashScroll = () => {
+
+      const timer = setTimeout(() => {
+
+        if (location.hash) {
+
+          const element = document.querySelector(location.hash);
+          console.log('element:', element);
+          element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
+        }
+
+
+      }, 1200);
+
+      return () => clearTimeout(timer);
+
+
+  }
 
   /*------Refs------ */
   const scrollRef = useRef(0);
@@ -129,7 +151,12 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
       return gallery.map((img, index) => {
         return (
         <div className='gallery_img_container'>
-          <img className={`gallery_img index${index}`} key={index + gallery.length} src={img.url} onClick={(e) => {
+          <img
+            className={`gallery_img index${index}`}
+            id={img.title}
+            key={index + gallery.length}
+            src={img.url}
+            onClick={(e) => {
             handleModal();
             getModalImgSource(e.target.attributes.src.value);
             scrollRef.current = index;
