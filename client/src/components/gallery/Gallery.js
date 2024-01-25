@@ -33,7 +33,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 
   const URLhashScroll = () => {
 
-      const timer = setTimeout(() => {
+      const timer = setTimeout(() => { // <- delay element scroll in case API call doesn't retrieve gallery data fast enough
 
         if (location.hash) {
 
@@ -42,19 +42,17 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
           element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
         }
 
-
       }, 1200);
 
       return () => clearTimeout(timer);
 
-
-  }
+  };
 
   /*------Refs------ */
   const scrollRef = useRef(0);
   const galleryRef = useRef([]);
 
-  /*----- Gallery-----*/
+  /*-----fetch gallery data from cloudinary API----*/
   const [gallery, getGallery] = useState([]);
   const fetchGallery = () => {
     axios({
@@ -70,6 +68,37 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
         console.log('error:', err.stack)
       })
   };
+
+ /*----- Map gallery data ui to gallery page-----*/
+ const mapGallery = () => {
+  let galleryDataHasArrived = gallery.length;
+  if (galleryDataHasArrived) {
+    return gallery.map((img, index) => {
+      return (
+      <div className='gallery_img_container'>
+        <img
+          className={`gallery_img index${index}`}
+          id={img.title}
+          key={index + gallery.length}
+          src={img.url}
+          onClick={(e) => {
+          handleModal();
+          getModalImgSource(e.target.attributes.src.value);
+          scrollRef.current = index;
+          handleSphereSelect(scrollRef.current);
+        }}
+        style={img.styles}/>
+        {/* <div className='gallery_desc'>
+          <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p> */}
+         <h2 className={`gallery_text_sold index${index}`} key={index}>{img.sold && 'SOLD'}</h2>
+        {/* </div> */}
+      </div>
+      )
+    });
+  } else {
+    return <h1 className='gallery_empty'>COMING SOON...</h1>
+  }
+};
 
   /*************- EVENT Handlers-*************/
 
@@ -141,38 +170,10 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
   /*----- Sphere List-----*/
   const [sphereIsSelected, selectSphere] = useState(false);
   const handleSphereSelect = (index) => {
+    console.log('handleSphereSelec[gallery]:', gallery[index].title);
+    window.location.hash = gallery[index].title;
+    console.log('location["hash"]:', location);
     selectSphere((({props}) => ({...props, [index]: true})))
-  };
-
-  /*----- Maps-----*/
-  const mapGallery = () => {
-    let galleryDataHasArrived = gallery.length;
-    if (galleryDataHasArrived) {
-      return gallery.map((img, index) => {
-        return (
-        <div className='gallery_img_container'>
-          <img
-            className={`gallery_img index${index}`}
-            id={img.title}
-            key={index + gallery.length}
-            src={img.url}
-            onClick={(e) => {
-            handleModal();
-            getModalImgSource(e.target.attributes.src.value);
-            scrollRef.current = index;
-            handleSphereSelect(scrollRef.current);
-          }}
-          style={img.styles}/>
-          {/* <div className='gallery_desc'>
-            <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p> */}
-           <h2 className={`gallery_text_sold index${index}`} key={index}>{img.sold && 'SOLD'}</h2>
-          {/* </div> */}
-        </div>
-        )
-      });
-    } else {
-      return <h1 className='gallery_empty'>COMING SOON...</h1>
-    }
   };
 
   return (
