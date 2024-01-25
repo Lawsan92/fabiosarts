@@ -36,9 +36,33 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
       const timer = setTimeout(() => { // <- delay element scroll in case API call doesn't retrieve gallery data fast enough
 
         if (location.hash) {
+          let element;
+          if (location.hash.indexOf('%')) {
+            let [HASHarr, eleIDfromHASH]= [Array.from(location.hash).slice(1), ''];
 
-          const element = document.querySelector(location.hash);
-          console.log('element:', element);
+            for (let index = 0; index < HASHarr.length; index++) {
+              const ifParam = HASHarr[index]  === '2' && HASHarr[index + 1] === '0' && HASHarr[index - 1] === '%';
+              if (ifParam) {
+                index +=1;
+                continue;
+              }
+              if (HASHarr[index] === '%') {
+                console.log('HIT')
+                eleIDfromHASH += ' ';
+                continue;
+              }
+              eleIDfromHASH += HASHarr[index];
+            }
+
+            console.log('HASHarr:', HASHarr, 'eleIDfromHASH:', eleIDfromHASH);
+            element = document.getElementById(eleIDfromHASH);
+
+          } else {
+            element = document.querySelector(location.hash);
+          }
+
+
+
           element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
         }
 
