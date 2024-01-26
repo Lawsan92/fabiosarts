@@ -26,10 +26,32 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     handleUpKey();
     handleEscKey();
 
-  }, [sphereIsSelected])
+  }, [sphereIsSelected]);
+
+   /*------Refs------ */
+   const scrollRef = useRef(0);
+   const galleryRef = useRef([]);
+
+   /*-----fetch gallery data from cloudinary API----*/
+   const [gallery, getGallery] = useState([]);
+   const fetchGallery = () => {
+     axios({
+       url: `/cloudinary/?exhibit=${params.id}`,
+       method: 'get',
+     })
+       .then((response) => {
+         console.log('response:', response);
+         galleryRef.current = response.data.data;
+         getGallery(response.data.data)
+       })
+       .catch((err) => {
+         console.log('error:', err.stack)
+       })
+   };
 
   const params= useParams();
   const location = useLocation();
+  const [locationHash, updateHash] = useState('')
 
   const URLhashScroll = () => {
 
@@ -55,6 +77,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
             }
 
             console.log('HASHarr:', HASHarr, 'eleIDfromHASH:', eleIDfromHASH);
+            updateHash(eleIDfromHASH);
             element = document.getElementById(eleIDfromHASH);
 
           } else {
@@ -72,26 +95,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 
   };
 
-  /*------Refs------ */
-  const scrollRef = useRef(0);
-  const galleryRef = useRef([]);
-
-  /*-----fetch gallery data from cloudinary API----*/
-  const [gallery, getGallery] = useState([]);
-  const fetchGallery = () => {
-    axios({
-      url: `/cloudinary/?exhibit=${params.id}`,
-      method: 'get',
-    })
-      .then((response) => {
-        console.log('response:', response);
-        galleryRef.current = response.data.data;
-        getGallery(response.data.data)
-      })
-      .catch((err) => {
-        console.log('error:', err.stack)
-      })
-  };
 
  /*----- Map gallery data ui to gallery page-----*/
  const mapGallery = () => {
@@ -150,6 +153,19 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     setModal(prevState => !prevState);
   }
 
+    /*----- Sphere List-----*/
+    const [sphereIsSelected, selectSphere] = useState(false);
+    const handleSphereSelect = (index) => {
+      console.log('index:', index, 'gallery:', gallery, 'galleryRef:', galleryRef)
+      // console.log('handleSphereSelec[gallery]:', gallery[index].title);
+      if (gallery[index]) {
+        window.location.hash = gallery[index].title;
+      } else if (galleryRef.current[index]) {
+        window.location.hash = galleryRef.current[index].title;
+      }
+      console.log('location["hash"]:', location);
+      selectSphere((({props}) => ({...props, [index]: true})))
+    };
   /*_________KEYS_________*/
 
   const handleEscKey = () => {
@@ -163,6 +179,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
       if (e.keyCode === 40) {
         e.preventDefault();
         scrollRef.current >= galleryRef.current.length - 1 ? scrollRef.current = 0 : scrollRef.current =  scrollRef.current + 1;
+        console.log('handleDownKey(scrollRef.current):', scrollRef.current)
         handleSphereSelect(scrollRef.current);
         scrollToImg(scrollRef.current);
         getScrollIndex(scrollRef.current);
@@ -189,16 +206,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     });
   }
 
-  /***************************************/
-
-  /*----- Sphere List-----*/
-  const [sphereIsSelected, selectSphere] = useState(false);
-  const handleSphereSelect = (index) => {
-    console.log('handleSphereSelec[gallery]:', gallery[index].title);
-    window.location.hash = gallery[index].title;
-    console.log('location["hash"]:', location);
-    selectSphere((({props}) => ({...props, [index]: true})))
-  };
 
   return (
     <div className='gallery'>
@@ -227,7 +234,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
       scrollIndex={scrollIndex}
       scrollRef={scrollRef}
       />
-      <Gallery_Footer gallery={gallery} scrollRef={scrollRef}/>
+      <Gallery_Footer gallery={gallery} scrollRef={scrollRef} locationHash={locationHash}/>
     </div>
   )
 };
@@ -235,5 +242,3 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 export default Gallery;
 
 // ref: https://dev.to/zeerorg/react-hooks-and-their-dependence-on-each-other-13pe
-
-
