@@ -16,9 +16,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
 
   /*---------------STATE && HOOKS---------------*/
   useEffect(() => {
-    console.log('MOUNTED')
-    console.log('params:', params);
-    console.log('location["hash"]:', location);
     URLhashScroll();
     fetchGallery();
     handleSelectPosition();
@@ -40,7 +37,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
        method: 'get',
      })
        .then((response) => {
-         console.log('response:', response);
          galleryRef.current = response.data.data;
          getGallery(response.data.data)
        })
@@ -69,30 +65,21 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
                 continue;
               }
               if (HASHarr[index] === '%') {
-                console.log('HIT')
                 eleIDfromHASH += ' ';
                 continue;
               }
               eleIDfromHASH += HASHarr[index];
             }
-
-            console.log('HASHarr:', HASHarr, 'eleIDfromHASH:', eleIDfromHASH);
             updateHash(eleIDfromHASH);
             element = document.getElementById(eleIDfromHASH);
-
           } else {
             element = document.querySelector(location.hash);
           }
-
-
-
           element.scrollIntoView({ behavior: "smooth", block: "center", inline: "nearest" });
         }
 
       }, 1200);
-
       return () => clearTimeout(timer);
-
   };
 
 
@@ -115,10 +102,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
           handleSphereSelect(scrollRef.current);
         }}
         style={img.styles}/>
-        {/* <div className='gallery_desc'>
-          <p className={`gallery_text index${index}`} key={index + gallery.length + 2}>{img.title + ', ' + img.size + ', ' + img.type}</p> */}
          <h2 className={`gallery_text_sold index${index}`} key={index}>{img.sold && 'SOLD'}</h2>
-        {/* </div> */}
       </div>
       )
     });
@@ -139,10 +123,8 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
   };
 
   const scrollToImg = (imgIndex) => {
-    console.log('imgIndex', imgIndex)
     const imgNode = document.querySelector(`.gallery_img.index${imgIndex}`);
     imgNode.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center'});
-    console.log('called')
   };
 
   /*_________MODAL__________*/
@@ -156,14 +138,13 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     /*----- Sphere List-----*/
     const [sphereIsSelected, selectSphere] = useState(false);
     const handleSphereSelect = (index) => {
-      console.log('index:', index, 'gallery:', gallery, 'galleryRef:', galleryRef)
-      // console.log('handleSphereSelec[gallery]:', gallery[index].title);
       if (gallery[index]) {
         window.location.hash = gallery[index].title;
+        updateHash(gallery[index].title);
       } else if (galleryRef.current[index]) {
         window.location.hash = galleryRef.current[index].title;
+        updateHash(galleryRef.current[index].title);
       }
-      console.log('location["hash"]:', location);
       selectSphere((({props}) => ({...props, [index]: true})))
     };
   /*_________KEYS_________*/
@@ -172,24 +153,21 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     document.addEventListener('keydown', (e) => {
       e.key === 'Escape' && handleModal(false);
     });
-  }
+  };
 
   const handleDownKey = () => {
     document.addEventListener('keydown', (e) => {
       if (e.keyCode === 40) {
         e.preventDefault();
         scrollRef.current >= galleryRef.current.length - 1 ? scrollRef.current = 0 : scrollRef.current =  scrollRef.current + 1;
-        console.log('handleDownKey(scrollRef.current):', scrollRef.current)
         handleSphereSelect(scrollRef.current);
         scrollToImg(scrollRef.current);
         getScrollIndex(scrollRef.current);
         let galleryArr = Array.from(galleryRef.current)
-        console.log('galleryArr[scrollRef.current].url:', galleryArr[scrollRef.current].url);
         getModalImgSource(galleryArr[scrollRef.current].url);
-        console.log('DOWN');
       }
     });
-  }
+  };
 
   const handleUpKey = () => {
     document.addEventListener('keydown', (e) => {
@@ -201,11 +179,9 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
         getScrollIndex(scrollRef.current);
         let galleryArr = Array.from(galleryRef.current)
         getModalImgSource(galleryArr[scrollRef.current].url);
-        console.log('UP');
       }
     });
-  }
-
+  };
 
   return (
     <div className='gallery'>
@@ -218,7 +194,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
       className='gallery_header'
       style={{...headerSpring(XYRef)}}
       >
-        {exhibits.exhibit}
+        {exhibits.exhibit ? exhibits.exhibit : params.id}
       </animated.h1>
       <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
       <animated.div className='gallery_container' style={{...gallerySpring()}} >

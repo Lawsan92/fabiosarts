@@ -13,7 +13,6 @@ export const gallerySpring = () => {
 }
 
 export const headerSpring = (XYRef) => {
-  console.log('headerSpring{XYRef}:', XYRef);
   return useSpring({
     from: {
       backgroundColor: 'rgba(255, 255, 255, 0)',
