@@ -1,6 +1,6 @@
 import React, { useState , useEffect, useRef  } from 'react';
 import { animated } from '@react-spring/web';
-import { headerSpring, gallerySpring } from '../../hooks/Springs.js';
+import { headerSpring, gallerySpring, headerSpringTablet } from '../../hooks/Springs.js';
 import HomeIcon from '../HomeIcon.js';
 import Modal from '../Modal.js';
 import SphereSelect from '../SphereSelect.js';
@@ -23,6 +23,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     handleUpKey();
     handleEscKey();
 
+    console.log('window.innnerWidth:', window.innnerWidth);
   }, [sphereIsSelected]);
 
    /*------Refs------ */
@@ -192,24 +193,28 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
       <Gallery_Header/>
       <animated.h1
       className='gallery_header'
-      style={{...headerSpring(XYRef)}}
-      >
+      // style={{...headerSpring(XYRef)}}
+      // >
+         style={window.innerWidth > 800 ? {...headerSpring(XYRef)} : {...headerSpringTablet(XYRef)}}
+         >
         {exhibits.exhibit ? exhibits.exhibit : params.id}
       </animated.h1>
-      <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
-      <animated.div className='gallery_container' style={{...gallerySpring()}} >
-        {mapGallery()}
+      <animated.div className='gallery_body' style={{...gallerySpring()}}>
+        <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
+        <animated.div className='gallery_container' style={{...gallerySpring()}} >
+          {mapGallery()}
+        </animated.div>
+        <SphereSelect
+        scrollPosition={scrollPosition}
+        handleSphereSelect={handleSphereSelect}
+        scrollToImg={scrollToImg}
+        getScrollIndex={getScrollIndex}
+        gallery={gallery}
+        sphereIsSelected={sphereIsSelected}
+        scrollIndex={scrollIndex}
+        scrollRef={scrollRef}
+        />
       </animated.div>
-      <SphereSelect
-      scrollPosition={scrollPosition}
-      handleSphereSelect={handleSphereSelect}
-      scrollToImg={scrollToImg}
-      getScrollIndex={getScrollIndex}
-      gallery={gallery}
-      sphereIsSelected={sphereIsSelected}
-      scrollIndex={scrollIndex}
-      scrollRef={scrollRef}
-      />
       <Gallery_Footer gallery={gallery} scrollRef={scrollRef} locationHash={locationHash}/>
     </div>
   )

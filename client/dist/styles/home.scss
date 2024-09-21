@@ -238,3 +238,12 @@
     height: auto;
   }
 }
+
+@media screen and (max-width: 850px){
+  .home_footer{
+    & p {
+      font-size: 3vw;
+    }
+  }
+
+}

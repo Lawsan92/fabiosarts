@@ -17,7 +17,6 @@ export const headerSpring = (XYRef) => {
     from: {
       backgroundColor: 'rgba(255, 255, 255, 0)',
       color: '#808080',
-
       y: XYRef.y,
       x: XYRef.x
     },
@@ -29,7 +28,25 @@ export const headerSpring = (XYRef) => {
       position: 'absolute'
     }
   });
-}
+};
+
+export const headerSpringTablet = (XYRef) => {
+  return useSpring({
+    from: {
+      backgroundColor: 'rgba(255, 255, 255, 0)',
+      color: '#808080',
+      y: XYRef.y,
+      x: XYRef.x
+    },
+    to: {
+      color: '#338BA8',
+      transition: '1s ease-in',
+      y: 0,
+      x: 0,
+      position: 'absolute'
+    }
+  });
+};
 
 export const mobileHeaderSpring = (XYRef) => {
   console.log('headerSpring{XYRef}:', XYRef);

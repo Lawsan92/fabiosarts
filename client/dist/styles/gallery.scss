@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100&display=swap');
 
+:root {
+  --animation-transform: translate3d(50px, 300px, 0px);
+}
+
 .gallery {
   height: 100vh;
   width: 100vw;
@@ -103,7 +107,8 @@
 /*____________________________*/
 
 .gallery_body {
-  position: relative;
+  height: 77.5vh;
+  display: flex;
 }
 
 .gallery_container{
@@ -154,14 +159,14 @@
 
 .gallery_select_menu {
   list-style: none;
-  position: absolute;
-  right: 30px;
-  top: 100px;
-  height: fit-content;
+  height: inherit;
+  width: fit-content;
   padding: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: absolute;
+  right: 1em;
 }
 
 .gallery_select_item{
@@ -271,6 +276,7 @@
 @media screen and (max-width: 850px) {
   .gallery_header {
     top: 15%;
-    left: 3%
+    left: 3%;
+    --animation-transform: 0;
   }
 }
