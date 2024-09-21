@@ -239,11 +239,22 @@
   }
 }
 
-@media screen and (max-width: 850px){
+@media screen and (max-width: 850px) {
   .home_footer{
     & p {
       font-size: 3vw;
     }
   }
 
+}
+
+@media screen and (max-height: 650px){
+  .home_footer{
+    & p {
+      font-size: 3vh;
+    }
+  }
+ .home_list {
+   font-size: 6vh;
+ }
 }
