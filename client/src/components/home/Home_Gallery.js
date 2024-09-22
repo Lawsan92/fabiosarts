@@ -7,7 +7,7 @@ const Home_Gallery = () => {
 
   useEffect(() => {
 
-  }, [])
+  }, []);
 
   /*
         Width | Height
@@ -85,7 +85,10 @@ const Home_Gallery = () => {
 
     return imageList.map((img, i) => {
       return <img src={img.url} className={`img${i}`}/>
-    })
+    });
+};
+
+export default Home_Gallery;
 
   // const image_Styles = imageList.map((image, i) =>  {
   //   const image_styles = {
@@ -144,6 +147,3 @@ const Home_Gallery = () => {
   // // );
 
   // // return imageList.map((img) => { functionCalls.current = functionCalls.current + 1;return <img src={img.url}/>});
-}
-
-export default Home_Gallery;

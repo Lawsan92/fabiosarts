@@ -1,0 +1,99 @@
+/* Home Gallery Images */
+
+.mobile_home_body {
+  top: 0;
+  height: 80vh;
+  width: 100vw;
+  overflow: hidden;
+  position: absolute;
+
+  & > .img0 {
+    width: 50%;
+    height: 46%;
+    z-index: 6;
+    position: absolute;
+    animation: animate_img0 1.5s ease-in 0s 1 normal;
+  }
+
+  & > .img1 {
+    width: 80%;
+    height: 40%;
+    z-index: 4;
+    position: absolute;
+    animation: animate_img1 1.5s ease-in 0s 1 normal;
+    bottom: 0;
+    left: 0;
+  }
+
+  & > .img2 {
+    width: 52.5%;
+    height:50%;
+    z-index: 5;
+    position: absolute;
+    bottom: 0px;
+    right: 0;
+    animation: animate_img2 1.5s ease-in 0s 1 normal;
+  }
+
+  & > .img3 {
+    width: 52.5%;
+    height: 35%;
+    z-index: 4;
+    position: absolute;
+    top: 0; right: 0;
+    animation: animate_img3 1.5s ease-in 0s 1 normal;
+  }
+
+  & > .img4 {
+    width: 55%;
+    height: 35%;
+    z-index: 4;
+    position: absolute;
+    right: 0px;
+    bottom: 138px;
+    animation: animate_img4 1.5s ease-in 0s 1 normal;
+  }
+
+  & > .img5 {
+    width: 70%;
+    height: 35%;
+    z-index: 2;
+    position: absolute;
+    top: 188px;
+    left: 0px;
+    animation: animate_img5 1.5s ease-in 0s 1 normal;
+  }
+
+}
+
+/* Keyframe Animations */
+
+@keyframes animate_img0 {
+  0% {top: -200px; opacity: 0;}
+  100% {top: 0px; opacity: 100%}
+}
+
+@keyframes animate_img1 {
+  0% {top: 0px; left: 500px; opacity: 0;}
+  100% {top: 68%; left: 55px; opacity: 100%}
+}
+
+@keyframes animate_img2 {
+  0% {top: 0px; right: 500px; opacity: 0;}
+  100% {right: 0px; bottom: 0; opacity: 100%}
+}
+
+@keyframes animate_img3 {
+  0% {top: 500px; left: 500px; opacity: 0;}
+  100% {top: 0px; right: 0px; opacity: 100%}
+}
+
+@keyframes animate_img4 {
+  0% {bottom: 0px; right: 500px; opacity: 0;}
+  100% {bottom: 0px; right: 0px; opacity: 100%}
+}
+
+@keyframes animate_img5 {
+  0% {top: 700px; left: 500px; opacity: 0;}
+  100% {top: 188px; left: 0px; opacity: 100%}
+}

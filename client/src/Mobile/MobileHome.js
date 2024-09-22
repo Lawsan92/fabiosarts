@@ -7,7 +7,6 @@ const MobileHome = ({ isMounted, setMount, toggleSelect, XYRef, getXYRef }) => {
 
   /*-----STATE: mobile list-----*/
   const [mobileListMounted, mountMobileList] = useState(false);
-
   const [seriesSubList, setSubList] = useState({oils: false, series: false});
 
    /*------STATE:email------*/
@@ -25,6 +24,7 @@ const MobileHome = ({ isMounted, setMount, toggleSelect, XYRef, getXYRef }) => {
     return transitions((style, items) =>
       items &&
       <animated.div className='mobile_home'>
+        <ImageAnimation/>
         <MobileMenu mountMobileList={mountMobileList}/>
         <div className='mobile_home_header'>
           <h1 className='mobile_home_header_text'>FABIO SANZOGNI</h1>
@@ -113,5 +113,40 @@ export const MobileMenu = ({ mountMobileList }) => {
     </div>
   );
 };
+
+/*/----------------------- */
+
+const ImageAnimation = () => {
+
+  const imageList = [
+    {
+      url: 'https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200221/FABIO/2016/Sanzogni_Starry_night_40_x_30_mixed_media_on_canvas_e806sj.jpg'
+    },
+    {
+      url: 'https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200234/FABIO/2012/Time_1_acrylic_and_resin_on_aluminum_4_panel_48_x_96_p6pqmj.jpg'
+    },
+    {
+      url: 'https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200225/FABIO/2016/Sanzogni_Palmistry_36_x_54_mixed_media_on_canvas_JPG_wtkzwh.png'
+    },
+    {
+      url: 'https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200235/FABIO/2013/Sanzogni_Slum_city_mixed_media_on_aluminum_72_x_48_3_panels_znla3l.jpg'
+    },
+    {
+      url: 'https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200270/FABIO/oil%20on%20canvas%20abstract/Sanzogni_Upswing_68_x_53_oil_on_canvas_hjufwm.jpg'
+    },
+    {
+      url: 'https://res.cloudinary.com/ducqdbpaw/image/upload/v1685200235/FABIO/2013/Sanzogni_Megalopolis_mixed_media_on_aluminum_4_panels_96_x_48_ihxsuc.jpg'
+    }
+  ]
+
+    return (
+      <div className='mobile_home_body'>{
+        imageList.map((img, i) => {
+          return (<img src={img.url} className={`img${i}`} /> )
+        })
+        }
+      </div>)
+}
+
 
 export default MobileHome;
