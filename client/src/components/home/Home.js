@@ -79,7 +79,7 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
         <div className='home_footer'>
           <p className='footer_text_contact' onClick={() => {setEmailForm(true)}}>Contact</p>
           <p className='footer_text'>All rights reserved</p>
-          <a href='http://studiodarteonline.com/' style={{textDecoration: 'none'}}>
+          <a href='https://studiodarteonline.com/' style={{textDecoration: 'none'}}>
             <p className='footer_text_link'>studiodarteonline.com</p>
           </a>
           <p className='footer_text'>designed by Lawrence Sanzogni</p>
