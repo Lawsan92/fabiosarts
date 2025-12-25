@@ -5,6 +5,9 @@
 @import './error.scss';
 @import './mobile/mobile.scss';
 
+* {
+ font-weight: 100 !important;
+}
 body {
   margin: 0;
   box-sizing: border-box;

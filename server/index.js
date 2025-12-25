@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 const cloudinary = require('./routes/cloudinary.js');
+const visits = require('./routes/visits.js');
 const fs = require('fs');
 const https = require('https');
 require('dotenv').config();
@@ -33,6 +34,8 @@ app.get('/.well-known/pki-validation/A7DC6BA9ED359DF264150C3009144078.txt', (req
 })
 
 app.use('/cloudinary', cloudinary);
+
+app.use('/visits', visits);
 
 app.get('/gallery/*', (req, res) => {
   console.log('req:', req.params);
