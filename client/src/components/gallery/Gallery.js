@@ -23,7 +23,6 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, pageRef, 
     handleUpKey();
     handleEscKey();
     getVisitRef();
-    console.log('window.innnerWidth:', window.innnerWidth);
   }, [sphereIsSelected]);
 
    /*------Refs------ */
@@ -85,9 +84,10 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, pageRef, 
 
 
  /*----- Map gallery data ui to gallery page-----*/
- const mapGallery = () => {
+ const GalleryPaintings = () => {
   let galleryDataHasArrived = gallery.length;
-  if (galleryDataHasArrived) {
+
+  const renderGallery = () => {
     return gallery.map((img, index) => {
       return (
       <div className='gallery_img_container'>
@@ -107,9 +107,12 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, pageRef, 
       </div>
       )
     });
-  } else {
-    return <h1 className='gallery_empty'>COMING SOON...</h1>
-  }
+  };
+
+  const fallBack = () => {return <h1 className='gallery_empty'>COMING SOON...</h1>}
+
+  return galleryDataHasArrived ? renderGallery() : fallBack()
+
 };
 
   /*************- EVENT Handlers-*************/
@@ -183,26 +186,18 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, pageRef, 
       }
     });
   };
-
   return (
     <div className='gallery'>
-      {openModal ?
-        <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/> :
-        ''
-      }
+      {openModal && <Modal handleModal={handleModal} modalImgSource={modalImgSource} scrollPosition={scrollPosition}/>}
       <Gallery_Header/>
-      <animated.h1
-      className='gallery_header'
-      // style={{...headerSpring(XYRef)}}
-      // >
-         style={window.innerWidth > 800 ? {...headerSpring(XYRef)} : {...headerSpringTablet(XYRef)}}
-         >
+      <animated.h1 className='gallery_header' style={window.innerWidth > 800 ? {...headerSpring(XYRef)} : {...headerSpringTablet(XYRef)}} >
         {exhibits.exhibit ? exhibits.exhibit : params.id}
       </animated.h1>
+
       <animated.div className='gallery_body' style={{...gallerySpring()}}>
         <HomeIcon selectExhibit={selectExhibit} setMount={setMount}/>
         <animated.div className='gallery_container' style={{...gallerySpring()}} >
-          {mapGallery()}
+          <GalleryPaintings/>
         </animated.div>
         <SphereSelect
         scrollPosition={scrollPosition}

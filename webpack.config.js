@@ -29,7 +29,7 @@ const config = (env) => {
       historyApiFallback: true,
       static: path.join(__dirname, 'client/dist'),
       proxy: {
-        '/': 'http://localhost:3000'
+        '/': 'http://127.0.0.1:3000'
       }
     },
     plugins: [
