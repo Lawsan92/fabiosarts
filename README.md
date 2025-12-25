@@ -4,7 +4,7 @@
 
 | desktop  | mobile |
 | ------------- | ------------- |
-| <img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1763688349/Screenshot_2025-11-20_at_19.25.43_vamjgf.jpg'/> | <img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1764467203/iPhone-12-PRO-www.fabiosarts.com_m81cdd.png'/> |
+| <img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1763688349/portfolio/Screenshot_2025-11-20_at_19.25.43_vamjgf.jpg'/> | <img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1764467203/iPhone-12-PRO-www.fabiosarts.com_m81cdd.png'/> |
 
 
 ### Tech stack: 
