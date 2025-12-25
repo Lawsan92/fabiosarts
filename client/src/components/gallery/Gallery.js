@@ -12,7 +12,7 @@ import { useParams, useLocation } from 'react-router-dom';
 
 const axios = require('axios');
 
-const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
+const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef, pageRef, getVisitRef }) => {
 
   /*---------------STATE && HOOKS---------------*/
   useEffect(() => {
@@ -22,7 +22,7 @@ const Gallery = ({ exhibits, selectExhibit, setMount, XYRef, getXYRef }) => {
     handleDownKey();
     handleUpKey();
     handleEscKey();
-
+    getVisitRef();
     console.log('window.innnerWidth:', window.innnerWidth);
   }, [sphereIsSelected]);
 

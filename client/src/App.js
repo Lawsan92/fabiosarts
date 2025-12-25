@@ -7,6 +7,7 @@ import Home from './components/home/Home.js';
 import MobileGallery from './Mobile/MobileGallery.js';
 import MobileHome from './Mobile/MobileHome.js';
 import Error from './components/Error.js';
+import useGeoApify from './hooks/useGeoApify.js';
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
   useEffect(() => {
     getVisitRef();
     handleSize();
+    handleVisits();
   }, []);
 
   const [exhibits, selectExhibit] = useState(false);
@@ -41,6 +43,52 @@ const App = () => {
 
   const MobileView = viewSize <= 450;
 
+//  const handleVisits = async () => {
+//     useGeoApify()
+//     .then((response) => {return response.json();})
+//     .then((result) => {
+//       let data = {
+//         ip: result.ip,
+//         country: result.country['iso_code'],
+//         city: result.city.name,
+//         lat: result.location.latitude,
+//         long: result.location.longitude,
+//         date: Date(),
+//         }
+//       let mountDate = new Date();
+//       const handleUnmount = () => {
+//         window.addEventListener("visibilitychange", () => {
+//           if (document.visibilityState === "hidden") {
+//             data['session_time'] = Math.floor((new Date().getTime() - mountDate.getTime()) / 1000);
+//             try {
+//               data.pages = pageRef.current
+//               } catch (error) {
+//                 console.console.error();
+//             }
+//             const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+//             navigator.sendBeacon("/visits", blob);
+//           }
+//         });
+//       }
+//       handleUnmount();
+//     })
+//     .catch((error) => {console.log('error', error)});
+//   };
+
+const handleVisits = async () => {
+
+      let mountDate = new Date();
+      const handleUnmount = () => {
+        window.addEventListener("visibilitychange", () => {
+          if (document.visibilityState === "hidden") {
+             const blob = new Blob([JSON.stringify(pageRef.current)], { type: "application/json" });
+            navigator.sendBeacon("/visits", blob);
+          }
+        });
+      }
+      handleUnmount();
+
+  };
 
   const handleSize = (size) => {
     window.addEventListener('resize', () => {
@@ -66,7 +114,7 @@ const App = () => {
     },
     {
       path: "gallery/:id",
-      element: <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef} />,
+      element: <Gallery exhibits={exhibits} selectExhibit={selectExhibit} setMount={setMount} XYRef={XYRef} getXYRef={getXYRef} pageRef={pageRef} getVisitRef={getVisitRef}/>,
       errorElement: <Error/>,
     },
     {

@@ -14,7 +14,7 @@ router.use((req, res, next) => {
 router
   .route('/')
   .post((req, res) => { try {
-    console.log('req.body:', req.body)
+    console.log('req.body /VISITS:', req.body)
      if (JSON.stringify(req.body) == '{}') {
       res.send('404, FAILED TP UPDATE \'{}\'')
       return '404 NO DATA FOUND: \'{\''
