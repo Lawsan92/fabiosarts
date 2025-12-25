@@ -38,8 +38,8 @@ app.use('/cloudinary', cloudinary);
 app.use('/visits', visits);
 
 app.get('/gallery/*', (req, res) => {
-  console.log('req:', req.params);
-  console.log('********************');
+  // console.log('req:', req.params);
+  // console.log('********************');
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     err && alert('err:', err);
   })
@@ -48,8 +48,8 @@ app.get('/gallery/*', (req, res) => {
 
 
 app.get('/*', (req, res) => {
-  console.log('req:', req.route);
-  console.log('********************');
+  // console.log('req:', req.route);
+  // console.log('********************');
   res.sendFile(path.join(__dirname, '../client/dist/index.html'), (err) => {
     err && alert('err:', err);
   })
