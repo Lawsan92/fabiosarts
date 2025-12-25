@@ -24,9 +24,9 @@ const Home = ({ isMounted, setMount, toggleSelect, viewSize, XYRef, getXYRef }) 
     return galleries.map((gallery, index) => {
       key ++;
       return gallery == 'series' ?
-        <li className='home_list_item'key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li> :
+        <li className='home_list_item' key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['series']: !prevState['series']}))}}>series</li> :
           gallery === 'oils' ?
-          <li className='home_list_item'key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['oils']: !prevState['oils']}))}}>oils</li> :
+          <li className='home_list_item' key={galleries.length - 1} onClick={(e) => {setSubList(prevState => ({...seriesSubList, ['oils']: !prevState['oils']}))}}>oils</li> :
       <Link
       className='home_list_item'
         key={key}

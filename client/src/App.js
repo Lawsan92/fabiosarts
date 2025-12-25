@@ -1,4 +1,4 @@
-import React, { useState , useEffect} from 'react';
+import React, { useState , useEffect, useRef} from 'react';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import { animated, useSpring, useTransition } from '@react-spring/web';
 import '../dist/styles/styles.scss';
@@ -10,7 +10,24 @@ import Error from './components/Error.js';
 
 const App = () => {
 
+  const visitedRef = useRef(false);
+  let hasVisited = visitedRef.current;
+  let pageRef = useRef({});
+
+  const getVisitRef = () => {
+
+    let events = ['load', 'hashchange', 'popstate', 'pushstate']
+    for (event of events) {
+      window.addEventListener(event, () => {
+        let path = window.location.pathname + window.location.hash;
+        console.log('path:', path)
+        pageRef.current[`${path}`] = true;
+      })
+    }
+  };
+
   useEffect(() => {
+    getVisitRef();
     handleSize();
   }, []);
 

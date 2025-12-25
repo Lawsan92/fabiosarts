@@ -84,7 +84,7 @@ const Home_Gallery = () => {
   ]
 
     return imageList.map((img, i) => {
-      return <img src={img.url} className={`img${i}`}/>
+      return <img src={img.url} className={`img${i}`} key={`home_gallery_key ${i}`}/>
     });
 };
 
