@@ -10,3 +10,4 @@ eslint.config.mjs
 .prettierignore
 .babelrc
 .DS_Store
+/client/dist/bundle.js
