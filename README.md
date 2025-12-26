@@ -18,7 +18,7 @@
 
 `-GET /visits`
 
-Returns a JSON object with all webpage visitor analytics. \* (This requires an admin password embedded in the HTTP authorization header to access, since this contains sensitive information.)
+Returns a JSON object with all webpage visitor analytics. \* (This is a password protected Admin-only endpoint, requiring a password embedded in the HTTP authorization header to access; for demonstration purposes only.)
 
 `RESPONSE (= JSON object)`
 
@@ -47,6 +47,12 @@ Returns a JSON object with all webpage visitor analytics. \* (This requires an a
     ]
 }
 ```
+
+\* ip addresses are masked
+
+### System Design (class diagram hybrid)
+
+<img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1766731232/fabiosarts/fabiosarts_classDiagram_mcsbui.png'/>
 
 ### Tech stack:
 
