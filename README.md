@@ -52,7 +52,7 @@ Returns a JSON object with all webpage visitor analytics. \* (This is a password
 
 ### System Design (class diagram hybrid)
 
-<img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1766731232/fabiosarts/fabiosarts_classDiagram_mcsbui.png'/>
+<img src='https://res.cloudinary.com/ducqdbpaw/image/upload/v1766735773/fabiosarts/fabiosarts_classDiagram_cc7yrx.png'/>
 
 ### Tech stack:
 
