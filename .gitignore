@@ -5,3 +5,8 @@ package-lock.json
 *.pem
 *.key
 *.txt
+eslint.config.mjs
+.prettierrc
+.prettierignore
+.babelrc
+.DS_Store
