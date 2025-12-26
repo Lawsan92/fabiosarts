@@ -11,7 +11,8 @@
 - Spring Animations
 - Cloudinary API integration for gallery assets
 - Custom image scaler module
-- Custom backend visitor analytics module
+- Custom backend visitor session analytics module
+- PostgreSQL integration for session records
 
 ### API docs
 
@@ -53,3 +54,4 @@ Returns a JSON object with all webpage visitor analytics. \* (This requires an a
 ![Node.js](https://img.shields.io/badge/Node.js-grey?logo=nodedotjs)
 ![React](https://img.shields.io/badge/React-white?logo=react)
 ![Cloudinary](https://img.shields.io/badge/Cloudinary-black?logo=cloudinary)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-white?logo=postgresql)
