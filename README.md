@@ -10,7 +10,7 @@
 
 - Spring Animations
 - Cloudinary API integration for gallery assets
-- customer image scaler
+- custom image scaler module
 - backend visitor analytics
 
 ### API docs
