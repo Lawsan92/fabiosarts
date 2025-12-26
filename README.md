@@ -33,7 +33,7 @@ Returns a JSON object with all webpage visitor analytics. \* (This requires an a
             "long": XX.XXXX,
             "first_visit": "Thu Dec 25 2025 11:20:23 GMT-0600 (Central Standard Time)",
             "last_visit": "Thu Dec 25 2025 23:04:48 GMT-0600 (Central Standard Time)",
-            "visit_count": 83,
+            "visit_count": 4,
             "session_time": 4,
             "pages": [
                 "0: [\"{/}\", time: 39], visit_date: Thu Dec 25 2025 11:20:23 GMT-0600 (Central Standard Time)]",
